@@ -1,4 +1,4 @@
-import { Session } from '../../examples/cli-app/models/Session'
+import { Session } from '@/examples/cli-app/models/Session'
 import { CLIView } from './presenter'
 
 export class CLI implements CLIView {

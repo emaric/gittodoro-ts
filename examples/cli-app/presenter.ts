@@ -1,5 +1,5 @@
-import { SessionPresenterInterface } from '../../interactor/responses/SessionPresenterInterface'
-import { SessionResponse } from '../../interactor/responses/SessionResponse'
+import { SessionPresenterInterface } from '@/interactor/responses/SessionPresenterInterface'
+import { SessionResponse } from '@/interactor/responses/SessionResponse'
 import { mapSession } from './response-view-mapper'
 import { Session } from './models/Session'
 

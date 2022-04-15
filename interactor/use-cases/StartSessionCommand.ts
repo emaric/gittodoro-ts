@@ -1,8 +1,8 @@
-import { SessionDataGatewayInterface } from '../../interactor/data-gateways/SessionDataGatewayInterface'
-import { SessionCommandInterface } from '../../interactor/requests/SessionCommandInterface'
-import { StartSessionRequest } from '../../interactor/requests/SessionRequest'
-import { SessionPresenterInterface } from '../../interactor/responses/SessionPresenterInterface'
-import { mapSession } from '../../interactor/use-cases/mapper/EntityResponseMapper'
+import { SessionDataGatewayInterface } from '@/interactor/data-gateways/SessionDataGatewayInterface'
+import { SessionCommandInterface } from '@/interactor/requests/SessionCommandInterface'
+import { StartSessionRequest } from '@/interactor/requests/SessionRequest'
+import { SessionPresenterInterface } from '@/interactor/responses/SessionPresenterInterface'
+import { mapSession } from '@/interactor/use-cases/mapper/EntityResponseMapper'
 
 export class StartSessionCommand implements SessionCommandInterface {
   sessionDataGateway: SessionDataGatewayInterface

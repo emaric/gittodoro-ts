@@ -1,1 +1,0 @@
-{"version":3,"file":"SessionPresenterInterface.d.ts","sourceRoot":"","sources":["../../../interactor/responses/SessionPresenterInterface.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,eAAe,EAAE,MAAM,4CAA4C,CAAA;AAE5E,MAAM,WAAW,yBAAyB;IACxC,OAAO,CAAC,QAAQ,EAAE,eAAe,GAAG,IAAI,CAAA;CACzC"}

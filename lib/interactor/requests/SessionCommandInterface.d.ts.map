@@ -1,1 +1,0 @@
-{"version":3,"file":"SessionCommandInterface.d.ts","sourceRoot":"","sources":["../../../interactor/requests/SessionCommandInterface.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,cAAc,EAAE,MAAM,0CAA0C,CAAA;AAEzE,MAAM,WAAW,uBAAuB;IACtC,OAAO,CAAC,OAAO,EAAE,cAAc,GAAG,IAAI,CAAA;CACvC"}

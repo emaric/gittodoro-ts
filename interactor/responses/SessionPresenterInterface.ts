@@ -1,4 +1,4 @@
-import { SessionResponse } from '../../interactor/responses/SessionResponse'
+import { SessionResponse } from '@/interactor/responses/SessionResponse'
 
 export interface SessionPresenterInterface {
   present(response: SessionResponse): void

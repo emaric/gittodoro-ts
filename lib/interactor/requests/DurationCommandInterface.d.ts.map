@@ -1,1 +1,0 @@
-{"version":3,"file":"DurationCommandInterface.d.ts","sourceRoot":"","sources":["../../../interactor/requests/DurationCommandInterface.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,eAAe,EAAE,MAAM,mBAAmB,CAAA;AAEnD,MAAM,WAAW,wBAAwB;IACvC,OAAO,CAAC,OAAO,EAAE,eAAe,GAAG,IAAI,CAAA;CACxC"}

@@ -1,7 +1,7 @@
-import { SessionDataGatewayInterface } from '../../interactor/data-gateways/SessionDataGatewayInterface'
-import { EndSessionRequest } from '../../interactor/requests/SessionRequest'
-import { SessionCommandInterface } from '../../interactor/requests/SessionCommandInterface'
-import { SessionPresenterInterface } from '../../interactor/responses/SessionPresenterInterface'
+import { SessionDataGatewayInterface } from '@/interactor/data-gateways/SessionDataGatewayInterface'
+import { EndSessionRequest } from '@/interactor/requests/SessionRequest'
+import { SessionCommandInterface } from '@/interactor/requests/SessionCommandInterface'
+import { SessionPresenterInterface } from '@/interactor/responses/SessionPresenterInterface'
 import { mapSession } from './mapper/EntityResponseMapper'
 
 export class EndSessionCommand implements SessionCommandInterface {

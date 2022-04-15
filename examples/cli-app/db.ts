@@ -1,6 +1,6 @@
-import { SessionDataGatewayInterface } from '../../interactor/data-gateways/SessionDataGatewayInterface'
-import { Duration } from '../../interactor/entities/Duration'
-import { Session } from '../../interactor/entities/Session'
+import { SessionDataGatewayInterface } from '@/interactor/data-gateways/SessionDataGatewayInterface'
+import { Duration } from '@/interactor/entities/Duration'
+import { Session } from '@/interactor/entities/Session'
 
 export class SessionInMemory implements SessionDataGatewayInterface {
   storage: Session[]
