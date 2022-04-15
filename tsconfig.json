@@ -2,11 +2,7 @@
   "compilerOptions": {
     "target": "es5",
     "allowJs": true,
-    "skipLibCheck": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
     "noEmit": true,
-    "esModuleInterop": true,
     "composite": true,
     "baseUrl": ".",
     "paths": {
@@ -15,10 +11,15 @@
       "@/examples/*": ["examples/*"],
       "@/tests/*": ["tests/*"]
     },
+    "module": "commonjs",
     "declaration": true,
     "declarationMap": true,
     "sourceMap": true,
-    "outDir": "lib"
+    "outDir": "lib",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "skipLibCheck": true
   },
   "include": ["interactor", "controller", "examples"]
 }

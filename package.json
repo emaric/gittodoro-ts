@@ -2,14 +2,11 @@
   "name": "@emaric/gittodoro-ts",
   "version": "0.0.1",
   "description": "Gittodoro in Typescript",
-  "main": "lib/examples/cli-app/index.js",
+  "main": "examples/cli-app/index.js",
   "types": "lib",
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/@emaric"
   },
-  "files": [
-    "lib"
-  ],
   "scripts": {
     "build": "tsc -p .",
     "lint": "eslint ./",
