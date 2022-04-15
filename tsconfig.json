@@ -2,16 +2,14 @@
   "compilerOptions": {
     "target": "es5",
     "allowJs": true,
-    "noEmit": true,
     "composite": true,
-    "baseUrl": ".",
+    "baseUrl": "./",
     "paths": {
       "@/interactor/*": ["interactor/*"],
       "@/controller/*": ["controller/*"],
       "@/examples/*": ["examples/*"],
       "@/tests/*": ["tests/*"]
     },
-    "module": "commonjs",
     "declaration": true,
     "declarationMap": true,
     "sourceMap": true,
