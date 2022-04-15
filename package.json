@@ -7,6 +7,9 @@
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/@emaric"
   },
+  "files": [
+    "lib"
+  ],
   "scripts": {
     "build": "tsc -p .",
     "lint": "eslint ./",
