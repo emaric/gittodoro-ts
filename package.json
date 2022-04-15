@@ -11,7 +11,7 @@
     "registry": "https://npm.pkg.github.com/@emaric"
   },
   "scripts": {
-    "build": "tsc -p tsconfig.json",
+    "build": "tsc -p tsconfig.json && tsc-alias -p tsconfig.json",
     "lint": "eslint ./",
     "test": "jest --maxWorkers=1"
   },
@@ -41,6 +41,7 @@
     "jest": "^27.5.1",
     "prettier": "^2.6.2",
     "ts-jest": "^27.1.4",
+    "tsc-alias": "^1.6.6",
     "typescript": "^4.6.3"
   }
 }
