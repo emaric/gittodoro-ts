@@ -45,4 +45,14 @@ export class NoteInMemoryStorage implements NoteDataGatewayInterface {
       throw new Error('Deletion was unsuccessful.')
     }
   }
+
+  readByRange(start: Date, end: Date) {
+    const filtered = this.storage.filter((n: Note) => {
+      if (n.date.getTime() >= start.getTime()) {
+        return true
+      }
+      return end.getTime() >= n.date.getTime()
+    })
+    return filtered
+  }
 }

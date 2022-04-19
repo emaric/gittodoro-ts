@@ -5,3 +5,8 @@ export type NoteRequest = {
   date?: Date
   content?: string
 }
+
+export type NoteRangeRequest = NoteRequest & {
+  start: Date
+  end: Date
+}

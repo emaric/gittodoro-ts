@@ -1,5 +1,8 @@
 import { NoteCommandInterface } from '@/interactor/requests/NoteCommandInterface'
-import { NoteRequest } from '@/interactor/requests/NoteRequest'
+import {
+  NoteRangeRequest,
+  NoteRequest,
+} from '@/interactor/requests/NoteRequest'
 
 export class NoteController {
   createNote(interactor: NoteCommandInterface, request: NoteRequest) {
@@ -15,6 +18,10 @@ export class NoteController {
   }
 
   deleteNote(interactor: NoteCommandInterface, request: NoteRequest) {
+    interactor.execute(request)
+  }
+
+  readNoteByRange(interactor: NoteCommandInterface, request: NoteRangeRequest) {
     interactor.execute(request)
   }
 }

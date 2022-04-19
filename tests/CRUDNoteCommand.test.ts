@@ -3,9 +3,13 @@ import {
   readNoteCommand,
   updateNoteCommand,
   deleteNoteCommand,
+  readNoteByRangeCommand,
 } from '@/interactor/use-cases/CRUDNoteCommandFactory'
 import { mapNote } from '@/interactor/use-cases/mapper/EntityResponseMapper'
-import { NoteRequest } from '@/interactor/requests/NoteRequest'
+import {
+  NoteRequest,
+  NoteRangeRequest,
+} from '@/interactor/requests/NoteRequest'
 
 import { NoteInMemoryStorage } from '@/tests/utils/NoteInMemoryStorage'
 import { NoteStringOutputPresenter } from '@/tests/utils/NoteStringOutputPresenter'
@@ -99,6 +103,43 @@ describe('[CRUDNoteCommand] unit tests', () => {
 
       // assert that the storage is empty
       expect(dataGateway.storage.length).toEqual(0)
+    })
+
+    it('should return a list of notes within the given range', () => {
+      const presenter = new NoteStringOutputPresenter('Notes presenter: ')
+      const readByRangeCommand = readNoteByRangeCommand(dataGateway, presenter)
+
+      const request: NoteRangeRequest = {
+        timestamp: new Date(),
+        message: 'get notes within range',
+        start: new Date('2022-04-02T00:00:00'),
+        end: new Date('2022-04-03T00:00:00'),
+      }
+
+      const createCommand = createNoteCommand(dataGateway, presenter)
+      createCommand.execute({
+        timestamp: new Date('2022-04-02T00:09:00'),
+        message: 'sample note for range query',
+        date: new Date(),
+        content: 'This should be included.',
+      })
+      createCommand.execute({
+        timestamp: new Date('2022-04-02T00:10:00'),
+        message: 'sample note for range query',
+        date: new Date(),
+        content: 'This should be included.',
+      })
+      createCommand.execute({
+        timestamp: new Date('2022-04-01T00:10:00'),
+        message: 'sample note for range query',
+        date: new Date(),
+        content: 'This should excluded.',
+      })
+
+      expect(dataGateway.storage.length).toEqual(3)
+
+      readByRangeCommand.execute(request)
+      expect(dataGateway.storage.length).toEqual(3)
     })
   })
 })

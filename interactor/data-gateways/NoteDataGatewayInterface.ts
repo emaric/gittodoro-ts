@@ -8,4 +8,6 @@ export interface NoteDataGatewayInterface {
   update(note: Note): Note
 
   delete(id: number): void
+
+  readByRange(start: Date, end: Date): Note[]
 }

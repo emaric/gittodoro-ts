@@ -1,5 +1,8 @@
 import { NoteDataGatewayInterface } from '@/interactor/data-gateways/NoteDataGatewayInterface'
-import { NoteRequest } from '@/interactor/requests/NoteRequest'
+import {
+  NoteRangeRequest,
+  NoteRequest,
+} from '@/interactor/requests/NoteRequest'
 import { NoteCommandInterface } from '@/interactor/requests/NoteCommandInterface'
 import { NotePresenterInterface } from '@/interactor/responses/NotePresenterInterface'
 import { mapNote } from '@/interactor/use-cases/mapper/EntityResponseMapper'
@@ -75,6 +78,13 @@ class DeleteNoteCommand extends BaseNoteCommand {
   }
 }
 
+class ReadNoteByRangeCommand extends BaseNoteCommand {
+  execute(request: NoteRangeRequest): void {
+    const notes = this.dataGateway.readByRange(request.start, request.end)
+    this.presenter.present({ notes })
+  }
+}
+
 export const createNoteCommand = (
   dataGateway: NoteDataGatewayInterface,
   presenter: NotePresenterInterface
@@ -101,4 +111,11 @@ export const deleteNoteCommand = (
   presenter: NotePresenterInterface
 ) => {
   return new DeleteNoteCommand(dataGateway, presenter)
+}
+
+export const readNoteByRangeCommand = (
+  dataGateway: NoteDataGatewayInterface,
+  presenter: NotePresenterInterface
+) => {
+  return new ReadNoteByRangeCommand(dataGateway, presenter)
 }
