@@ -17,3 +17,8 @@ export type EndSessionRequest = SessionRequest & {
 export type ViewSessionRequest = SessionRequest & {
   start: Date
 }
+
+export type ViewSessionsByRangeRequest = SessionRequest & {
+  start: Date
+  end: Date
+}

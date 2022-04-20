@@ -14,3 +14,7 @@ export type SessionResponse = {
   timerSequenceDuration: number
   timerSequence: StateTimer[]
 }
+
+export type SessionsByRangeResponse = SessionResponse & {
+  sessions: SessionResponse[]
+}

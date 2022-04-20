@@ -12,4 +12,6 @@ export interface SessionDataGatewayInterface {
   readSession(start: Date): Session
 
   endSession(end: Date): Session
+
+  viewSessionsByRange(start: Date, end: Date): Session[]
 }

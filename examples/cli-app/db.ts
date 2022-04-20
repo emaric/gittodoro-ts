@@ -44,4 +44,10 @@ export class SessionInMemory implements SessionDataGatewayInterface {
     this.storage[last].end = end
     return this.storage[last]
   }
+
+  viewSessionsByRange(start: Date, end: Date) {
+    return this.storage
+      .filter((session: Session) => session.start.getTime() >= start.getTime())
+      .filter((session: Session) => end.getTime() >= session.start.getTime())
+  }
 }

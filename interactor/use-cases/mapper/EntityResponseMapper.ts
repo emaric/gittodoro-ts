@@ -5,6 +5,7 @@ import { Note } from '@/interactor/entities/Note'
 
 import {
   SessionResponse,
+  SessionsByRangeResponse,
   StateTimer as StateTimerResponse,
 } from '@/interactor/responses/SessionResponse'
 import { NoteResponse } from '@/interactor/responses/NoteResponse'
@@ -25,6 +26,21 @@ export const mapSession = (session: Session): SessionResponse => {
     timerSequenceDuration: session.timerSequenceDuration,
     timerSequence: mapTimerSequence(session.timerSequence),
   }
+}
+
+export const mapSessions = (sessions: Session[]): SessionsByRangeResponse => {
+  if (sessions.length == 0) {
+    throw new Error('No sessions to map.')
+  }
+  const firstSession = mapSession(sessions[0])
+  const response: SessionsByRangeResponse = {
+    ...firstSession,
+    sessions: [firstSession],
+  }
+  if (sessions.length > 1) {
+    response.sessions = sessions.map((session) => mapSession(session))
+  }
+  return response
 }
 
 export const mapNote = (note: Note): NoteResponse => {
