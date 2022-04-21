@@ -49,10 +49,12 @@ describe('[ViewSessionsByRangeCommand] unit tests', () => {
 
       viewSessionsByRangeCommand.execute(request)
 
-      const expectedOutput =
-        'View sessions by range: ' +
-        JSON.stringify(mapSessions([sampleSession]))
-      expect(sessionPresenter.output).toBe(expectedOutput)
+      const expectedOutputIncludes = JSON.stringify(
+        mapSessions([sampleSession])
+      )
+      expect(sessionPresenter.output.includes(expectedOutputIncludes)).toBe(
+        true
+      )
     })
   })
 })

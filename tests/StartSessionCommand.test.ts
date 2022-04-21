@@ -24,11 +24,11 @@ describe('[StartSessionCommand] unit tests', () => {
       }
       startSessionCommand.execute(request)
 
-      const expectedOutput =
-        'A session has started: ' +
-        JSON.stringify(mapSession(dataGateway.storage[0]))
+      const expectedOutputIncludes = JSON.stringify(
+        mapSession(dataGateway.storage[0])
+      )
 
-      expect(presenter.output).toBe(expectedOutput)
+      expect(presenter.output.includes(expectedOutputIncludes)).toBe(true)
     })
   })
 })

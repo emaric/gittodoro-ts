@@ -35,9 +35,9 @@ describe('[EndSessionCommand] unit tests', () => {
       endSessionCommand.execute(request)
 
       const response = mapSession(dataGateway.storage[0])
-      const expectedOutput = 'A session has ended: ' + JSON.stringify(response)
+      const expectedOutputIncludes = JSON.stringify(response)
 
-      expect(presenter.output).toBe(expectedOutput)
+      expect(presenter.output.includes(expectedOutputIncludes)).toBe(true)
     })
   })
 })

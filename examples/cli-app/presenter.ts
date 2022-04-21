@@ -1,5 +1,5 @@
 import { SessionPresenterInterface } from '@/interactor/responses/SessionPresenterInterface'
-import { SessionResponse } from '@/interactor/responses/SessionResponse'
+import { SessionBaseResponse } from '@/interactor/responses/SessionResponse'
 import { mapSession } from './response-view-mapper'
 import { Session } from './models/Session'
 
@@ -13,7 +13,7 @@ export class SessionCLIPresenter implements SessionPresenterInterface {
   constructor(cliView: CLIView) {
     this.cliView = cliView
   }
-  present(response: SessionResponse): void {
-    this.cliView.display(mapSession(response))
+  present(response: SessionBaseResponse): void {
+    response.session && this.cliView.display(mapSession(response.session))
   }
 }

@@ -3,6 +3,7 @@ import { EndSessionRequest } from '@/interactor/requests/SessionRequest'
 import { SessionCommandInterface } from '@/interactor/requests/SessionCommandInterface'
 import { SessionPresenterInterface } from '@/interactor/responses/SessionPresenterInterface'
 import { mapSession } from './mapper/EntityResponseMapper'
+import { SessionBaseResponse } from '../responses/SessionResponse'
 
 export class EndSessionCommand implements SessionCommandInterface {
   sessionDataGateway: SessionDataGatewayInterface
@@ -18,6 +19,11 @@ export class EndSessionCommand implements SessionCommandInterface {
 
   execute(request: EndSessionRequest): void {
     const session = this.sessionDataGateway.endSession(request.end)
-    this.sessionPresenter.present(mapSession(session))
+    const response: SessionBaseResponse = {
+      timestamp: new Date(),
+      message: 'End session',
+      session: mapSession(session),
+    }
+    this.sessionPresenter.present(response)
   }
 }

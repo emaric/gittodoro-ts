@@ -15,6 +15,9 @@ export type SessionResponse = {
   timerSequence: StateTimer[]
 }
 
-export type SessionsByRangeResponse = SessionResponse & {
-  sessions: SessionResponse[]
+export type SessionBaseResponse = {
+  timestamp: Date
+  message: string
+  session?: SessionResponse
+  sessions?: SessionResponse[]
 }

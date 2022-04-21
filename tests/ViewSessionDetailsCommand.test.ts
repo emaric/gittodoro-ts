@@ -39,9 +39,10 @@ describe('[ViewSessionDetails] unit tests', () => {
 
       viewSessionDetailsCommand.execute(request)
 
-      const expectedOutput =
-        'View Session Details: ' + JSON.stringify(mapSession(sampleSession))
-      expect(sessionPresenter.output).toBe(expectedOutput)
+      const expectedOutputIncludes = JSON.stringify(mapSession(sampleSession))
+      expect(sessionPresenter.output.includes(expectedOutputIncludes)).toBe(
+        true
+      )
     })
   })
 })

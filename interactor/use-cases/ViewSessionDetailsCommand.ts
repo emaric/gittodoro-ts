@@ -2,6 +2,7 @@ import { SessionDataGatewayInterface } from '@/interactor/data-gateways/SessionD
 import { SessionCommandInterface } from '@/interactor/requests/SessionCommandInterface'
 import { ViewSessionRequest } from '@/interactor/requests/SessionRequest'
 import { SessionPresenterInterface } from '@/interactor/responses/SessionPresenterInterface'
+import { SessionBaseResponse } from '../responses/SessionResponse'
 import { mapSession } from './mapper/EntityResponseMapper'
 
 export class ViewSessionDetailsCommand implements SessionCommandInterface {
@@ -18,6 +19,11 @@ export class ViewSessionDetailsCommand implements SessionCommandInterface {
 
   execute(request: ViewSessionRequest): void {
     const session = this.sessionDataGateway.readSession(request.start)
-    this.sessionPresenter.present(mapSession(session))
+    const response: SessionBaseResponse = {
+      timestamp: new Date(),
+      message: 'View session details',
+      session: mapSession(session),
+    }
+    this.sessionPresenter.present(response)
   }
 }

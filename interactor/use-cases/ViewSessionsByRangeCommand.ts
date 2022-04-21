@@ -3,6 +3,7 @@ import { SessionCommandInterface } from '@/interactor/requests/SessionCommandInt
 import { ViewSessionsByRangeRequest } from '@/interactor/requests/SessionRequest'
 import { SessionPresenterInterface } from '@/interactor/responses/SessionPresenterInterface'
 import { mapSessions } from '@/interactor/use-cases/mapper/EntityResponseMapper'
+import { SessionBaseResponse } from '../responses/SessionResponse'
 
 export class ViewSessionsByRangeCommand implements SessionCommandInterface {
   sessionDataGateway: SessionDataGatewayInterface
@@ -21,6 +22,11 @@ export class ViewSessionsByRangeCommand implements SessionCommandInterface {
       request.start,
       request.end
     )
-    this.sessionPresenter.present(mapSessions(sessions))
+    const response: SessionBaseResponse = {
+      timestamp: new Date(),
+      message: 'View sessions by range.',
+      sessions: mapSessions(sessions),
+    }
+    this.sessionPresenter.present(response)
   }
 }
