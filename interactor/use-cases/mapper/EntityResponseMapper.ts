@@ -20,8 +20,8 @@ export const mapTimerSequence = (
 
 export const mapSession = (session: Session): SessionResponse => {
   return {
-    ...session,
     ...session.duration,
+    ...session,
     timerSequenceDuration: session.timerSequenceDuration,
     timerSequence: mapTimerSequence(session.timerSequence),
   }
