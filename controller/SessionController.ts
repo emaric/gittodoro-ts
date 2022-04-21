@@ -3,6 +3,7 @@ import {
   EndSessionRequest,
   StartSessionRequest,
   ViewSessionRequest,
+  ViewSessionsByRangeRequest,
 } from '../interactor/requests/SessionRequest'
 
 export class SessionController {
@@ -24,6 +25,13 @@ export class SessionController {
     interactor: SessionCommandInterface,
     request: ViewSessionRequest
   ): void {
+    interactor.execute(request)
+  }
+
+  viewSessionsByRange(
+    interactor: SessionCommandInterface,
+    request: ViewSessionsByRangeRequest
+  ) {
     interactor.execute(request)
   }
 }
