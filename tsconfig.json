@@ -6,7 +6,6 @@
     "baseUrl": "./",
     "paths": {
       "@/interactor/*": ["interactor/*"],
-      "@/interactor/use-cases/*": ["interactor/use-cases/*"],
       "@/controller/*": ["controller/*"],
       "@/examples/*": ["examples/*"],
       "@/tests/*": ["tests/*"]
@@ -20,5 +19,5 @@
     "strict": true,
     "skipLibCheck": true
   },
-  "include": ["interactor", "controller", "examples"]
+  "include": ["interactor", "controller", "examples", "tests"]
 }

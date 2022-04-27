@@ -29,10 +29,9 @@ describe('[CRUDNoteCommand] unit tests', () => {
       }
       createCommand.execute(request)
 
-      const expectedOutput =
-        'Note: ' + JSON.stringify(mapNote(dataGateway.storage[0]))
+      const expectedNote = JSON.stringify(mapNote(dataGateway.storage[0]))
 
-      expect(presenter.output).toBe(expectedOutput)
+      expect(presenter.output.includes(expectedNote)).toBe(true)
     })
 
     it('should return the details of a saved note on readNoteCommand', () => {
@@ -46,10 +45,9 @@ describe('[CRUDNoteCommand] unit tests', () => {
       }
       readCommand.execute(request)
 
-      const expectedOutput =
-        'Note: ' + JSON.stringify(mapNote(dataGateway.storage[0]))
+      const expectedNote = JSON.stringify(mapNote(dataGateway.storage[0]))
 
-      expect(presenter.output).toBe(expectedOutput)
+      expect(presenter.output.includes(expectedNote)).toBe(true)
     })
 
     it('shoud update the note on updateNoteCommand', () => {
@@ -68,18 +66,15 @@ describe('[CRUDNoteCommand] unit tests', () => {
         content: 'This note has been updated. -SHOULD INCLUDE THIS TEXT-',
       }
       // assert the old values
-      const oldValue =
-        'Read command Note: ' + JSON.stringify(mapNote(dataGateway.storage[0]))
+      const oldValue = JSON.stringify(mapNote(dataGateway.storage[0]))
       readCommand.execute(request)
-      expect(readPresenter.output).toBe(oldValue)
+      expect(readPresenter.output.includes(oldValue)).toBe(true)
 
       // assert that the note is updated
       updateCommand.execute(request)
-      const newValue =
-        'Update command Note: ' +
-        JSON.stringify(mapNote(dataGateway.storage[0]))
+      const newValue = JSON.stringify(mapNote(dataGateway.storage[0]))
       expect(newValue.includes('-SHOULD INCLUDE THIS TEXT-')).toBe(true)
-      expect(updatePresenter.output).toBe(newValue)
+      expect(updatePresenter.output.includes(newValue)).toBe(true)
     })
 
     it('shoud delete the note with the given id', () => {

@@ -1,5 +1,5 @@
-import { DurationResponse } from './DurationResponse'
+import { DurationBaseResponse } from './DurationResponse'
 
 export interface DurationPresenterInterface {
-  present(duration: DurationResponse): void
+  present(duration: DurationBaseResponse): void
 }

@@ -1,13 +1,13 @@
-export type Note = {
+export type NoteResponse = {
   id?: number
   date?: Date
   content?: string
   updatedAt?: Date
 }
 
-export type NoteResponse = Note & {
-  timestamp?: Date
-  message?: string
-
-  notes?: Note[]
+export type NoteBaseResponse = {
+  timestamp: Date
+  message: string
+  note?: NoteResponse
+  notes?: NoteResponse[]
 }

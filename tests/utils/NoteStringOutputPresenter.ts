@@ -1,5 +1,5 @@
 import { NotePresenterInterface } from '@/interactor/responses/NotePresenterInterface'
-import { NoteResponse } from '@/interactor/responses/NoteResponse'
+import { NoteBaseResponse } from '@/interactor/responses/NoteResponse'
 
 export class NoteStringOutputPresenter implements NotePresenterInterface {
   output: string
@@ -8,7 +8,7 @@ export class NoteStringOutputPresenter implements NotePresenterInterface {
     this.output = output
   }
 
-  present(response: NoteResponse): void {
+  present(response: NoteBaseResponse): void {
     this.output = this.output + JSON.stringify(response)
   }
 }

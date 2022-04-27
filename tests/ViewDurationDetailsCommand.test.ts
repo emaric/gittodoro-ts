@@ -1,7 +1,7 @@
 import { Duration } from '@/interactor/entities/Duration'
 import { DurationDataGatewayInterface } from '@/interactor/data-gateways/DurationDataGatewayInterface'
 import { DurationRequest } from '@/interactor/requests/DurationRequest'
-import { DurationResponse } from '@/interactor/responses/DurationResponse'
+import { DurationBaseResponse } from '@/interactor/responses/DurationResponse'
 import { DurationPresenterInterface } from '@/interactor/responses/DurationPresenterInterface'
 import { ViewDurationDetailsCommand } from '@/interactor/use-cases/ViewDurationDetailsCommand'
 
@@ -23,8 +23,8 @@ class TestDurationPresenter implements DurationPresenterInterface {
     this.output = output
   }
 
-  present(duration: DurationResponse): void {
-    this.output = this.output + JSON.stringify(duration)
+  present(response: DurationBaseResponse): void {
+    this.output = this.output + JSON.stringify(response.duration)
   }
 }
 

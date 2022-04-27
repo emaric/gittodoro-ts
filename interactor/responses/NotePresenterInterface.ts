@@ -1,5 +1,5 @@
-import { NoteResponse } from '@/interactor/responses/NoteResponse'
+import { NoteBaseResponse } from '@/interactor/responses/NoteResponse'
 
 export interface NotePresenterInterface {
-  present(response: NoteResponse): void
+  present(response: NoteBaseResponse): void
 }

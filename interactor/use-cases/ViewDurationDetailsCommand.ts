@@ -2,6 +2,7 @@ import { DurationDataGatewayInterface } from '@/interactor/data-gateways/Duratio
 import { DurationCommandInterface } from '@/interactor/requests/DurationCommandInterface'
 import { DurationRequest } from '@/interactor/requests/DurationRequest'
 import { DurationPresenterInterface } from '@/interactor/responses/DurationPresenterInterface'
+import { DurationBaseResponse } from '../responses/DurationResponse'
 
 export class ViewDurationDetailsCommand implements DurationCommandInterface {
   dataGateway: DurationDataGatewayInterface
@@ -18,6 +19,11 @@ export class ViewDurationDetailsCommand implements DurationCommandInterface {
   execute(request: DurationRequest): void {
     console.log(request)
     const duration = this.dataGateway.getDefaultDuration()
-    this.presenter.present({ ...duration })
+    const response: DurationBaseResponse = {
+      timestamp: new Date(),
+      message: 'View Duration Response',
+      duration,
+    }
+    this.presenter.present(response)
   }
 }

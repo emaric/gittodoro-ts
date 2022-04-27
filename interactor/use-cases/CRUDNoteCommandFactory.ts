@@ -31,7 +31,12 @@ class CreateNoteCommand extends BaseNoteCommand {
       date: request.date || new Date(),
       content: request.content || '',
     })
-    this.presenter.present(mapNote(note))
+    const response = {
+      timestamp: new Date(),
+      message: 'Create Note response.',
+      note: mapNote(note),
+    }
+    this.presenter.present(response)
   }
 }
 
@@ -39,7 +44,12 @@ class ReadNoteCommand extends BaseNoteCommand {
   execute(request: NoteRequest): void {
     if (request.id != undefined) {
       const note = this.dataGateway.read(request.id)
-      this.presenter.present(mapNote(note))
+      const response = {
+        timestamp: new Date(),
+        message: 'Read Note response.',
+        note: mapNote(note),
+      }
+      this.presenter.present(response)
     } else {
       throw new Error('ReadNoteCommand requires id.')
     }
@@ -55,7 +65,12 @@ class UpdateNoteCommand extends BaseNoteCommand {
       note.content = request.content || ''
       note.updatedAt = request.timestamp
       const updatedNote = this.dataGateway.update(note)
-      this.presenter.present(mapNote(updatedNote))
+      const response = {
+        timestamp: new Date(),
+        message: 'Update Note response.',
+        note: mapNote(updatedNote),
+      }
+      this.presenter.present(response)
     }
   }
 }
@@ -81,7 +96,12 @@ class DeleteNoteCommand extends BaseNoteCommand {
 class ReadNoteByRangeCommand extends BaseNoteCommand {
   execute(request: NoteRangeRequest): void {
     const notes = this.dataGateway.readByRange(request.start, request.end)
-    this.presenter.present({ notes })
+    const response = {
+      timestamp: new Date(),
+      message: 'Read Note by range response.',
+      notes,
+    }
+    this.presenter.present(response)
   }
 }
 
