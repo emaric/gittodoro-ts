@@ -10,7 +10,7 @@ export const mapTimerSequence = (
   timerSequence: StateTimerResponse[]
 ): StateTimer[] => {
   return timerSequence.map((ts) => ({
-    state: (<any>State)[ts.state],
+    state: (<never>State)[ts.state],
     duration: ts.duration,
   }))
 }
