@@ -63,7 +63,7 @@ class UpdateNoteCommand extends BaseNoteCommand {
     } else {
       const note = this.dataGateway.read(request.id)
       note.content = request.content || ''
-      note.updatedAt = request.timestamp
+      note.updatedAt = request.updatedAt
       const updatedNote = this.dataGateway.update(note)
       const response = {
         timestamp: new Date(),
