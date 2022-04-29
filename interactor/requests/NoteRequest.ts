@@ -4,6 +4,7 @@ export type NoteRequest = {
   id?: number
   date?: Date
   content?: string
+  updatedAt?: Date
 }
 
 export type NoteRangeRequest = NoteRequest & {
