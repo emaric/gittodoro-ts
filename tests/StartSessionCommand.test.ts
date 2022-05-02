@@ -15,12 +15,13 @@ describe('[StartSessionCommand] unit tests', () => {
         presenter
       )
       const request: StartSessionRequest = {
+        timestamp: new Date(),
+        message: 'This is my first session.',
         start: new Date('2022-04-12T00:00:00'),
         pomodoro: 50,
         short: 10,
         long: 20,
         longInterval: 4,
-        message: 'This is my first session.',
       }
       startSessionCommand.execute(request)
 

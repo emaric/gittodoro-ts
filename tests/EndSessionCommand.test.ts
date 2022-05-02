@@ -29,8 +29,9 @@ describe('[EndSessionCommand] unit tests', () => {
       )
       const endSessionCommand = new EndSessionCommand(dataGateway, presenter)
       const request: EndSessionRequest = {
-        end: new Date('2022-04-12T00:00:00'),
+        timestamp: new Date(),
         message: 'End my latest unfinished session.',
+        end: new Date('2022-04-12T00:00:00'),
       }
       endSessionCommand.execute(request)
 

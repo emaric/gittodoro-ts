@@ -42,9 +42,10 @@ describe('[ViewSessionsByRangeCommand] unit tests', () => {
       )
 
       const request: ViewSessionsByRangeRequest = {
+        timestamp: new Date(),
+        message: 'View sessions by range',
         start: new Date('2022-04-12T00:00:00'),
         end: new Date('2022-04-13T00:00:00'),
-        message: 'View sessions by range',
       }
 
       viewSessionsByRangeCommand.execute(request)

@@ -30,6 +30,7 @@ export class SessionCLIApp {
       this.startCommand = new StartSessionCommand(this.storage, this.presenter)
     }
     this.startCommand.execute({
+      timestamp: new Date(),
       message: 'Start a session',
       start: new Date(),
       ...SessionCLIApp.DEFAULT_DURATION,
@@ -42,6 +43,7 @@ export class SessionCLIApp {
     }
 
     this.stopCommand.execute({
+      timestamp: new Date(),
       message: 'End a session',
       end: new Date(),
     })

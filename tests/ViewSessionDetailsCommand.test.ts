@@ -33,8 +33,9 @@ describe('[ViewSessionDetails] unit tests', () => {
       )
 
       const request: ViewSessionRequest = {
-        start: new Date('2022-04-12T09:00:00'),
+        timestamp: new Date(),
         message: 'View session details',
+        start: new Date('2022-04-12T09:00:00'),
       }
 
       viewSessionDetailsCommand.execute(request)

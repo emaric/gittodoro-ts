@@ -52,4 +52,11 @@ export class SessionInMemoryStorage implements SessionDataGatewayInterface {
       .filter((session: Session) => session.start.getTime() >= start.getTime())
       .filter((session: Session) => end.getTime() >= session.start.getTime())
   }
+
+  first(): Session {
+    throw new Error('Method not implemented.')
+  }
+  last(): Session {
+    throw new Error('Method not implemented.')
+  }
 }

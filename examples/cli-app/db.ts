@@ -8,6 +8,7 @@ export class SessionInMemory implements SessionDataGatewayInterface {
   constructor(storage: Session[]) {
     this.storage = storage
   }
+
   createSession(args: {
     start: Date
     pomodoro: number
@@ -49,5 +50,13 @@ export class SessionInMemory implements SessionDataGatewayInterface {
     return this.storage
       .filter((session: Session) => session.start.getTime() >= start.getTime())
       .filter((session: Session) => end.getTime() >= session.start.getTime())
+  }
+
+  first(): Session {
+    throw new Error('Method not implemented.')
+  }
+
+  last(): Session {
+    throw new Error('Method not implemented.')
   }
 }

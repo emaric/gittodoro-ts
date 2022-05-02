@@ -1,4 +1,5 @@
 export type SessionRequest = {
+  timestamp: Date
   message: string
 }
 
@@ -22,3 +23,5 @@ export type ViewSessionsByRangeRequest = SessionRequest & {
   start: Date
   end: Date
 }
+
+export type ViewFirstAndLastSessionsRequest = SessionRequest
