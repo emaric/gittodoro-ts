@@ -5,7 +5,9 @@ import { SessionPresenterInterface } from '@/interactor/responses/SessionPresent
 import { SessionBaseResponse } from '@/interactor/responses/SessionResponse'
 import { mapSessions } from './mapper/EntityResponseMapper'
 
-export class ViewFirstAndLastSessions implements SessionCommandInterface {
+export class ViewFirstAndLastSessionsCommand
+  implements SessionCommandInterface
+{
   sessionDataGateway: SessionDataGatewayInterface
   sessionPresenter: SessionPresenterInterface
 
