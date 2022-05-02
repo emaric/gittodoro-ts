@@ -54,9 +54,9 @@ export class SessionInMemoryStorage implements SessionDataGatewayInterface {
   }
 
   first(): Session {
-    throw new Error('Method not implemented.')
+    return this.storage[0]
   }
   last(): Session {
-    throw new Error('Method not implemented.')
+    return this.storage[this.storage.length - 1]
   }
 }

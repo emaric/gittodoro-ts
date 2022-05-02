@@ -36,7 +36,7 @@ export class SessionController {
     interactor.execute(request)
   }
 
-  ViewFirstAndLastSessions(
+  viewFirstAndLastSessions(
     interactor: SessionCommandInterface,
     request: ViewFirstAndLastSessionsRequest
   ) {

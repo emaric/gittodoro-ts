@@ -23,10 +23,15 @@ export class ViewFirstAndLastSessionsCommand
     console.log('view first and last sessions request:', request)
     const firstSession = this.sessionDataGateway.first()
     const lastSession = this.sessionDataGateway.last()
+
+    const sessions = []
+    firstSession && sessions.push(firstSession)
+    lastSession && sessions.push(lastSession)
+
     const response: SessionBaseResponse = {
       timestamp: new Date(),
       message: 'View session details',
-      sessions: mapSessions([firstSession, lastSession]),
+      sessions: sessions ? mapSessions(sessions) : [],
     }
     this.sessionPresenter.present(response)
   }
