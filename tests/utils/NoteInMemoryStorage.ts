@@ -8,7 +8,7 @@ export class NoteInMemoryStorage implements NoteDataGatewayInterface {
     this.storage = storage
   }
 
-  create(note: Note): Note {
+  create(note: Note): Promise<Note> {
     const id = this.storage.length
     const newNote: Note = {
       ...note,
@@ -18,15 +18,15 @@ export class NoteInMemoryStorage implements NoteDataGatewayInterface {
     return this.read(id)
   }
 
-  read(id: number): Note {
+  read(id: number): Promise<Note> {
     const note = this.storage.find((n) => n.id == id)
     if (note) {
-      return note
+      return Promise.resolve(note)
     }
     throw new Error('Not found.')
   }
 
-  update(note: Note): Note {
+  update(note: Note): Promise<Note> {
     this.storage = this.storage.map((n) => {
       if (note.id == n.id) {
         return {
@@ -39,11 +39,12 @@ export class NoteInMemoryStorage implements NoteDataGatewayInterface {
     return this.read(note.id)
   }
 
-  delete(id: number): void {
+  delete(id: number): Promise<Note | undefined> {
     this.storage = this.storage.filter((n) => n.id != id)
     if (this.storage.find((n) => n.id == id)) {
-      throw new Error('Deletion was unsuccessful.')
+      return Promise.reject(new Error('Deletion was unsuccessful'))
     }
+    return Promise.resolve(undefined)
   }
 
   readByRange(start: Date, end: Date) {
@@ -53,6 +54,6 @@ export class NoteInMemoryStorage implements NoteDataGatewayInterface {
       }
       return end.getTime() >= n.date.getTime()
     })
-    return filtered
+    return Promise.resolve(filtered)
   }
 }

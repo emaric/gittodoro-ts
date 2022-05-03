@@ -15,7 +15,7 @@ export class SessionInMemory implements SessionDataGatewayInterface {
     short: number
     long: number
     longInterval: number
-  }): Session {
+  }): Promise<Session> {
     const session = new Session({
       ...args,
       id: this.storage.length,
@@ -25,10 +25,10 @@ export class SessionInMemory implements SessionDataGatewayInterface {
       }),
     })
     this.storage.push(session)
-    return session
+    return Promise.resolve(session)
   }
 
-  readSession(start: Date): Session {
+  readSession(start: Date): Promise<Session> {
     const session = this.storage.find(
       (session) => session.start.getTime() == start.getTime()
     )
@@ -37,26 +37,30 @@ export class SessionInMemory implements SessionDataGatewayInterface {
       throw new Error('Not found.')
     }
 
-    return session
+    return Promise.resolve(session)
   }
 
-  endSession(end: Date): Session {
+  endSession(end: Date): Promise<Session> {
     const last = this.storage.length - 1
     this.storage[last].end = end
-    return this.storage[last]
+    return Promise.resolve(this.storage[last])
   }
 
   viewSessionsByRange(start: Date, end: Date) {
-    return this.storage
-      .filter((session: Session) => session.start.getTime() >= start.getTime())
-      .filter((session: Session) => end.getTime() >= session.start.getTime())
+    return Promise.resolve(
+      this.storage
+        .filter(
+          (session: Session) => session.start.getTime() >= start.getTime()
+        )
+        .filter((session: Session) => end.getTime() >= session.start.getTime())
+    )
   }
 
-  first(): Session {
+  first(): Promise<Session> {
     throw new Error('Method not implemented.')
   }
 
-  last(): Session {
+  last(): Promise<Session> {
     throw new Error('Method not implemented.')
   }
 }

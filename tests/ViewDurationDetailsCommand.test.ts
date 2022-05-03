@@ -1,7 +1,10 @@
 import { Duration } from '@/interactor/entities/Duration'
 import { DurationDataGatewayInterface } from '@/interactor/data-gateways/DurationDataGatewayInterface'
 import { DurationRequest } from '@/interactor/requests/DurationRequest'
-import { DurationBaseResponse } from '@/interactor/responses/DurationResponse'
+import {
+  DurationBaseResponse,
+  DurationResponse,
+} from '@/interactor/responses/DurationResponse'
 import { DurationPresenterInterface } from '@/interactor/responses/DurationPresenterInterface'
 import { ViewDurationDetailsCommand } from '@/interactor/use-cases/ViewDurationDetailsCommand'
 
@@ -11,8 +14,8 @@ class TestDurationDataGateway implements DurationDataGatewayInterface {
   constructor(defaultDuration: Duration) {
     this.defaultDuration = defaultDuration
   }
-  getDefaultDuration(): Duration {
-    return this.defaultDuration
+  getDefaultDuration(): Promise<Duration> {
+    return Promise.resolve(this.defaultDuration)
   }
 }
 
@@ -23,14 +26,17 @@ class TestDurationPresenter implements DurationPresenterInterface {
     this.output = output
   }
 
-  present(response: DurationBaseResponse): void {
+  present(
+    response: DurationBaseResponse
+  ): Promise<DurationResponse | undefined> {
     this.output = this.output + JSON.stringify(response.duration)
+    return Promise.resolve(response.duration)
   }
 }
 
 describe('[ViewDurationDetailsCommand] unit tests', () => {
   describe('when trying to execute view duration details command', () => {
-    it('should get a duration response', () => {
+    it('should get a duration response', async () => {
       const sampleDuration = new Duration({
         id: 0,
         pomodoro: 50,
@@ -51,7 +57,7 @@ describe('[ViewDurationDetailsCommand] unit tests', () => {
         timestamp: new Date(),
         message: 'this is a sample request',
       }
-      viewDurationDetailsCommand.execute(request)
+      await viewDurationDetailsCommand.execute(request)
 
       const expectedOutput =
         'This is the response: ' + JSON.stringify(sampleDuration)

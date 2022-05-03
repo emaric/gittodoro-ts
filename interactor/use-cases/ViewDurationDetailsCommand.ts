@@ -16,14 +16,17 @@ export class ViewDurationDetailsCommand implements DurationCommandInterface {
     this.presenter = presenter
   }
 
-  execute(request: DurationRequest): void {
+  async execute(request: DurationRequest): Promise<DurationBaseResponse> {
     console.log(request)
-    const duration = this.dataGateway.getDefaultDuration()
+    const duration = await this.dataGateway.getDefaultDuration()
     const response: DurationBaseResponse = {
       timestamp: new Date(),
       message: 'View Duration Response',
       duration,
     }
-    this.presenter.present(response)
+    return new Promise((resolve) => {
+      this.presenter.present(response)
+      resolve(response)
+    })
   }
 }

@@ -17,13 +17,17 @@ export class StartSessionCommand implements SessionCommandInterface {
     this.sessionPresenter = sessionPresenter
   }
 
-  execute(request: StartSessionRequest): void {
-    const session = this.sessionDataGateway.createSession({ ...request })
+  async execute(request: StartSessionRequest): Promise<SessionBaseResponse> {
+    const session = await this.sessionDataGateway.createSession({ ...request })
     const response: SessionBaseResponse = {
       timestamp: new Date(),
       message: 'Start session',
       session: mapSession(session),
     }
-    this.sessionPresenter.present(response)
+
+    return new Promise((resolve) => {
+      this.sessionPresenter.present(response)
+      resolve(response)
+    })
   }
 }

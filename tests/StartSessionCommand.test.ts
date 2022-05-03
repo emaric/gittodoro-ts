@@ -5,7 +5,7 @@ import { SessionStringOutputPresenter } from '@/tests/utils/SessionStringOutputP
 import { mapSession } from '@/interactor/use-cases/mapper/EntityResponseMapper'
 describe('[StartSessionCommand] unit tests', () => {
   describe('when trying to execute the start session command', () => {
-    it('should create an incomplete session', () => {
+    it('should create an incomplete session', async () => {
       const dataGateway = new SessionInMemoryStorage([])
       const presenter = new SessionStringOutputPresenter(
         'A session has started: '
@@ -23,7 +23,7 @@ describe('[StartSessionCommand] unit tests', () => {
         long: 20,
         longInterval: 4,
       }
-      startSessionCommand.execute(request)
+      await startSessionCommand.execute(request)
 
       const expectedOutputIncludes = JSON.stringify(
         mapSession(dataGateway.storage[0])

@@ -13,7 +13,15 @@ export class SessionCLIPresenter implements SessionPresenterInterface {
   constructor(cliView: CLIView) {
     this.cliView = cliView
   }
-  present(response: SessionBaseResponse): void {
-    response.session && this.cliView.display(mapSession(response.session))
+  present(response: SessionBaseResponse): Promise<Session> {
+    return new Promise((resolve, reject) => {
+      if (response.session) {
+        const session = mapSession(response.session)
+        this.cliView.display(session)
+        resolve(session)
+      } else {
+        reject('No session to present.')
+      }
+    })
   }
 }

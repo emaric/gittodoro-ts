@@ -1,5 +1,8 @@
 import { SessionPresenterInterface } from '@/interactor/responses/SessionPresenterInterface'
-import { SessionBaseResponse } from '@/interactor/responses/SessionResponse'
+import {
+  SessionBaseResponse,
+  SessionResponse,
+} from '@/interactor/responses/SessionResponse'
 
 export class SessionStringOutputPresenter implements SessionPresenterInterface {
   output: string
@@ -8,7 +11,10 @@ export class SessionStringOutputPresenter implements SessionPresenterInterface {
     this.output = output
   }
 
-  present(session: SessionBaseResponse): void {
-    this.output = this.output + JSON.stringify(session)
+  present(response: SessionBaseResponse): Promise<SessionBaseResponse> {
+    return new Promise((resolve) => {
+      this.output = this.output + JSON.stringify(response)
+      resolve(response)
+    })
   }
 }

@@ -8,7 +8,7 @@ import { SessionStringOutputPresenter } from './utils/SessionStringOutputPresent
 
 describe('[ViewSessionDetails] unit tests', () => {
   describe('when trying to execute View Session Details command', () => {
-    it('should should return a session with the same start date', () => {
+    it('should should return a session with the same start date', async () => {
       const duration = new Duration({
         id: 0,
         pomodoro: 25,
@@ -38,7 +38,7 @@ describe('[ViewSessionDetails] unit tests', () => {
         start: new Date('2022-04-12T09:00:00'),
       }
 
-      viewSessionDetailsCommand.execute(request)
+      await viewSessionDetailsCommand.execute(request)
 
       const expectedOutputIncludes = JSON.stringify(mapSession(sampleSession))
       expect(sessionPresenter.output.includes(expectedOutputIncludes)).toBe(

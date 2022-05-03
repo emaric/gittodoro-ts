@@ -8,7 +8,7 @@ import { SessionStringOutputPresenter } from './utils/SessionStringOutputPresent
 
 describe('[EndSessionCommand] unit tests', () => {
   describe('when trying to execute the end session command', () => {
-    it('should end the latest unfinished session', () => {
+    it('should end the latest unfinished session', async () => {
       const duration = new Duration({
         id: 0,
         pomodoro: 25,
@@ -33,7 +33,7 @@ describe('[EndSessionCommand] unit tests', () => {
         message: 'End my latest unfinished session.',
         end: new Date('2022-04-12T00:00:00'),
       }
-      endSessionCommand.execute(request)
+      await endSessionCommand.execute(request)
 
       const response = mapSession(dataGateway.storage[0])
       const expectedOutputIncludes = JSON.stringify(response)

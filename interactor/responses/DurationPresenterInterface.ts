@@ -1,5 +1,5 @@
 import { DurationBaseResponse } from './DurationResponse'
 
 export interface DurationPresenterInterface {
-  present(duration: DurationBaseResponse): void
+  present(duration: DurationBaseResponse): Promise<unknown>
 }

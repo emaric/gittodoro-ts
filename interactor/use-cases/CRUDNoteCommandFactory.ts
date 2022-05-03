@@ -6,6 +6,7 @@ import {
 import { NoteCommandInterface } from '@/interactor/requests/NoteCommandInterface'
 import { NotePresenterInterface } from '@/interactor/responses/NotePresenterInterface'
 import { mapNote } from '@/interactor/use-cases/mapper/EntityResponseMapper'
+import { NoteBaseResponse } from '../responses/NoteResponse'
 
 class BaseNoteCommand implements NoteCommandInterface {
   dataGateway: NoteDataGatewayInterface
@@ -18,90 +19,106 @@ class BaseNoteCommand implements NoteCommandInterface {
     this.dataGateway = dataGateway
     this.presenter = presenter
   }
-
-  execute(request: NoteRequest): void {
-    throw new Error('Method not implemented. ' + request)
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  execute(request: NoteRequest): Promise<NoteBaseResponse> {
+    throw new Error('Method not implemented.')
   }
 }
 
 class CreateNoteCommand extends BaseNoteCommand {
-  execute(request: NoteRequest): void {
-    const note = this.dataGateway.create({
+  async execute(request: NoteRequest): Promise<NoteBaseResponse> {
+    const note = await this.dataGateway.create({
       id: -1,
       date: request.date || new Date(),
       content: request.content || '',
     })
-    const response = {
+    const response: NoteBaseResponse = {
       timestamp: new Date(),
       message: 'Create Note response.',
       note: mapNote(note),
     }
-    this.presenter.present(response)
+    return new Promise((resolve) => {
+      this.presenter.present(response)
+      resolve(response)
+    })
   }
 }
 
 class ReadNoteCommand extends BaseNoteCommand {
-  execute(request: NoteRequest): void {
+  async execute(request: NoteRequest): Promise<NoteBaseResponse> {
     if (request.id != undefined) {
-      const note = this.dataGateway.read(request.id)
+      const note = await this.dataGateway.read(request.id)
       const response = {
         timestamp: new Date(),
         message: 'Read Note response.',
         note: mapNote(note),
       }
-      this.presenter.present(response)
+      return new Promise((resolve) => {
+        this.presenter.present(response)
+        resolve(response)
+      })
     } else {
-      throw new Error('ReadNoteCommand requires id.')
+      return Promise.reject(new Error('ReadNoteCommand requires id.'))
     }
   }
 }
 
 class UpdateNoteCommand extends BaseNoteCommand {
-  execute(request: NoteRequest): void {
+  async execute(request: NoteRequest): Promise<NoteBaseResponse> {
     if (request.id == undefined) {
       throw new Error('UpdateNoteCommand requires id')
     } else {
-      const note = this.dataGateway.read(request.id)
+      const note = await this.dataGateway.read(request.id)
       note.content = request.content || ''
       note.updatedAt = request.updatedAt
-      const updatedNote = this.dataGateway.update(note)
+      const updatedNote = await this.dataGateway.update(note)
       const response = {
         timestamp: new Date(),
         message: 'Update Note response.',
         note: mapNote(updatedNote),
       }
-      this.presenter.present(response)
+      return new Promise((resolve) => {
+        this.presenter.present(response)
+        resolve(response)
+      })
     }
   }
 }
 
 class DeleteNoteCommand extends BaseNoteCommand {
-  execute(request: NoteRequest): void {
+  async execute(request: NoteRequest): Promise<NoteBaseResponse> {
     if (request.id == undefined) {
       throw new Error('DeleteNoteCommand requries id')
     } else {
       try {
-        this.dataGateway.delete(request.id)
-        this.presenter.present({
-          timestamp: new Date(),
-          message: `The Note with the id ${request.id} has been deleted.`,
+        await this.dataGateway.delete(request.id)
+        return new Promise((resolve) => {
+          const response = {
+            timestamp: new Date(),
+            message: `The Note with the id ${request.id} has been deleted.`,
+          }
+          this.presenter.present(response)
+          resolve(response)
         })
       } catch (e) {
-        throw new Error('Delete command failed.')
+        return Promise.reject(new Error('Delete command failed.'))
       }
     }
   }
 }
 
 class ReadNoteByRangeCommand extends BaseNoteCommand {
-  execute(request: NoteRangeRequest): void {
-    const notes = this.dataGateway.readByRange(request.start, request.end)
-    const response = {
+  async execute(request: NoteRangeRequest): Promise<NoteBaseResponse> {
+    const notes = await this.dataGateway.readByRange(request.start, request.end)
+    const response: NoteBaseResponse = {
       timestamp: new Date(),
       message: 'Read Note by range response.',
       notes,
     }
-    this.presenter.present(response)
+    return new Promise((resolve) => {
+      this.presenter.present(response)
+      resolve(response)
+    })
   }
 }
 

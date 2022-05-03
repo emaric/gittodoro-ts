@@ -8,7 +8,7 @@ import { SessionStringOutputPresenter } from './utils/SessionStringOutputPresent
 
 describe('[ViewSessionsByRangeCommand] unit tests', () => {
   describe('when trying to execute View Session by range command', () => {
-    it('should return session within the range', () => {
+    it('should return session within the range', async () => {
       const duration = new Duration({
         id: 0,
         pomodoro: 25,
@@ -48,7 +48,7 @@ describe('[ViewSessionsByRangeCommand] unit tests', () => {
         end: new Date('2022-04-13T00:00:00'),
       }
 
-      viewSessionsByRangeCommand.execute(request)
+      await viewSessionsByRangeCommand.execute(request)
 
       const expectedOutputIncludes = JSON.stringify(
         mapSessions([sampleSession])

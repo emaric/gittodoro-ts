@@ -7,15 +7,15 @@ export interface SessionDataGatewayInterface {
     short: number
     long: number
     longInterval: number
-  }): Session
+  }): Promise<Session>
 
-  readSession(start: Date): Session
+  readSession(start: Date): Promise<Session>
 
-  endSession(end: Date): Session
+  endSession(end: Date): Promise<Session>
 
-  viewSessionsByRange(start: Date, end: Date): Session[]
+  viewSessionsByRange(start: Date, end: Date): Promise<Session[]>
 
-  first(): Session
+  first(): Promise<Session>
 
-  last(): Session
+  last(): Promise<Session>
 }

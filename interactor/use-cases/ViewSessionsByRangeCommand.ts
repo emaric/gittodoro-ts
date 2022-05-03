@@ -1,9 +1,12 @@
 import { SessionDataGatewayInterface } from '@/interactor/data-gateways/SessionDataGatewayInterface'
+
 import { SessionCommandInterface } from '@/interactor/requests/SessionCommandInterface'
 import { ViewSessionsByRangeRequest } from '@/interactor/requests/SessionRequest'
+
 import { SessionPresenterInterface } from '@/interactor/responses/SessionPresenterInterface'
+import { SessionBaseResponse } from '@/interactor/responses/SessionResponse'
+
 import { mapSessions } from '@/interactor/use-cases/mapper/EntityResponseMapper'
-import { SessionBaseResponse } from '../responses/SessionResponse'
 
 export class ViewSessionsByRangeCommand implements SessionCommandInterface {
   sessionDataGateway: SessionDataGatewayInterface
@@ -17,8 +20,10 @@ export class ViewSessionsByRangeCommand implements SessionCommandInterface {
     this.sessionPresenter = sessionPresenter
   }
 
-  execute(request: ViewSessionsByRangeRequest): void {
-    const sessions = this.sessionDataGateway.viewSessionsByRange(
+  async execute(
+    request: ViewSessionsByRangeRequest
+  ): Promise<SessionBaseResponse> {
+    const sessions = await this.sessionDataGateway.viewSessionsByRange(
       request.start,
       request.end
     )
@@ -27,6 +32,10 @@ export class ViewSessionsByRangeCommand implements SessionCommandInterface {
       message: 'View sessions by range.',
       sessions: mapSessions(sessions),
     }
-    this.sessionPresenter.present(response)
+
+    return new Promise((resolve) => {
+      this.sessionPresenter.present(response)
+      resolve(response)
+    })
   }
 }

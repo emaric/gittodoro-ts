@@ -19,10 +19,11 @@ export class ViewFirstAndLastSessionsCommand
     this.sessionPresenter = sessionPresenter
   }
 
-  execute(request: ViewFirstAndLastSessionsRequest): void {
-    console.log('view first and last sessions request:', request)
-    const firstSession = this.sessionDataGateway.first()
-    const lastSession = this.sessionDataGateway.last()
+  async execute(
+    request: ViewFirstAndLastSessionsRequest
+  ): Promise<SessionBaseResponse> {
+    const firstSession = await this.sessionDataGateway.first()
+    const lastSession = await this.sessionDataGateway.last()
 
     const sessions = []
     firstSession && sessions.push(firstSession)
@@ -33,6 +34,11 @@ export class ViewFirstAndLastSessionsCommand
       message: 'View session details',
       sessions: sessions ? mapSessions(sessions) : [],
     }
+
     this.sessionPresenter.present(response)
+    return new Promise((resolve) => {
+      resolve(response)
+      this.sessionPresenter.present(response)
+    })
   }
 }

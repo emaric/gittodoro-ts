@@ -18,7 +18,7 @@ describe('[CRUDNoteCommand] unit tests', () => {
   describe('when trying to execute CRUD command for Notes', () => {
     const dataGateway = new NoteInMemoryStorage([])
 
-    it('should create a note on createNoteCommand', () => {
+    it('should create a note on createNoteCommand', async () => {
       const presenter = new NoteStringOutputPresenter('Note: ')
       const createCommand = createNoteCommand(dataGateway, presenter)
       const request: NoteRequest = {
@@ -27,14 +27,14 @@ describe('[CRUDNoteCommand] unit tests', () => {
         date: new Date(),
         content: 'This is a new note!',
       }
-      createCommand.execute(request)
+      await createCommand.execute(request)
 
       const expectedNote = JSON.stringify(mapNote(dataGateway.storage[0]))
 
       expect(presenter.output.includes(expectedNote)).toBe(true)
     })
 
-    it('should return the details of a saved note on readNoteCommand', () => {
+    it('should return the details of a saved note on readNoteCommand', async () => {
       const presenter = new NoteStringOutputPresenter('Note: ')
       const readCommand = readNoteCommand(dataGateway, presenter)
       console.log(dataGateway.storage)
@@ -43,14 +43,14 @@ describe('[CRUDNoteCommand] unit tests', () => {
         message: 'read a note',
         id: 0,
       }
-      readCommand.execute(request)
+      await readCommand.execute(request)
 
       const expectedNote = JSON.stringify(mapNote(dataGateway.storage[0]))
 
       expect(presenter.output.includes(expectedNote)).toBe(true)
     })
 
-    it('shoud update the note on updateNoteCommand', () => {
+    it('shoud update the note on updateNoteCommand', async () => {
       const readPresenter = new NoteStringOutputPresenter('Read command Note: ')
       const updatePresenter = new NoteStringOutputPresenter(
         'Update command Note: '
@@ -67,17 +67,17 @@ describe('[CRUDNoteCommand] unit tests', () => {
       }
       // assert the old values
       const oldValue = JSON.stringify(mapNote(dataGateway.storage[0]))
-      readCommand.execute(request)
+      await readCommand.execute(request)
       expect(readPresenter.output.includes(oldValue)).toBe(true)
 
       // assert that the note is updated
-      updateCommand.execute(request)
+      await updateCommand.execute(request)
       const newValue = JSON.stringify(mapNote(dataGateway.storage[0]))
       expect(newValue.includes('-SHOULD INCLUDE THIS TEXT-')).toBe(true)
       expect(updatePresenter.output.includes(newValue)).toBe(true)
     })
 
-    it('shoud delete the note with the given id', () => {
+    it('shoud delete the note with the given id', async () => {
       const presenter = new NoteStringOutputPresenter('Note presenter: ')
       const deleteCommand = deleteNoteCommand(dataGateway, presenter)
 
@@ -91,7 +91,7 @@ describe('[CRUDNoteCommand] unit tests', () => {
       expect(dataGateway.storage[0].id).toBe(request.id)
 
       // execute the delete command
-      deleteCommand.execute(request)
+      await deleteCommand.execute(request)
       expect(
         presenter.output.includes('The Note with the id 0 has been deleted.')
       ).toBe(true)
@@ -100,7 +100,7 @@ describe('[CRUDNoteCommand] unit tests', () => {
       expect(dataGateway.storage.length).toEqual(0)
     })
 
-    it('should return a list of notes within the given range', () => {
+    it('should return a list of notes within the given range', async () => {
       const presenter = new NoteStringOutputPresenter('Notes presenter: ')
       const readByRangeCommand = readNoteByRangeCommand(dataGateway, presenter)
 
@@ -112,19 +112,19 @@ describe('[CRUDNoteCommand] unit tests', () => {
       }
 
       const createCommand = createNoteCommand(dataGateway, presenter)
-      createCommand.execute({
+      await createCommand.execute({
         timestamp: new Date('2022-04-02T00:09:00'),
         message: 'sample note for range query',
         date: new Date(),
         content: 'This should be included.',
       })
-      createCommand.execute({
+      await createCommand.execute({
         timestamp: new Date('2022-04-02T00:10:00'),
         message: 'sample note for range query',
         date: new Date(),
         content: 'This should be included.',
       })
-      createCommand.execute({
+      await createCommand.execute({
         timestamp: new Date('2022-04-01T00:10:00'),
         message: 'sample note for range query',
         date: new Date(),
@@ -133,7 +133,7 @@ describe('[CRUDNoteCommand] unit tests', () => {
 
       expect(dataGateway.storage.length).toEqual(3)
 
-      readByRangeCommand.execute(request)
+      await readByRangeCommand.execute(request)
       expect(dataGateway.storage.length).toEqual(3)
     })
   })

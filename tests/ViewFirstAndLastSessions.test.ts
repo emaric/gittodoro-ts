@@ -8,7 +8,7 @@ import { SessionStringOutputPresenter } from './utils/SessionStringOutputPresent
 
 describe('[ViewFirstAndLastSessions] unit tests', () => {
   describe('when trying to execute view first and last sessions command', () => {
-    it('should return a size 2 array containing the first and last sessions', () => {
+    it('should return a size 2 array containing the first and last sessions', async () => {
       const duration = new Duration({
         id: -1,
         pomodoro: 25,
@@ -36,7 +36,7 @@ describe('[ViewFirstAndLastSessions] unit tests', () => {
       }
 
       const command = new ViewFirstAndLastSessionsCommand(db, presenter)
-      command.execute(request)
+      await command.execute(request)
 
       expect(presenter.output.includes('"id":0')).toBe(true)
       expect(presenter.output.includes('"id":1')).toBe(false)

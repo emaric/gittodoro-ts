@@ -15,7 +15,7 @@ export class SessionInMemoryStorage implements SessionDataGatewayInterface {
     short: number
     long: number
     longInterval: number
-  }): Session {
+  }): Promise<Session> {
     const duration = new Duration({
       ...args,
       id: -1,
@@ -28,35 +28,39 @@ export class SessionInMemoryStorage implements SessionDataGatewayInterface {
 
     this.storage.push(session)
 
-    return session
+    return Promise.resolve(session)
   }
 
-  readSession(start: Date): Session {
+  readSession(start: Date): Promise<Session> {
     const session = this.storage.find(
       (session) => session.start.getTime() == start.getTime()
     )
     if (!session) {
       throw new Error('Not in storage.')
     }
-    return session
+    return Promise.resolve(session)
   }
 
-  endSession(end: Date): Session {
+  endSession(end: Date): Promise<Session> {
     const last = this.storage.length - 1
     this.storage[last].end = end
-    return this.storage[last]
+    return Promise.resolve(this.storage[last])
   }
 
   viewSessionsByRange(start: Date, end: Date) {
-    return this.storage
-      .filter((session: Session) => session.start.getTime() >= start.getTime())
-      .filter((session: Session) => end.getTime() >= session.start.getTime())
+    return Promise.resolve(
+      this.storage
+        .filter(
+          (session: Session) => session.start.getTime() >= start.getTime()
+        )
+        .filter((session: Session) => end.getTime() >= session.start.getTime())
+    )
   }
 
-  first(): Session {
-    return this.storage[0]
+  first(): Promise<Session> {
+    return Promise.resolve(this.storage[0])
   }
-  last(): Session {
-    return this.storage[this.storage.length - 1]
+  last(): Promise<Session> {
+    return Promise.resolve(this.storage[this.storage.length - 1])
   }
 }

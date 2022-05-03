@@ -40,12 +40,12 @@ describe('[index] unit tests', () => {
       )
     })
 
-    it('should display that the session has ended when stop is called', () => {
+    it('should display that the session has ended when stop is called', async () => {
       jest.advanceTimersByTime(duration.long * 1000)
       expect(consoleLog.mock.calls.at(-1).at(-1)).toBe(
         'pomodoro : ' + duration.pomodoro
       )
-      app.stop()
+      await app.stop()
 
       expect(consoleLog.mock.calls.at(-1).at(-1)).toBe('Session has ended.')
     })

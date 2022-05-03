@@ -17,13 +17,16 @@ export class EndSessionCommand implements SessionCommandInterface {
     this.sessionPresenter = sessionPresenter
   }
 
-  execute(request: EndSessionRequest): void {
-    const session = this.sessionDataGateway.endSession(request.end)
+  async execute(request: EndSessionRequest): Promise<SessionBaseResponse> {
+    const session = await this.sessionDataGateway.endSession(request.end)
     const response: SessionBaseResponse = {
       timestamp: new Date(),
       message: 'End session',
       session: mapSession(session),
     }
-    this.sessionPresenter.present(response)
+    return new Promise((resolve) => {
+      this.sessionPresenter.present(response)
+      resolve(response)
+    })
   }
 }

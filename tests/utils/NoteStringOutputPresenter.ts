@@ -8,7 +8,8 @@ export class NoteStringOutputPresenter implements NotePresenterInterface {
     this.output = output
   }
 
-  present(response: NoteBaseResponse): void {
+  present(response: NoteBaseResponse): Promise<NoteBaseResponse> {
     this.output = this.output + JSON.stringify(response)
+    return Promise.resolve(response)
   }
 }
