@@ -1,6 +1,8 @@
 import { SessionCommandInterface } from '../interactor/requests/SessionCommandInterface'
 import {
+  DeleteAllRequest,
   EndSessionRequest,
+  SaveAllRequest,
   StartSessionRequest,
   ViewFirstAndLastSessionsRequest,
   ViewSessionRequest,
@@ -39,6 +41,20 @@ export class SessionController {
   viewFirstAndLastSessions(
     interactor: SessionCommandInterface,
     request: ViewFirstAndLastSessionsRequest
+  ) {
+    interactor.execute(request)
+  }
+
+  saveAllSessions(
+    interactor: SessionCommandInterface,
+    request: SaveAllRequest
+  ) {
+    interactor.execute(request)
+  }
+
+  deleteAllSessions(
+    interactor: SessionCommandInterface,
+    request: DeleteAllRequest
   ) {
     interactor.execute(request)
   }
