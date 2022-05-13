@@ -65,12 +65,26 @@ export class SessionInMemoryStorage implements SessionDataGatewayInterface {
   }
 
   saveSessions(sessions: Session[]): Promise<Session[]> {
-    throw new Error('Method not implemented.')
+    const savedSessions: Session[] = []
+    sessions.forEach((session) => {
+      session.id = this.storage.length
+      this.storage.push(session)
+      savedSessions.push(session)
+    })
+    return Promise.resolve(savedSessions)
   }
+
   deleteSessions(ids: number[]): Promise<Session[]> {
-    throw new Error('Method not implemented.')
-  }
-  getUnfinishedSessions(): Promise<Session[]> {
-    throw new Error('Method not implemented.')
+    const deletedSessions: Session[] = []
+    this.storage = this.storage.filter((session) => {
+      if (ids.includes(session.id)) {
+        deletedSessions.push(session)
+        return false
+      } else {
+        return true
+      }
+    })
+
+    return Promise.resolve(deletedSessions)
   }
 }

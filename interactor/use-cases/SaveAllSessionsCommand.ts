@@ -6,21 +6,21 @@ import { SessionBaseResponse } from '@/interactor/responses/SessionResponse'
 import { mapRequestsToSessions } from '@/interactor/use-cases/mapper/RequestEntityMapper'
 import { mapSessions } from './mapper/EntityResponseMapper'
 
-export class SaveAllSessionCommand implements SessionCommandInterface {
-  private repository: SessionDataGatewayInterface
+export class SaveAllSessionsCommand implements SessionCommandInterface {
+  private dataGateway: SessionDataGatewayInterface
   private presenter: SessionPresenterInterface
 
   constructor(
-    repository: SessionDataGatewayInterface,
+    dataGateway: SessionDataGatewayInterface,
     presenter: SessionPresenterInterface
   ) {
-    this.repository = repository
+    this.dataGateway = dataGateway
     this.presenter = presenter
   }
 
   async execute(request: SaveAllRequest): Promise<SessionBaseResponse> {
     const sessions = mapRequestsToSessions(request.sessions)
-    const savedSessions = await this.repository.saveSessions(sessions)
+    const savedSessions = await this.dataGateway.saveSessions(sessions)
     const response: SessionBaseResponse = {
       timestamp: new Date(),
       message: 'Successfully saved all sessions.',

@@ -71,8 +71,4 @@ export class SessionInMemory implements SessionDataGatewayInterface {
   deleteSessions(ids: number[]): Promise<Session[]> {
     throw new Error('Method not implemented.')
   }
-
-  getUnfinishedSessions(): Promise<Session[]> {
-    throw new Error('Method not implemented.')
-  }
 }

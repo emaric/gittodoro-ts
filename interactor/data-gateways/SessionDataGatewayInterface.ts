@@ -21,5 +21,4 @@ export interface SessionDataGatewayInterface {
 
   saveSessions(sessions: Session[]): Promise<Session[]>
   deleteSessions(ids: number[]): Promise<Session[]>
-  getUnfinishedSessions(): Promise<Session[]>
 }

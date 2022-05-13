@@ -46,4 +46,25 @@ describe('[ViewSessionDetails] unit tests', () => {
       )
     })
   })
+
+  describe('when trying to view a non-existent Session', () => {
+    it('should throw an Error', async () => {
+      const dataGateway = new SessionInMemoryStorage([])
+      const sessionPresenter = new SessionStringOutputPresenter(
+        'View Session Details: '
+      )
+      const viewSessionDetailsCommand = new ViewSessionDetailsCommand(
+        dataGateway,
+        sessionPresenter
+      )
+
+      const request: ViewSessionRequest = {
+        timestamp: new Date(),
+        message: 'View session details',
+        start: new Date('2022-04-12T09:00:00'),
+      }
+
+      await expect(viewSessionDetailsCommand.execute(request)).rejects.toThrow()
+    })
+  })
 })

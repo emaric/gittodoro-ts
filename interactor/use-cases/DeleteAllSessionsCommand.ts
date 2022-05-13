@@ -5,15 +5,15 @@ import { SessionPresenterInterface } from '@/interactor/responses/SessionPresent
 import { SessionBaseResponse } from '@/interactor/responses/SessionResponse'
 import { mapSessions } from '@/interactor/use-cases/mapper/EntityResponseMapper'
 
-export class DeleteAllSessionCommand implements SessionCommandInterface {
+export class DeleteAllSessionsCommand implements SessionCommandInterface {
   private dateGateway: SessionDataGatewayInterface
   private presenter: SessionPresenterInterface
 
   constructor(
-    repository: SessionDataGatewayInterface,
+    dataGateway: SessionDataGatewayInterface,
     presenter: SessionPresenterInterface
   ) {
-    this.dateGateway = repository
+    this.dateGateway = dataGateway
     this.presenter = presenter
   }
 

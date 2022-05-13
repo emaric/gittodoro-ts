@@ -32,7 +32,7 @@ export class ViewFirstAndLastSessionsCommand
     const response: SessionBaseResponse = {
       timestamp: new Date(),
       message: 'View session details',
-      sessions: sessions ? mapSessions(sessions) : [],
+      sessions: mapSessions(sessions),
     }
 
     this.sessionPresenter.present(response)
