@@ -1,6 +1,6 @@
 {
   "name": "@emaric/gittodoro-ts",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Gittodoro in Typescript",
   "main": "examples/cli-app/index.js",
   "types": "lib",
