@@ -3,6 +3,16 @@ export type SessionRequest = {
   message: string
 }
 
+export type SessionModelRequest = {
+  start: Date
+  pomodoro: number
+  short: number
+  long: number
+  longInterval: number
+  id?: number
+  end?: Date
+}
+
 export type StartSessionRequest = SessionRequest & {
   start: Date
   pomodoro: number
@@ -25,3 +35,11 @@ export type ViewSessionsByRangeRequest = SessionRequest & {
 }
 
 export type ViewFirstAndLastSessionsRequest = SessionRequest
+
+export type SaveAllRequest = SessionRequest & {
+  sessions: SessionModelRequest[]
+}
+
+export type DeleteAllRequest = SessionRequest & {
+  ids: number[]
+}

@@ -18,4 +18,8 @@ export interface SessionDataGatewayInterface {
   first(): Promise<Session>
 
   last(): Promise<Session>
+
+  saveSessions(sessions: Session[]): Promise<Session[]>
+  deleteSessions(ids: number[]): Promise<Session[]>
+  getUnfinishedSessions(): Promise<Session[]>
 }
