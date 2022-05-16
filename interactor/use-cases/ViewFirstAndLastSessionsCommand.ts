@@ -22,23 +22,32 @@ export class ViewFirstAndLastSessionsCommand
   async execute(
     request: ViewFirstAndLastSessionsRequest
   ): Promise<SessionBaseResponse> {
-    const firstSession = await this.sessionDataGateway.first()
-    const lastSession = await this.sessionDataGateway.last()
+    try {
+      const firstSession = await this.sessionDataGateway.first()
+      const lastSession = await this.sessionDataGateway.last()
 
-    const sessions = []
-    firstSession && sessions.push(firstSession)
-    lastSession && sessions.push(lastSession)
+      const sessions = []
+      firstSession && sessions.push(firstSession)
+      lastSession && sessions.push(lastSession)
 
-    const response: SessionBaseResponse = {
-      timestamp: new Date(),
-      message: 'View session details',
-      sessions: mapSessions(sessions),
+      const response: SessionBaseResponse = {
+        timestamp: new Date(),
+        message: 'View first and last sessions',
+        sessions: mapSessions(sessions),
+      }
+
+      return new Promise((resolve) => {
+        resolve(response)
+        this.sessionPresenter.present(response)
+      })
+    } catch (error) {
+      const response: SessionBaseResponse = {
+        timestamp: new Date(),
+        message:
+          'Error getting first and last sessions. Request made @ ' +
+          request.timestamp,
+      }
+      return Promise.resolve(response)
     }
-
-    this.sessionPresenter.present(response)
-    return new Promise((resolve) => {
-      resolve(response)
-      this.sessionPresenter.present(response)
-    })
   }
 }
