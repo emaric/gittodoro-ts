@@ -20,15 +20,15 @@ Trying to follow the Clean Architecture principles.
 1. - [x] Anonymous Users can read the default Duration
 1. - [x] Anonymous Users can modify the default Duration.
 1. - [x] Anonymous Users can reset the default Duration.
-1. - [x] Anonymous Users can start Sessions.
-1. - [x] Anonymous Users can stop Sessions.
-1. - [x] Anonymous Users can view a Session by start date.
-1. - [x] Anonymous Users can view Sessions by a range of dates (start date inclusive; end date exclusive). Which will filter both the start date and end date of the Session.
-1. - [x] Anonymous Users can delete Sessions from the local/offline storage.
-1. - [x] Anonymous Users can create a new Notes.
-1. - [x] Anonymous Users can read Notes by ID or by the date it was created and/or updated.
-1. - [x] Anonymous Users can update Notes.
-1. - [x] Anonymous Users can delete Notes.
+1. - [ ] Anonymous Users can start Sessions.
+1. - [ ] Anonymous Users can stop Sessions.
+1. - [ ] Anonymous Users can view a Session by start date.
+1. - [ ] Anonymous Users can view Sessions by a range of dates (start date inclusive; end date exclusive). Which will filter both the start date and end date of the Session.
+1. - [ ] Anonymous Users can delete Sessions from the local/offline storage.
+1. - [ ] Anonymous Users can create a new Notes.
+1. - [ ] Anonymous Users can read Notes by ID or by the date it was created and/or updated.
+1. - [ ] Anonymous Users can update Notes.
+1. - [ ] Anonymous Users can delete Notes.
 
 ### Actor: Github User
 
