@@ -14,8 +14,8 @@ export default class DefaultDurationView
   render(duration: Duration) {
     console.log('\n')
     console.log(new Date().toJSON() + ' [info] Rendering Default Duration...')
-    console.log('Default Duration:')
-    console.log(JSON.stringify(duration))
+    console.log(new Date().toJSON() + ' [info] Default Duration:')
+    console.table(JSON.stringify(duration))
     console.log('\n')
 
     this._defaultDuration = duration

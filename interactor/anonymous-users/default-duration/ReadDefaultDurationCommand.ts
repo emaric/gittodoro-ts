@@ -2,18 +2,18 @@ import DefaultDurationError from './error/DefaultDurationError'
 
 import { mapDurationToResponse } from './io/mappers'
 import { ReadDefaultDurationResponse } from './io/response.model'
-import DefaultDurationDataGatewayInterface from './io/DefaultDurationDataGatewayInterface'
 import DefaultDurationPresenterInterface from './io/DefaultDurationPresenterInterface'
 import DefaultDurationCommandInterface from './io/DefaultDurationCommandInterface'
+import { ReadDefaultDurationDataGatewayInterface } from './io/data.gateway'
 
 export default class ReadDefaultDurationCommand
   implements DefaultDurationCommandInterface
 {
-  private dataGateway: DefaultDurationDataGatewayInterface
+  private dataGateway: ReadDefaultDurationDataGatewayInterface
   private presenter: DefaultDurationPresenterInterface
 
   constructor(
-    dataGateway: DefaultDurationDataGatewayInterface,
+    dataGateway: ReadDefaultDurationDataGatewayInterface,
     presenter: DefaultDurationPresenterInterface
   ) {
     this.dataGateway = dataGateway

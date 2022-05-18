@@ -1,8 +1,15 @@
-import DefaultDurationDataGatewayInterface from '@/interactor/anonymous-users/default-duration/io/DefaultDurationDataGatewayInterface'
+import {
+  ReadDefaultDurationDataGatewayInterface,
+  ResetDefaultDurationDataGatewayInterface,
+  UpdateDefaultDurationDataGatewayInterface,
+} from '@/interactor/anonymous-users/default-duration/io/data.gateway'
 import { defaultDuration, Duration } from '@/interactor/entities/Duration'
 
 export default class DefaultDurationInMemory
-  implements DefaultDurationDataGatewayInterface
+  implements
+    ReadDefaultDurationDataGatewayInterface,
+    UpdateDefaultDurationDataGatewayInterface,
+    ResetDefaultDurationDataGatewayInterface
 {
   private storage: Duration[]
   private defaultDurationId
