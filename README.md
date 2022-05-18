@@ -21,7 +21,7 @@ Trying to follow the Clean Architecture principles.
 1. - [x] Anonymous Users can start Sessions.
 1. - [x] Anonymous Users can stop Sessions.
 1. - [x] Anonymous Users can view a Session by start date.
-1. - [x] Anonymous Users can view Sessions by a range of date (start date inclusive; end date exclusive). Which will filter both the start date and end date of the Session.
+1. - [x] Anonymous Users can view Sessions by a range of dates (start date inclusive; end date exclusive). Which will filter both the start date and end date of the Session.
 1. - [x] Anonymous Users can delete Sessions from the local/offline storage.
 1. - [x] Anonymous Users can create a new Notes.
 1. - [x] Anonymous Users can read Notes by ID or by the date it was created and/or updated.
@@ -37,7 +37,7 @@ Trying to follow the Clean Architecture principles.
 1. - [x] Github Users can stop Sessions.
 1. - [ ] Github Users can stop Sessions across platforms based on the last time it was active.
 1. - [x] Github Users can view a Session by start date.
-1. - [x] Github Users can view Sessions by a range of date (start date inclusive; end date exclusive). Which will filter both the start date and end date of the Session.
+1. - [x] Github Users can view Sessions by a range of dates (start date inclusive; end date exclusive). Which will filter both the start date and end date of the Session.
 1. - [x] Github Users can copy Sessions from the local/offline storage to their account.
 1. - [x] Github Users can delete Sessions from the local/offline storage.
 1. - [x] Github Users can create a new Notes.
