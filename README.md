@@ -47,3 +47,7 @@ Trying to follow the Clean Architecture principles.
 1. - [x] Github Users can view Sessions by a range of date (start date inclusive; end date exclusive). Which will filter both the start date and end date of the Session.
 1. - [ ] Github Users can select the Repo/Project/Issue to associate with a new Session.
 1. - [ ] Github Users can view the total number of Pomodori they have for each Repo/Project/Issue
+
+## Running Tests
+
+`npm test`
