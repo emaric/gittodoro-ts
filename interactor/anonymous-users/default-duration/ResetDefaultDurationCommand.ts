@@ -3,7 +3,7 @@ import DefaultDurationError from './error/DefaultDurationError'
 import { ResetDefaultDurationResponse } from './io/response.model'
 import DefaultDurationCommandInterface from './io/DefaultDurationCommandInterface'
 import DefaultDurationPresenterInterface from './io/DefaultDurationPresenterInterface'
-import { mapDurationToResponse } from './io/mappers'
+import { mapDurationToResponse } from './io/mapper'
 import { ResetDefaultDurationDataGatewayInterface } from './io/data.gateway'
 
 export default class ResetDefaultDurationCommand

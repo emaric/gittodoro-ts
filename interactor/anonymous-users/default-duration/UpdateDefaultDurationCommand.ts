@@ -1,6 +1,6 @@
 import DefaultDurationError from './error/DefaultDurationError'
 
-import { mapDurationToResponse } from './io/mappers'
+import { mapDurationToResponse } from './io/mapper'
 import { UpdateDefaultDurationRequest } from './io/request.model'
 import { UpdateDefaultDurationResponse } from './io/response.model'
 import DefaultDurationPresenterInterface from './io/DefaultDurationPresenterInterface'
