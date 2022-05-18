@@ -2,14 +2,14 @@ import { State } from './State'
 import { StateTimer } from './StateTimer'
 
 export class Duration {
-  id: number
+  id: string
   pomodoro: number
   short: number
   long: number
   longInterval: number
 
   constructor(params: {
-    id: number
+    id: string
     pomodoro: number
     short: number
     long: number
