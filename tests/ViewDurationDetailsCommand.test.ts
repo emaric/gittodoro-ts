@@ -38,7 +38,7 @@ describe('[ViewDurationDetailsCommand] unit tests', () => {
   describe('when trying to execute view duration details command', () => {
     it('should get a duration response', async () => {
       const sampleDuration = new Duration({
-        id: 0,
+        id: '0',
         pomodoro: 50,
         short: 10,
         long: 15,

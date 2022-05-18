@@ -10,7 +10,7 @@ describe('[ViewFirstAndLastSessions] unit tests', () => {
   describe('when trying to execute view first and last sessions command', () => {
     it('should return a size 2 array containing the first and last sessions', async () => {
       const duration = new Duration({
-        id: -1,
+        id: '-1',
         pomodoro: 25,
         short: 5,
         long: 15,

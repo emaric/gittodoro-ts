@@ -21,7 +21,7 @@ export class SessionInMemory implements SessionDataGatewayInterface {
       id: this.storage.length,
       duration: new Duration({
         ...args,
-        id: -1,
+        id: '-1',
       }),
     })
     this.storage.push(session)

@@ -43,3 +43,11 @@ export class Duration {
     })
   }
 }
+
+export const defaultDuration = new Duration({
+  id: '0',
+  pomodoro: 25 * 60,
+  short: 5 * 60,
+  long: 15 * 60,
+  longInterval: 4,
+})

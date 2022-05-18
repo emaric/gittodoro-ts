@@ -18,7 +18,7 @@ export class SessionInMemoryStorage implements SessionDataGatewayInterface {
   }): Promise<Session> {
     const duration = new Duration({
       ...args,
-      id: -1,
+      id: '-1',
     })
     const session = new Session({
       id: this.storage.length,

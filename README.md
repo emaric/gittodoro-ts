@@ -11,13 +11,15 @@ Trying to follow the Clean Architecture principles.
 1. **Pomodoro** must be at least 25 minutes, but must not go over 120 minutes.
 1. **Short** breaks must be at least 1 minute, but must not go over 15 minutes.
 1. **Long** breaks must be at least 3 minutes, but must not go over 60 minutes.
+1. **Long Intervals** must be at least 2, but not more than 4.
 
 ## Interactors
 
 ### Actor: Anonymous User
 
 1. - [ ] Anonymous Users can read the default Duration
-1. - [ ] Anonymous Users can define Durations.
+1. - [ ] Anonymous Users can modify the default Duration.
+1. - [ ] Anonymous Users can reset the default Duration.
 1. - [x] Anonymous Users can start Sessions.
 1. - [x] Anonymous Users can stop Sessions.
 1. - [x] Anonymous Users can view a Session by start date.
@@ -31,6 +33,8 @@ Trying to follow the Clean Architecture principles.
 ### Actor: Github User
 
 1. - [ ] Github Users can read the default Duration
+1. - [ ] Github Users can modify the default Duration.
+1. - [ ] Github Users can reset the default Duration.
 1. - [ ] Github Users can define Durations for their Sessions.
 1. - [ ] Github Users can sign in to the app.
 1. - [x] Github Users can start Sessions.
@@ -50,3 +54,5 @@ Trying to follow the Clean Architecture principles.
 ## Running Tests
 
 `npm test`
+
+`npm run build && node ./lib/examples/anonymous-user-app/index.js`

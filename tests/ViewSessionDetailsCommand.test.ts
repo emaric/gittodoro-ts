@@ -10,7 +10,7 @@ describe('[ViewSessionDetails] unit tests', () => {
   describe('when trying to execute View Session Details command', () => {
     it('should should return a session with the same start date', async () => {
       const duration = new Duration({
-        id: 0,
+        id: '0',
         pomodoro: 25,
         short: 5,
         long: 15,

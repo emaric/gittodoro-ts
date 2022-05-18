@@ -10,7 +10,7 @@ describe('[ViewSessionsByRangeCommand] unit tests', () => {
   describe('when trying to execute View Session by range command', () => {
     it('should return session within the range', async () => {
       const duration = new Duration({
-        id: 0,
+        id: '0',
         pomodoro: 25,
         short: 5,
         long: 15,

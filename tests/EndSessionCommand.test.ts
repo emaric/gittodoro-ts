@@ -10,7 +10,7 @@ describe('[EndSessionCommand] unit tests', () => {
   describe('when trying to execute the end session command', () => {
     it('should end the latest unfinished session', async () => {
       const duration = new Duration({
-        id: 0,
+        id: '0',
         pomodoro: 25,
         short: 5,
         long: 15,
