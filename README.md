@@ -25,12 +25,12 @@ Trying to follow the Clean Architecture principles.
 1. - [x] Github Users can copy Sessions from the local/offline storage to their account.
 1. - [x] Github Users can delete Sessions from the local/offline storage.
 1. - [ ] Anonymous Users can define Durations.
-1. - [ ] Anonymous Users can login with a Github Account.
 1. - [x] Anonymous Users can view a Session by start date.
 1. - [x] Anonymous Users can view Sessions by a range of date (start date inclusive; end date exclusive). Which will filter both the start date and end date of the Session.
 
 ### Actor: Github User
 
+1. - [ ] Github Users can sign in to the app.
 1. - [x] Github Users can start Sessions.
 1. - [x] Github Users can stop Sessions.
 1. - [ ] Github Users can stop Sessions across platforms based on the last time it was active.
