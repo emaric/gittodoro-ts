@@ -16,7 +16,7 @@ Trying to follow the Clean Architecture principles.
 
 ### Actor: Anonymous User
 
-1. - [ ] Github Users can read the default Duration
+1. - [ ] Anonymous Users can read the default Duration
 1. - [ ] Anonymous Users can define Durations.
 1. - [x] Anonymous Users can start Sessions.
 1. - [x] Anonymous Users can stop Sessions.
