@@ -17,9 +17,9 @@ Trying to follow the Clean Architecture principles.
 
 ### Actor: Anonymous User
 
-1. - [ ] Anonymous Users can read the default Duration
-1. - [ ] Anonymous Users can modify the default Duration.
-1. - [ ] Anonymous Users can reset the default Duration.
+1. - [x] Anonymous Users can read the default Duration
+1. - [x] Anonymous Users can modify the default Duration.
+1. - [x] Anonymous Users can reset the default Duration.
 1. - [x] Anonymous Users can start Sessions.
 1. - [x] Anonymous Users can stop Sessions.
 1. - [x] Anonymous Users can view a Session by start date.
