@@ -18,4 +18,16 @@ export default class Duration {
     this.long = long
     this.longInterval = longInterval
   }
+
+  get pomodoroMillis() {
+    return this.pomodoro * 1000
+  }
+
+  get shortMillis() {
+    return this.short * 1000
+  }
+
+  get longMillis() {
+    return this.long * 1000
+  }
 }

@@ -1,7 +1,9 @@
+import SessionTimer from '../components/timers/SessionTimer'
 import Session from '../model/Session'
 import SessionViewInterface from '../presenter/SessionViewInterface'
 
 export default class SessionView implements SessionViewInterface {
+  private timer?: SessionTimer
   private _session?: Session
   callback?: CallableFunction
 
