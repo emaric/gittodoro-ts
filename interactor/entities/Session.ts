@@ -1,5 +1,4 @@
 import { Duration } from './Duration'
-import { StateTimer } from './StateTimer'
 
 export class Session {
   id: string
@@ -17,14 +16,6 @@ export class Session {
     this.start = params.start
     this.end = params.end
     this.duration = params.duration
-  }
-
-  get timerSequenceDuration(): number {
-    return this.duration.timerSequenceDuration
-  }
-
-  get timerSequence(): StateTimer[] {
-    return this.duration.timerSequence
   }
 
   toString() {
