@@ -4,6 +4,7 @@ import {
   UpdateDefaultDurationDataGatewayInterface,
 } from '@/interactor/anonymous-users/default-duration/io/data.gateway'
 import { defaultDuration, Duration } from '@/interactor/entities/Duration'
+import storage from '../storage'
 
 export default class DefaultDurationInMemory
   implements
@@ -11,16 +12,15 @@ export default class DefaultDurationInMemory
     UpdateDefaultDurationDataGatewayInterface,
     ResetDefaultDurationDataGatewayInterface
 {
-  private storage: Duration[]
   private defaultDurationId
 
   constructor() {
-    this.storage = [defaultDuration]
-    this.defaultDurationId = this.storage[0].id
+    storage.duration = [defaultDuration]
+    this.defaultDurationId = storage.duration[0].id
   }
 
   getDefaultDuration(): Promise<Duration> {
-    const duration = this.storage.find(
+    const duration = storage.duration.find(
       (duration) => duration.id === this.defaultDurationId
     )
     if (duration) {
@@ -38,7 +38,7 @@ export default class DefaultDurationInMemory
     long: number,
     longInterval: number
   ): Promise<Duration> {
-    const duplicate = this.storage.find(
+    const duplicate = storage.duration.find(
       (duration) =>
         duration.pomodoro == pomodoro &&
         duration.short == short &&
@@ -50,13 +50,13 @@ export default class DefaultDurationInMemory
       return Promise.resolve(duplicate)
     } else {
       const duration = new Duration({
-        id: String(this.storage.length),
+        id: String(storage.duration.length),
         pomodoro,
         short,
         long,
         longInterval,
       })
-      this.storage.push(duration)
+      storage.duration.push(duration)
       this.defaultDurationId = duration.id
       return Promise.resolve(duration)
     }

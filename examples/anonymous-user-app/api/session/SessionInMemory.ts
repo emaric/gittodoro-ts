@@ -1,35 +1,49 @@
-import { SessionDataGatewayInterface } from '@/interactor/data-gateways/SessionDataGatewayInterface'
+import SessionError from '@/interactor/anonymous-users/session/error/SessionError'
+import {
+  StartSessionGatewayInterface,
+  StopSessionGatewayInterface,
+} from '@/interactor/anonymous-users/session/io/data.gateway'
 import { Session } from '@/interactor/entities/Session'
+import storage from '../storage'
 
-export default class SessionInMemory implements SessionDataGatewayInterface {
-  createSession(args: {
-    start: Date
-    pomodoro: number
-    short: number
-    long: number
-    longInterval: number
-  }): Promise<Session> {
-    throw new Error('Method not implemented.')
+export default class SessionInMemory
+  implements StartSessionGatewayInterface, StopSessionGatewayInterface
+{
+  async start(start: Date, durationId: string): Promise<Session> {
+    try {
+      const duration = storage.duration.find(
+        (duration) => duration.id == durationId
+      )
+      if (duration == undefined) {
+        return Promise.reject(new SessionError('Invalid Duration'))
+      }
+
+      const session = new Session({
+        id: String(storage.session.length),
+        duration,
+        start,
+      })
+      storage.session.push(session)
+      return Promise.resolve(session)
+    } catch (error) {
+      return Promise.reject([
+        error,
+        new SessionError(
+          'Error encountered in SessionInMemory while trying to start a Session.'
+        ),
+      ])
+    }
   }
-  readSession(start: Date): Promise<Session> {
-    throw new Error('Method not implemented.')
-  }
-  endSession(end: Date): Promise<Session> {
-    throw new Error('Method not implemented.')
-  }
-  viewSessionsByRange(start: Date, end: Date): Promise<Session[]> {
-    throw new Error('Method not implemented.')
-  }
-  first(): Promise<Session> {
-    throw new Error('Method not implemented.')
-  }
-  last(): Promise<Session> {
-    throw new Error('Method not implemented.')
-  }
-  saveSessions(sessions: Session[]): Promise<Session[]> {
-    throw new Error('Method not implemented.')
-  }
-  deleteSessions(ids: number[]): Promise<Session[]> {
-    throw new Error('Method not implemented.')
+
+  stop(date: Date): Promise<Session | undefined> {
+    const lastIndex = storage.session.length - 1
+    const last = storage.session[lastIndex]
+    if (last?.end == undefined) {
+      last.end = date
+      storage.session[lastIndex] = last
+      return Promise.resolve(last)
+    } else {
+      return Promise.resolve(undefined)
+    }
   }
 }

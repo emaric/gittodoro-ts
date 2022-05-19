@@ -19,7 +19,7 @@ describe('[ViewFirstAndLastSessions] unit tests', () => {
       const sessions: Session[] = Array.from(Array(5)).map(
         (_, i) =>
           new Session({
-            id: i,
+            id: String(i),
             start: new Date(`2022-04-0${i + 1}T09:00:00`),
             end: new Date(`2022-04-0${i + 1}T17:00:00`),
             duration: duration,

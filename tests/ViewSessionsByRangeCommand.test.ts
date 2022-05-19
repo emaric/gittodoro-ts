@@ -18,13 +18,13 @@ describe('[ViewSessionsByRangeCommand] unit tests', () => {
       })
 
       const sampleSession = new Session({
-        id: 0,
+        id: '0',
         start: new Date('2022-04-12T09:00:00'),
         duration: duration,
       })
 
       const sampleOutOfRangeSession = new Session({
-        id: 1,
+        id: '1',
         start: new Date('2022-04-11T09:20:00'),
         duration: duration,
       })

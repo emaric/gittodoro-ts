@@ -18,7 +18,7 @@ export class SessionInMemory implements SessionDataGatewayInterface {
   }): Promise<Session> {
     const session = new Session({
       ...args,
-      id: this.storage.length,
+      id: String(this.storage.length),
       duration: new Duration({
         ...args,
         id: '-1',
@@ -68,7 +68,7 @@ export class SessionInMemory implements SessionDataGatewayInterface {
     throw new Error('Method not implemented.')
   }
 
-  deleteSessions(ids: number[]): Promise<Session[]> {
+  deleteSessions(ids: string[]): Promise<Session[]> {
     throw new Error('Method not implemented.')
   }
 }

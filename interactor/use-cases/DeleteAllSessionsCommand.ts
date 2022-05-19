@@ -18,7 +18,9 @@ export class DeleteAllSessionsCommand implements SessionCommandInterface {
   }
 
   async execute(request: DeleteAllRequest): Promise<SessionBaseResponse> {
-    const deletedSessions = await this.dateGateway.deleteSessions(request.ids)
+    const deletedSessions = await this.dateGateway.deleteSessions(
+      request.ids.map((id) => String(id))
+    )
     const response: SessionBaseResponse = {
       timestamp: new Date(),
       message: 'Successfully deleted following sessions.',

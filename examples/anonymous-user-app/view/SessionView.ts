@@ -2,7 +2,12 @@ import Session from '../model/Session'
 import SessionViewInterface from '../presenter/SessionViewInterface'
 
 export default class SessionView implements SessionViewInterface {
-  mainSession?: Session
+  private _session?: Session
+  callback?: CallableFunction
+
+  constructor(callback?: CallableFunction) {
+    this.callback = callback
+  }
 
   render(session: Session) {
     console.log('\n')
@@ -11,6 +16,11 @@ export default class SessionView implements SessionViewInterface {
     console.table(JSON.stringify(session))
     console.log('\n')
 
-    this.mainSession = session
+    this._session = session
+    this.callback?.(session)
+  }
+
+  get session() {
+    return this._session
   }
 }

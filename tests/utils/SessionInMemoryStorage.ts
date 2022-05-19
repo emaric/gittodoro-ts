@@ -21,7 +21,7 @@ export class SessionInMemoryStorage implements SessionDataGatewayInterface {
       id: '-1',
     })
     const session = new Session({
-      id: this.storage.length,
+      id: String(this.storage.length),
       start: args.start,
       duration: duration,
     })
@@ -67,14 +67,14 @@ export class SessionInMemoryStorage implements SessionDataGatewayInterface {
   saveSessions(sessions: Session[]): Promise<Session[]> {
     const savedSessions: Session[] = []
     sessions.forEach((session) => {
-      session.id = this.storage.length
+      session.id = String(this.storage.length)
       this.storage.push(session)
       savedSessions.push(session)
     })
     return Promise.resolve(savedSessions)
   }
 
-  deleteSessions(ids: number[]): Promise<Session[]> {
+  deleteSessions(ids: string[]): Promise<Session[]> {
     const deletedSessions: Session[] = []
     this.storage = this.storage.filter((session) => {
       if (ids.includes(session.id)) {

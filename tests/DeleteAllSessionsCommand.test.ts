@@ -80,7 +80,9 @@ describe('[DeleteAllSessionsCommand] unit tests', () => {
 
       const expectedOutputIncludes = JSON.stringify(
         mapSessions(
-          dataGateway.storage.filter((s) => request.ids.includes(s.id))
+          dataGateway.storage.filter((s) =>
+            request.ids.includes(Number.parseInt(s.id))
+          )
         )
       )
 

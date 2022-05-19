@@ -2,13 +2,13 @@ import { Duration } from './Duration'
 import { StateTimer } from './StateTimer'
 
 export class Session {
-  id: number
+  id: string
   start: Date
   end?: Date | undefined
   duration: Duration
 
   constructor(params: {
-    id: number
+    id: string
     start: Date
     end?: Date | undefined
     duration: Duration

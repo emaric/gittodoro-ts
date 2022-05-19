@@ -18,7 +18,7 @@ describe('[EndSessionCommand] unit tests', () => {
       })
 
       const unfinishedSession = new Session({
-        id: 0,
+        id: '0',
         start: new Date('2022-04-12T00:00:00'),
         duration: duration,
       })

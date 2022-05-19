@@ -1,34 +1,16 @@
 import {
-  EndSessionRequest,
   StartSessionRequest,
-  ViewSessionRequest,
-  ViewSessionsByRangeRequest,
-} from '@/interactor/requests/SessionRequest'
-import { EndSessionCommand } from '@/interactor/use-cases/EndSessionCommand'
-import { StartSessionCommand } from '@/interactor/use-cases/StartSessionCommand'
-import { ViewSessionDetailsCommand } from '@/interactor/use-cases/ViewSessionDetailsCommand'
-import { ViewSessionsByRangeCommand } from '@/interactor/use-cases/ViewSessionsByRangeCommand'
+  StopSessionRequest,
+} from '@/interactor/anonymous-users/session/io/request.model'
+import StartSessionCommand from '@/interactor/anonymous-users/session/StartSessionCommand'
+import StopSessionCommand from '@/interactor/anonymous-users/session/StopSessionCommand'
 
 export default class SessionController {
   start(interactor: StartSessionCommand, request: StartSessionRequest) {
     return interactor.execute(request)
   }
 
-  stop(interactor: EndSessionCommand, request: EndSessionRequest) {
-    return interactor.execute(request)
-  }
-
-  getByStartDate(
-    interactor: ViewSessionDetailsCommand,
-    request: ViewSessionRequest
-  ) {
-    return interactor.execute(request)
-  }
-
-  getByRange(
-    interactor: ViewSessionsByRangeCommand,
-    request: ViewSessionsByRangeRequest
-  ) {
+  stop(interactor: StopSessionCommand, request: StopSessionRequest) {
     return interactor.execute(request)
   }
 }

@@ -18,7 +18,7 @@ describe('[ViewSessionDetails] unit tests', () => {
       })
 
       const sampleSession = new Session({
-        id: 0,
+        id: '0',
         start: new Date('2022-04-12T09:00:00'),
         duration: duration,
       })

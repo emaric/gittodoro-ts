@@ -22,6 +22,7 @@ export const mapSession = (session: Session): SessionResponse => {
   return {
     ...session.duration,
     ...session,
+    id: Number.parseInt(session.id),
     timerSequenceDuration: session.timerSequenceDuration,
     timerSequence: mapTimerSequence(session.timerSequence),
   }
