@@ -1,9 +1,9 @@
 import * as DefaultDurationAPI from '@/examples/anonymous-user-app/api/duration'
 import * as SessionAPI from '@/examples/anonymous-user-app/api/session'
-import { logger } from './components/loggers'
-import { createRecordsForSession } from './components/records'
-import SessionTimer from './components/timers/SessionTimer'
-import Session from './model/Session'
+import { logger } from '@/examples/anonymous-user-app/components/loggers'
+import { createRecordsForSession } from '@/examples/anonymous-user-app/components/records'
+import SessionTimer from '@/examples/anonymous-user-app/components/timers/SessionTimer'
+import Session from '@/examples/anonymous-user-app/model/Session'
 
 const timer = new SessionTimer(logger)
 

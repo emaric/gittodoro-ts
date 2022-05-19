@@ -1,5 +1,6 @@
-import Duration from '../model/Duration'
-import DefaultDurationViewInterface from '../presenter/DefaultDurationViewInterface'
+import DefaultDurationViewInterface from '@/examples/anonymous-user-app/presenter/DefaultDurationViewInterface'
+import Duration from '@/examples/anonymous-user-app/model/Duration'
+import { logger } from '@/examples/anonymous-user-app/components/loggers'
 
 export default class DefaultDurationView
   implements DefaultDurationViewInterface
@@ -12,11 +13,8 @@ export default class DefaultDurationView
   }
 
   render(duration: Duration) {
-    console.log('\n')
-    console.log(new Date().toJSON() + ' [info] Rendering Default Duration...')
-    console.log(new Date().toJSON() + ' [info] Default Duration:')
-    console.table(JSON.stringify(duration))
-    console.log('\n')
+    logger.debug('Rendering Default Duration...')
+    logger.debug('Default Duration:', duration, '\n\n')
 
     this._defaultDuration = duration
     this.callback?.(duration)

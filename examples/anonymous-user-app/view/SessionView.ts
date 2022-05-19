@@ -1,6 +1,7 @@
-import SessionTimer from '../components/timers/SessionTimer'
-import Session from '../model/Session'
-import SessionViewInterface from '../presenter/SessionViewInterface'
+import SessionViewInterface from '@/examples/anonymous-user-app/presenter/SessionViewInterface'
+import Session from '@/examples/anonymous-user-app/model/Session'
+import SessionTimer from '@/examples/anonymous-user-app/components/timers/SessionTimer'
+import { logger } from '@/examples/anonymous-user-app/components/loggers'
 
 export default class SessionView implements SessionViewInterface {
   private timer?: SessionTimer
@@ -12,11 +13,8 @@ export default class SessionView implements SessionViewInterface {
   }
 
   render(session: Session) {
-    console.log('\n')
-    console.log(new Date().toJSON() + ' [info] Rendering Session...')
-    console.log(new Date().toJSON() + ' [info] Session:')
-    console.table(JSON.stringify(session))
-    console.log('\n')
+    logger.log('Rendering Session...')
+    logger.log('Session:', session, '\n\n')
 
     this._session = session
     this.callback?.(session)
