@@ -17,11 +17,11 @@ export default class RecordTimer {
 
   start(record: Record) {
     this.record = record
-    this.logger?.info(
+    this.logger?.debug(
       'Starting RecordTimer...',
       this.record?.state,
       this.record?.duration,
-      'seconds \n'
+      'seconds'
     )
     if (this.timeout) {
       clearTimeout(this.timeout)
@@ -32,23 +32,19 @@ export default class RecordTimer {
     }, ms)
   }
 
-  stop() {
-    this.logger?.info(
+  stop(end = new Date()) {
+    this.logger?.debug(
       'Stopping RecordTimer...',
       this.record?.state,
       this.record?.duration,
-      'seconds \n'
+      'seconds'
     )
     if (this.timeout) {
       clearTimeout(this.timeout)
       this.timeout = undefined
     }
     if (this.record) {
-      const record = new Record(
-        this.record.state,
-        this.record.start,
-        new Date()
-      )
+      const record = new Record(this.record.state, this.record.start, end)
       this.onStopped?.(record)
     } else {
       this.onStopped?.()

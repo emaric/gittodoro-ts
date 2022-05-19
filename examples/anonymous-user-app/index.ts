@@ -1,6 +1,7 @@
 import * as DefaultDurationAPI from '@/examples/anonymous-user-app/api/duration'
 import * as SessionAPI from '@/examples/anonymous-user-app/api/session'
 import { logger } from './components/loggers'
+import { createRecordsForSession } from './components/records'
 import SessionTimer from './components/timers/SessionTimer'
 import Session from './model/Session'
 
@@ -9,7 +10,7 @@ const timer = new SessionTimer(logger)
 console.log('This is a basic app using the Gittodoro module.')
 console.log('The primary actor is an Anonymous User.')
 
-DefaultDurationAPI.updateDefaultDuration(25, 5, 15, 4)
+DefaultDurationAPI.updateDefaultDuration(5, 1, 2, 4)
 
 DefaultDurationAPI.onDefaultDurationChanged(() => {
   const defaultDuration = DefaultDurationAPI.getDefaultDuration()
@@ -25,7 +26,7 @@ SessionAPI.onSessionChanged((session: Session) => {
   logger.debug('onSessionChanged... \nsession:', session, '\n')
   if (session.end == undefined) {
     timer.start(session)
-    const ms = 1000 * 60 * 10
+    const ms = 1000 * 28
     const to = setTimeout(() => {
       timer.stop()
       const end = new Date()
@@ -34,6 +35,10 @@ SessionAPI.onSessionChanged((session: Session) => {
     }, ms)
   } else {
     logger.debug('Finished a Session:')
-    logger.debug('Finished Records:', timer.finishedRecords)
+    logger.debug('Finished Records:', timer.finishedRecords, '\n\n')
+  }
+
+  if (session && session.end) {
+    logger.debug('records:', createRecordsForSession(session, session.end))
   }
 })

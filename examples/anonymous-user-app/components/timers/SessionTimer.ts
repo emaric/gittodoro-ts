@@ -34,7 +34,7 @@ export default class SessionTimer {
 
   private onRecordTimerEnded(record?: Record): void {
     if (record && this.session) {
-      this.logger?.info(
+      this.logger?.debug(
         'Finished a record timer:',
         record.state,
         record.duration,
@@ -62,17 +62,25 @@ export default class SessionTimer {
 
   start(session: Session) {
     this.session = session
-    this.logger?.info('Starting SessionTimer... \nsession:', this.session, '\n')
+    this.logger?.debug(
+      'Starting SessionTimer... \nsession:',
+      this.session,
+      '\n'
+    )
     this.startActiveSessionTimer()
     this.startRecordTimer()
   }
 
-  stop() {
-    this.logger?.info('Stopping SessionTimer... \nsession:', this.session, '\n')
+  stop(end = new Date()) {
+    this.logger?.debug(
+      'Stopping SessionTimer... \nsession:',
+      this.session,
+      '\n'
+    )
     if (this.activeSessionTimeout) {
       clearTimeout(this.activeSessionTimeout)
       this.activeSessionTimeout = undefined
-      this.recordTimer.stop()
+      this.recordTimer.stop(end)
     }
   }
 }

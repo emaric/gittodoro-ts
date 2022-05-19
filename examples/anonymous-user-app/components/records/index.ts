@@ -1,17 +1,21 @@
 import Session from '@/examples/anonymous-user-app/model/Session'
-import Duration from '../../model/Duration'
-import Record from '../../model/Record'
+import Duration from '@/examples/anonymous-user-app/model/Duration'
+import Record from '@/examples/anonymous-user-app/model/Record'
+
+const POMODORO = 'pomodoro'
+const SHORT = 'short'
+const LONG = 'long'
 
 const _getState = (
   numberOfRecords: number,
   duration: Duration
 ): { state: string; durationMillis: number } => {
   if (numberOfRecords % 2 == 0) {
-    return { state: 'pomodoro', durationMillis: duration.pomodoroMillis }
-  } else if (numberOfRecords % (duration.longInterval * 2 - 1) == 0) {
-    return { state: 'long', durationMillis: duration.longMillis }
+    return { state: POMODORO, durationMillis: duration.pomodoroMillis }
+  } else if (((numberOfRecords + 1) / 2) % duration.longInterval == 0) {
+    return { state: LONG, durationMillis: duration.longMillis }
   } else {
-    return { state: 'short', durationMillis: duration.shortMillis }
+    return { state: SHORT, durationMillis: duration.shortMillis }
   }
 }
 
@@ -31,15 +35,15 @@ const _createRecords = (duration: Duration, start: Date, end: Date) => {
   let record = firstRecord
   while (record.end.getTime() < end.getTime()) {
     record = createNextRecord(records.length, duration, record.end)
-    records.push(record)
+    if (record.end.getTime() >= end.getTime()) {
+      records.push(new Record(record.state, record.start, end))
+    } else {
+      records.push(record)
+    }
   }
   return records
 }
 
-export const createRecordsForSession = (session: Session) => {
-  if (session.end) {
-    return _createRecords(session.duration, session.start, session.end)
-  } else {
-    return _createRecords(session.duration, session.start, session.maxEnd)
-  }
+export const createRecordsForSession = (session: Session, end: Date) => {
+  return _createRecords(session.duration, session.start, end)
 }
