@@ -37,17 +37,17 @@ Trying to follow the Clean Architecture principles.
 1. - [ ] Github Users can reset the default Duration.
 1. - [ ] Github Users can define Durations for their Sessions.
 1. - [ ] Github Users can sign in to the app.
-1. - [x] Github Users can start Sessions.
-1. - [x] Github Users can stop Sessions.
+1. - [ ] Github Users can start Sessions.
+1. - [ ] Github Users can stop Sessions.
 1. - [ ] Github Users can stop Sessions across platforms based on the last time it was active.
-1. - [x] Github Users can view a Session by start date.
-1. - [x] Github Users can view Sessions by a range of dates (start date inclusive; end date exclusive). Which will filter both the start date and end date of the Session.
-1. - [x] Github Users can copy Sessions from the local/offline storage to their account.
-1. - [x] Github Users can delete Sessions from the local/offline storage.
-1. - [x] Github Users can create a new Notes.
-1. - [x] Github Users can read Notes by ID or by the date it was created and/or updated.
-1. - [x] Github Users can update Notes.
-1. - [x] Github Users can delete Notes.
+1. - [ ] Github Users can view a Session by start date.
+1. - [ ] Github Users can view Sessions by a range of dates (start date inclusive; end date exclusive). Which will filter both the start date and end date of the Session.
+1. - [ ] Github Users can copy Sessions from the local/offline storage to their account.
+1. - [ ] Github Users can delete Sessions from the local/offline storage.
+1. - [ ] Github Users can create a new Notes.
+1. - [ ] Github Users can read Notes by ID or by the date it was created and/or updated.
+1. - [ ] Github Users can update Notes.
+1. - [ ] Github Users can delete Notes.
 1. - [ ] Github Users can select the Repo/Project/Issue to associate with a new Session.
 1. - [ ] Github Users can view the total number of Pomodori they have for each Repo/Project/Issue
 

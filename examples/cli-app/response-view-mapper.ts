@@ -1,23 +1,9 @@
-import {
-  SessionResponse,
-  StateTimer as StateTimerResponse,
-} from '@/interactor/responses/SessionResponse'
+import { SessionResponse } from '@/interactor/anonymous-users/session/io/response.model'
 import { Session } from './models/Session'
-import { State } from './models/State'
-import { StateTimer } from './models/StateTimer'
-
-export const mapTimerSequence = (
-  timerSequence: StateTimerResponse[]
-): StateTimer[] => {
-  return timerSequence.map((ts) => ({
-    state: (<never>State)[ts.state],
-    duration: ts.duration,
-  }))
-}
 
 export const mapSession = (session: SessionResponse): Session => {
   return new Session({
+    ...session.duration,
     ...session,
-    timerSequence: mapTimerSequence(session.timerSequence),
   })
 }

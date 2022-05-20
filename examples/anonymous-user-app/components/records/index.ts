@@ -47,3 +47,56 @@ const _createRecords = (duration: Duration, start: Date, end: Date) => {
 export const createRecordsForSession = (session: Session, end: Date) => {
   return _createRecords(session.duration, session.start, end)
 }
+
+export const getCurrentRecord = (current: Date, session: Session) => {
+  const start = session.start
+  const duration = session.duration
+  const numberOfRecords = calcNumberOfRecords(duration, session.elapsedMillis)
+  const calculatedStart = calcCurrentRecordStartTime(duration, start, current)
+  return createNextRecord(numberOfRecords, duration, calculatedStart)
+}
+
+export const calcCurrentRecordStartTime = (
+  duration: Duration,
+  start: Date,
+  current: Date
+) => {
+  const elapsedMillis = current.getTime() - start.getTime()
+  const completedCyclesMillis =
+    elapsedMillis - (elapsedMillis % duration.totalMillis)
+
+  return new Date(start.getTime() + completedCyclesMillis)
+}
+
+export const calcNumberOfRecords = (
+  duration: Duration,
+  elapsedMillis: number
+) => {
+  const cycleMillis = duration.totalMillis
+  const completedCycles =
+    Math.floor(elapsedMillis / cycleMillis) * (duration.longInterval * 2)
+  const remainder = elapsedMillis % cycleMillis
+
+  const reachedLong = remainder > cycleMillis - duration.longMillis
+  if (reachedLong) {
+    return completedCycles + duration.longInterval * 2 - 1
+  }
+  const reachedLastPomodoro =
+    remainder > cycleMillis - (duration.longMillis + duration.pomodoroMillis)
+  if (reachedLastPomodoro) {
+    return completedCycles + duration.longInterval
+  }
+
+  const completedPomodoroAndShortCycles =
+    Math.floor(remainder / (duration.pomodoroMillis + duration.shortMillis)) * 2
+
+  const remainderPomodoroAndShort =
+    remainder % (duration.pomodoroMillis + duration.shortMillis)
+
+  const reachedLastShort = remainderPomodoroAndShort > duration.pomodoroMillis
+  if (reachedLastShort) {
+    return completedCycles + completedPomodoroAndShortCycles + 1
+  } else {
+    return completedCycles + completedPomodoroAndShortCycles
+  }
+}

@@ -1,74 +1,51 @@
-import { SessionDataGatewayInterface } from '@/interactor/data-gateways/SessionDataGatewayInterface'
+import {
+  StartSessionGatewayInterface,
+  StopSessionGatewayInterface,
+} from '@/interactor/anonymous-users/session/io/data.gateway'
+import { MAX_SESSION_AGE_IN_MS } from '@/interactor/constants'
 import { Duration } from '@/interactor/entities/Duration'
 import { Session } from '@/interactor/entities/Session'
 
-export class SessionInMemory implements SessionDataGatewayInterface {
-  storage: Session[]
+export class SessionInMemory
+  implements StartSessionGatewayInterface, StopSessionGatewayInterface
+{
+  storage: {
+    duration: Duration[]
+    session: Session[]
+  }
 
-  constructor(storage: Session[]) {
+  constructor(storage: { session: Session[]; duration: Duration[] }) {
     this.storage = storage
   }
 
-  createSession(args: {
-    start: Date
-    pomodoro: number
-    short: number
-    long: number
-    longInterval: number
-  }): Promise<Session> {
-    const session = new Session({
-      ...args,
-      id: String(this.storage.length),
-      duration: new Duration({
-        ...args,
-        id: '-1',
-      }),
-    })
-    this.storage.push(session)
-    return Promise.resolve(session)
-  }
-
-  readSession(start: Date): Promise<Session> {
-    const session = this.storage.find(
-      (session) => session.start.getTime() == start.getTime()
-    )
-
-    if (!session) {
-      throw new Error('Not found.')
-    }
-
-    return Promise.resolve(session)
-  }
-
-  endSession(end: Date): Promise<Session> {
-    const last = this.storage.length - 1
-    this.storage[last].end = end
-    return Promise.resolve(this.storage[last])
-  }
-
-  viewSessionsByRange(start: Date, end: Date) {
-    return Promise.resolve(
-      this.storage
-        .filter(
-          (session: Session) => session.start.getTime() >= start.getTime()
+  start(start: Date, durationId: string): Promise<Session> {
+    const duration = this.storage.duration.find((d) => d.id == durationId)
+    if (duration) {
+      const session = new Session({
+        id: String(this.storage.session.length),
+        start,
+        duration,
+      })
+      return Promise.resolve(session)
+    } else {
+      return Promise.reject(
+        new Error(
+          'Error encountered while trying to start a Session. The Duration was not found.'
         )
-        .filter((session: Session) => end.getTime() >= session.start.getTime())
-    )
+      )
+    }
   }
 
-  first(): Promise<Session> {
-    throw new Error('Method not implemented.')
-  }
-
-  last(): Promise<Session> {
-    throw new Error('Method not implemented.')
-  }
-
-  saveSessions(sessions: Session[]): Promise<Session[]> {
-    throw new Error('Method not implemented.')
-  }
-
-  deleteSessions(ids: string[]): Promise<Session[]> {
-    throw new Error('Method not implemented.')
+  stop(date: Date): Promise<Session | undefined> {
+    const lastIndex = this.storage.session.length - 1
+    const last = this.storage.session[lastIndex]
+    if (last) {
+      if (last.elapsedMillis < MAX_SESSION_AGE_IN_MS) {
+        last.end = date
+        this.storage.session[lastIndex].end = date
+        return Promise.resolve(last)
+      }
+    }
+    return Promise.resolve(undefined)
   }
 }

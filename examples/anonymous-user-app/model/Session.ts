@@ -21,4 +21,8 @@ export default class Session {
   get remainingActiveMillis() {
     return constants.MAX_SESSION_AGE_IN_MS - (Date.now() - this.start.getTime())
   }
+
+  get elapsedMillis() {
+    return Date.now() - this.start.getTime()
+  }
 }

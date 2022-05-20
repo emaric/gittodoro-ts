@@ -30,4 +30,10 @@ export default class Duration {
   get longMillis() {
     return this.long * 1000
   }
+
+  get totalMillis() {
+    const totalPomodoro = this.longInterval * this.pomodoroMillis
+    const totalShort = (this.longInterval - 1) * this.shortMillis
+    return this.longMillis + totalShort + totalPomodoro
+  }
 }

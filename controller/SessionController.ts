@@ -1,61 +1,26 @@
-import { SessionCommandInterface } from '../interactor/requests/SessionCommandInterface'
 import {
-  DeleteAllRequest,
-  EndSessionRequest,
-  SaveAllRequest,
   StartSessionRequest,
-  ViewFirstAndLastSessionsRequest,
-  ViewSessionRequest,
-  ViewSessionsByRangeRequest,
-} from '../interactor/requests/SessionRequest'
+  StopSessionRequest,
+} from '@/interactor/anonymous-users/session/io/request.model'
+import SessionCommandInterface from '@/interactor/anonymous-users/session/io/SessionCommandInterface'
+
+export interface SessionInteractorFactoryInterface {
+  start(): SessionCommandInterface
+  stop(): SessionCommandInterface
+}
 
 export class SessionController {
-  startSession(
-    interactor: SessionCommandInterface,
-    request: StartSessionRequest
-  ): void {
-    interactor.execute(request)
+  private interactorFactory: SessionInteractorFactoryInterface
+
+  constructor(interactorFactory: SessionInteractorFactoryInterface) {
+    this.interactorFactory = interactorFactory
   }
 
-  endSession(
-    interactor: SessionCommandInterface,
-    request: EndSessionRequest
-  ): void {
-    interactor.execute(request)
+  start(request: StartSessionRequest) {
+    this.interactorFactory.start().execute(request)
   }
 
-  viewSession(
-    interactor: SessionCommandInterface,
-    request: ViewSessionRequest
-  ): void {
-    interactor.execute(request)
-  }
-
-  viewSessionsByRange(
-    interactor: SessionCommandInterface,
-    request: ViewSessionsByRangeRequest
-  ) {
-    interactor.execute(request)
-  }
-
-  viewFirstAndLastSessions(
-    interactor: SessionCommandInterface,
-    request: ViewFirstAndLastSessionsRequest
-  ) {
-    interactor.execute(request)
-  }
-
-  saveAllSessions(
-    interactor: SessionCommandInterface,
-    request: SaveAllRequest
-  ) {
-    interactor.execute(request)
-  }
-
-  deleteAllSessions(
-    interactor: SessionCommandInterface,
-    request: DeleteAllRequest
-  ) {
-    interactor.execute(request)
+  stop(request: StopSessionRequest) {
+    return this.interactorFactory.stop().execute(request)
   }
 }
