@@ -2,7 +2,7 @@ import {
   StartSessionGatewayInterface,
   StopSessionGatewayInterface,
 } from '@/interactor/anonymous-users/session/io/data.gateway'
-import { MAX_SESSION_AGE_IN_MS } from '@/interactor/constants'
+import { MAX_SESSION_TIME } from '@/interactor/constants'
 import { Duration } from '@/interactor/entities/Duration'
 import { Session } from '@/interactor/entities/Session'
 
@@ -40,7 +40,7 @@ export class SessionInMemory
     const lastIndex = this.storage.session.length - 1
     const last = this.storage.session[lastIndex]
     if (last) {
-      if (last.elapsedMillis < MAX_SESSION_AGE_IN_MS) {
+      if (last.elapsedMillis < MAX_SESSION_TIME) {
         last.end = date
         this.storage.session[lastIndex].end = date
         return Promise.resolve(last)

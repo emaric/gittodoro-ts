@@ -11,7 +11,7 @@ Trying to follow the Clean Architecture principles.
 1. **Pomodoro** must be at least 25 minutes, but must not go over 120 minutes.
 1. **Short** breaks must be at least 1 minute, but must not go over 15 minutes.
 1. **Long** breaks must be at least 3 minutes, but must not go over 60 minutes.
-1. **Long Intervals** must be at least 2, but not more than 4.
+1. **Long Intervals** must be at least 2, but not more than 6.
 
 ## Interactors
 
