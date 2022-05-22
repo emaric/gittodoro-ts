@@ -20,6 +20,18 @@ export default class Duration {
     this.long = long
     this.longInterval = longInterval
   }
+
+  get totalPomodoro() {
+    return this.pomodoro * this.longInterval
+  }
+
+  get totalShort() {
+    return this.short * (this.longInterval - 1)
+  }
+
+  get totalTime() {
+    return this.long + this.totalPomodoro + this.totalShort
+  }
 }
 
 export const defaultDuration = new Duration(

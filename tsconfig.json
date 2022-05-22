@@ -3,7 +3,7 @@
     "target": "es5",
     "allowJs": true,
     "composite": true,
-    "baseUrl": "./",
+    "baseUrl": ".",
     "paths": {
       "@/interactor/*": ["interactor/*"],
       "@/controller/*": ["controller/*"],

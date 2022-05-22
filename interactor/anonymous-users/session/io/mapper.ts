@@ -1,5 +1,5 @@
-import { Duration } from '@/interactor/entities/Duration'
-import { Session } from '@/interactor/entities/Session'
+import Duration from '@/interactor/entities/Duration'
+import Session from '@/interactor/entities/Session'
 import { DurationResponse, SessionResponse } from './response.model'
 
 export const mapDurationToResponse = (duration: Duration) => {

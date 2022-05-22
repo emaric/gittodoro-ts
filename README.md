@@ -22,6 +22,7 @@ Trying to follow the Clean Architecture principles.
 1. - [x] Anonymous Users can reset the default Duration.
 1. - [x] Anonymous Users can start Sessions.
 1. - [x] Anonymous Users can stop Sessions.
+1. - [ ] Anonymous Users can stop Sessions based on the last time it was active.
 1. - [ ] Anonymous Users can view a Session by start date.
 1. - [ ] Anonymous Users can view Sessions by a range of dates (start date inclusive; end date exclusive). Which will filter both the start date and end date of the Session.
 1. - [ ] Anonymous Users can delete Sessions from the local/offline storage.

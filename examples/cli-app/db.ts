@@ -3,8 +3,8 @@ import {
   StopSessionGatewayInterface,
 } from '@/interactor/anonymous-users/session/io/data.gateway'
 import { MAX_SESSION_TIME } from '@/interactor/constants'
-import { Duration } from '@/interactor/entities/Duration'
-import { Session } from '@/interactor/entities/Session'
+import Duration from '@/interactor/entities/Duration'
+import Session from '@/interactor/entities/Session'
 
 export class SessionInMemory
   implements StartSessionGatewayInterface, StopSessionGatewayInterface
@@ -21,11 +21,11 @@ export class SessionInMemory
   start(start: Date, durationId: string): Promise<Session> {
     const duration = this.storage.duration.find((d) => d.id == durationId)
     if (duration) {
-      const session = new Session({
-        id: String(this.storage.session.length),
-        start,
+      const session = new Session(
+        String(this.storage.session.length),
         duration,
-      })
+        start
+      )
       return Promise.resolve(session)
     } else {
       return Promise.reject(

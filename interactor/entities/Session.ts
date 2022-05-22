@@ -1,6 +1,6 @@
-import { Duration } from './Duration'
+import Duration from './Duration'
 
-export class Session {
+export default class Session {
   id: string
   duration: Duration
   start: Date
