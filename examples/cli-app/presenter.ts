@@ -5,6 +5,9 @@ import {
   StartSessionResponse,
   StopSessionResponse,
 } from '@/interactor/anonymous-users/session/io/response.model'
+import RecordPresenterInterface from '@/interactor/record-timer-system/io/RecordPresenterInterface'
+import { CreateRecordResponse } from '@/interactor/record-timer-system/io/response.model'
+import Record from './models/Record'
 
 export interface CLIView {
   display(content: Session): void
@@ -28,5 +31,22 @@ export class SessionCLIPresenter implements SessionPresenterInterface {
         reject('No session to present.')
       }
     })
+  }
+}
+
+export interface RecordCLIViewInterface {
+  display(record: Record): unknown
+}
+
+export class RecordCLIPresenter implements RecordPresenterInterface {
+  private view: RecordCLIViewInterface
+
+  constructor(view: RecordCLIViewInterface) {
+    this.view = view
+  }
+
+  present(response: CreateRecordResponse) {
+    const { record } = response
+    this.view.display(new Record(record.state, record.start, record.end))
   }
 }

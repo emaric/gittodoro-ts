@@ -3,7 +3,7 @@ import {
   StartSessionGatewayInterface,
   StopSessionGatewayInterface,
 } from '@/interactor/anonymous-users/session/io/data.gateway'
-import { Session } from '@/interactor/entities/Session'
+import Session from '@/interactor/entities/Session'
 import storage from '../storage'
 
 export default class SessionInMemory
@@ -18,11 +18,11 @@ export default class SessionInMemory
         return Promise.reject(new SessionError('Invalid Duration'))
       }
 
-      const session = new Session({
-        id: String(storage.session.length),
+      const session = new Session(
+        String(storage.session.length),
         duration,
-        start,
-      })
+        start
+      )
       storage.session.push(session)
       return Promise.resolve(session)
     } catch (error) {

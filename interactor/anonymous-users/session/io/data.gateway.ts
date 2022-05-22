@@ -1,4 +1,4 @@
-import { Session } from '@/interactor/entities/Session'
+import Session from '@/interactor/entities/Session'
 
 export interface StartSessionGatewayInterface {
   start(start: Date, durationId: string): Promise<Session>

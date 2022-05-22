@@ -1,4 +1,4 @@
-import { Duration } from '@/interactor/entities/Duration'
+import Duration from '@/interactor/entities/Duration'
 
 import { DefaultDurationResponse } from './response.model'
 

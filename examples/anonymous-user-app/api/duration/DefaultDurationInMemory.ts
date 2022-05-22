@@ -3,7 +3,8 @@ import {
   ResetDefaultDurationDataGatewayInterface,
   UpdateDefaultDurationDataGatewayInterface,
 } from '@/interactor/anonymous-users/default-duration/io/data.gateway'
-import { defaultDuration, Duration } from '@/interactor/entities/Duration'
+import { defaultDuration } from '@/interactor/entities/Duration'
+import Duration from '@/interactor/entities/Duration'
 import storage from '../storage'
 
 export default class DefaultDurationInMemory
@@ -49,13 +50,13 @@ export default class DefaultDurationInMemory
       this.defaultDurationId = duplicate.id
       return Promise.resolve(duplicate)
     } else {
-      const duration = new Duration({
-        id: String(storage.duration.length),
+      const duration = new Duration(
+        String(storage.duration.length),
         pomodoro,
         short,
         long,
-        longInterval,
-      })
+        longInterval
+      )
       storage.duration.push(duration)
       this.defaultDurationId = duration.id
       return Promise.resolve(duration)
