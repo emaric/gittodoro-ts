@@ -20,6 +20,18 @@ describe('[CreateRecordCommand] unit test', () => {
     const duration = mapRequestToDuration(durationRequest)
     const presenter = new ConsolePresenter()
 
+    it('should throw an Error for invalid input values', async () => {
+      const command = new CreateRecordCommand(presenter)
+      const start = new Date('2022-01-01T09:00:00')
+      const current = new Date(start.getTime() - 1)
+      const request: CreateRecordRequest = {
+        duration,
+        start,
+        current,
+      }
+      expect(await command.execute(request)).toThrow()
+    })
+
     it('should return a pomodoro Record to start a new cycle', async () => {
       const command = new CreateRecordCommand(presenter)
       const start = new Date('2022-01-01T09:00:00')
