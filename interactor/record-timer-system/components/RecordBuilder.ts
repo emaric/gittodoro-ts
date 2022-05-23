@@ -38,6 +38,25 @@ export default class RecordBuilder {
     return new Record(String(State[state]), startDate, endDate)
   }
 
+  createAllRecords(start: Date, end: Date) {
+    if (end.getTime() < start.getTime()) {
+      throw new RecordError('Invalid start and end date.')
+    }
+    const recordCount = this.calculateNRecords(end.getTime() - start.getTime())
+    const records = [this.createNthRecord(1, start)]
+
+    Array.from(Array(recordCount - 1)).forEach(() => {
+      const last = records[records.length - 1]
+      const state = this.calculateState(records.length + 1)
+      const startDate = last.end
+      const endDate = this.calculateEnd(state, startDate)
+      const record = new Record(String(State[state]), startDate, endDate)
+      records.push(record)
+    })
+
+    return records
+  }
+
   private calculateNRecords(elapsed: number) {
     const cycles = Math.floor(elapsed / this.duration.totalTime)
     const recordsPerCycle = cycles * this.recordsPerCycle

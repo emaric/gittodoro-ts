@@ -12,6 +12,12 @@ export type CreateNthRecordRequest = RecordBaseRequest & {
   start: Date
 }
 
+export type CreateAllRecordsRequest = RecordBaseRequest & {
+  duration: DurationRequest
+  start: Date
+  end: Date
+}
+
 export type DurationRequest = {
   id: string
   pomodoro: number
