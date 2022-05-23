@@ -43,8 +43,10 @@ export class RecordCLIPresenter implements RecordPresenterInterface {
     this.view = view
   }
 
-  present(response: CreateRecordResponse) {
+  present(response: CreateRecordResponse): Promise<Record> {
     const { record } = response
-    this.view.display(new Record(record.state, record.start, record.end))
+    const newRecord = new Record(record.state, record.start, record.end)
+    this.view.display(newRecord)
+    return Promise.resolve(newRecord)
   }
 }
