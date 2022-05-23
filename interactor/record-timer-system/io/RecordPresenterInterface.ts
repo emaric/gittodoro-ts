@@ -1,5 +1,5 @@
-import { RecordBaseResponse } from './response.model'
+import { RecordBaseResponse } from '@/interactor/record-timer-system/io/response.model'
 
 export default interface RecordPresenterInterface {
-  present(response: RecordBaseResponse): unknown
+  present(response: RecordBaseResponse): Promise<unknown>
 }

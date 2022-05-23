@@ -1,5 +1,3 @@
-export default class DefaultDurationError extends Error {
-  constructor(message?: string) {
-    super(message)
-  }
-}
+import MultipleErrors from '@/interactor/errors/MultipleErrors'
+
+export default class DefaultDurationError extends MultipleErrors {}

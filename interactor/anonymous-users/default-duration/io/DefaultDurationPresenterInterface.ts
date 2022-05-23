@@ -1,5 +1,5 @@
 import { DefaultDurationBaseResponse } from './response.model'
 
 export default interface DefaultDurationPresenterInterface {
-  present(response: DefaultDurationBaseResponse): unknown
+  present(response: DefaultDurationBaseResponse): Promise<unknown>
 }

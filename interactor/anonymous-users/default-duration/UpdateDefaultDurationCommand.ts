@@ -34,15 +34,15 @@ export default class UpdateDefaultDurationCommand
       const response = {
         duration: mapDurationToResponse(duration),
       }
-      this.presenter.present(response)
+      await this.presenter.present(response)
       return Promise.resolve(response)
     } catch (error) {
-      return Promise.reject([
-        error,
+      return Promise.reject(
         new DefaultDurationError(
-          'Error encountered while trying to update the default duration.'
-        ),
-      ])
+          'Error encountered while trying to update the default duration.',
+          error as Error
+        )
+      )
     }
   }
 }

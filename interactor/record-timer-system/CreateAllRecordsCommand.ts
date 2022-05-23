@@ -16,7 +16,9 @@ export default class CreateAllRecordsCommand implements RecordCommandInterface {
     this.presenter = presenter
   }
 
-  execute(request: CreateAllRecordsRequest): Promise<CreateAllRecordsResponse> {
+  async execute(
+    request: CreateAllRecordsRequest
+  ): Promise<CreateAllRecordsResponse> {
     try {
       const duration = mapRequestToDuration(request.duration)
       const records = this.createAllRecords(
@@ -27,11 +29,11 @@ export default class CreateAllRecordsCommand implements RecordCommandInterface {
       const response = {
         records,
       }
-      this.presenter.present(response)
+      await this.presenter.present(response)
       return Promise.resolve(response)
     } catch (error) {
       return Promise.reject(
-        new RecordError('Error creating current record.', [error as Error])
+        new RecordError('Error creating current record.', error as Error)
       )
     }
   }

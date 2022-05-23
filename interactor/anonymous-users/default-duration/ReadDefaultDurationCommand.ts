@@ -26,15 +26,15 @@ export default class ReadDefaultDurationCommand
       const response = {
         duration: duration ? mapDurationToResponse(duration) : undefined,
       }
-      this.presenter.present(response)
+      await this.presenter.present(response)
       return Promise.resolve(response)
     } catch (error) {
-      return Promise.reject([
-        error,
+      return Promise.reject(
         new DefaultDurationError(
-          'Error encountered while trying to get the default duration from the data gateway.'
-        ),
-      ])
+          'Error encountered while trying to get the default duration from the data gateway.',
+          error as Error
+        )
+      )
     }
   }
 }

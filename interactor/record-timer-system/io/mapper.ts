@@ -1,5 +1,4 @@
 import Duration from '@/interactor/entities/Duration'
-import Session from '@/interactor/entities/Session'
 import { DurationRequest } from './request.model'
 
 export const mapRequestToDuration = (request: DurationRequest) => {

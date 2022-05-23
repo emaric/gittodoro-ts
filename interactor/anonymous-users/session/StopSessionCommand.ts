@@ -25,13 +25,15 @@ export default class StopSessionCommand implements SessionCommandInterface {
       const response = {
         session: session ? mapSessionToResponse(session) : undefined,
       }
-      this.presenter.present(response)
+      await this.presenter.present(response)
       return Promise.resolve(response)
     } catch (error) {
-      return Promise.reject([
-        error,
-        new SessionError('Error encountered while trying to start a Session.'),
-      ])
+      return Promise.reject(
+        new SessionError(
+          'Error encountered while trying to start a Session.',
+          error as Error
+        )
+      )
     }
   }
 }

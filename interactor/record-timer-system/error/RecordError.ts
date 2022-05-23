@@ -1,8 +1,3 @@
-export default class RecordError extends Error {
-  errors: Error[]
+import MultipleErrors from '@/interactor/errors/MultipleErrors'
 
-  constructor(message?: string, errors: Error[] = []) {
-    super(message)
-    this.errors = errors
-  }
-}
+export default class RecordError extends MultipleErrors {}

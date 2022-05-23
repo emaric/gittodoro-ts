@@ -1,7 +1,8 @@
 import Duration from '@/interactor/entities/Duration'
 import Record from '@/interactor/entities/Record'
 import { State } from '@/interactor/entities/State'
-import RecordError from '../error/RecordError'
+
+import RecordError from '@/interactor/record-timer-system/error/RecordError'
 
 export default class RecordBuilder {
   private duration: Duration

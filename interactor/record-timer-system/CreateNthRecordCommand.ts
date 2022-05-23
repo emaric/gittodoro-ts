@@ -16,18 +16,20 @@ export default class CreateNthRecordCommand implements RecordCommandInterface {
     this.presenter = presenter
   }
 
-  execute(request: CreateNthRecordRequest): Promise<CreateRecordResponse> {
+  async execute(
+    request: CreateNthRecordRequest
+  ): Promise<CreateRecordResponse> {
     try {
       const duration = mapRequestToDuration(request.duration)
       const record = this.createNthRecord(duration, request.n, request.start)
       const response = {
         record,
       }
-      this.presenter.present(response)
+      await this.presenter.present(response)
       return Promise.resolve(response)
     } catch (error) {
       return Promise.reject(
-        new RecordError('Error creating current record.', [error as Error])
+        new RecordError('Error creating current record.', error as Error)
       )
     }
   }
