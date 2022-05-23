@@ -1,10 +1,8 @@
 import SessionViewInterface from '@/examples/anonymous-user-app/presenter/SessionViewInterface'
 import Session from '@/examples/anonymous-user-app/model/Session'
-import SessionTimer from '@/examples/anonymous-user-app/components/timers/SessionTimer'
 import { logger } from '@/examples/anonymous-user-app/components/loggers'
 
 export default class SessionView implements SessionViewInterface {
-  private timer?: SessionTimer
   private _session?: Session
   callback?: CallableFunction
 

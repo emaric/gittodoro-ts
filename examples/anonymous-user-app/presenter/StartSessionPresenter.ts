@@ -1,13 +1,9 @@
 import SessionError from '@/interactor/anonymous-users/session/error/SessionError'
-import {
-  SessionResponse,
-  StartSessionResponse,
-  StopSessionResponse,
-} from '@/interactor/anonymous-users/session/io/response.model'
+import { StartSessionResponse } from '@/interactor/anonymous-users/session/io/response.model'
 import SessionPresenterInterface from '@/interactor/anonymous-users/session/io/SessionPresenterInterface'
 
 import Session from '../model/Session'
-import { mapResponse } from './mapper'
+import { mapResponseToSession } from './mapper'
 import SessionViewInterface from './SessionViewInterface'
 
 export default class StartSessionPresenter
@@ -21,7 +17,7 @@ export default class StartSessionPresenter
 
   present(response: StartSessionResponse): Promise<Session> {
     if (response.session) {
-      const session = mapResponse(response.session)
+      const session = mapResponseToSession(response.session)
       this.view.render(session)
       return Promise.resolve(session)
     } else {

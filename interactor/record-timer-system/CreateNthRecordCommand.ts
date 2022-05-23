@@ -5,21 +5,21 @@ import RecordError from '@/interactor/record-timer-system/error/RecordError'
 import RecordCommandInterface from '@/interactor/record-timer-system/io/RecordCommandInterface'
 import RecordPresenterInterface from '@/interactor/record-timer-system/io/RecordPresenterInterface'
 import { mapRequestToDuration } from '@/interactor/record-timer-system/io/mapper'
-import { CreateRecordRequest } from '@/interactor/record-timer-system/io/request.model'
+import { CreateNthRecordRequest } from '@/interactor/record-timer-system/io/request.model'
 import { CreateRecordResponse } from '@/interactor/record-timer-system/io/response.model'
 import RecordBuilder from './components/RecordBuilder'
 
-export default class CreateRecordCommand implements RecordCommandInterface {
+export default class CreateNthRecordCommand implements RecordCommandInterface {
   private presenter: RecordPresenterInterface
 
   constructor(presenter: RecordPresenterInterface) {
     this.presenter = presenter
   }
 
-  execute(request: CreateRecordRequest): Promise<CreateRecordResponse> {
+  execute(request: CreateNthRecordRequest): Promise<CreateRecordResponse> {
     try {
       const duration = mapRequestToDuration(request.duration)
-      const record = this.createRecord(duration, request.start, request.current)
+      const record = this.createNthRecord(duration, request.n, request.start)
       const response = {
         record,
       }
@@ -32,8 +32,8 @@ export default class CreateRecordCommand implements RecordCommandInterface {
     }
   }
 
-  createRecord(duration: Duration, start: Date, current: Date) {
+  createNthRecord(duration: Duration, n: number, start: Date) {
     const builder = new RecordBuilder(duration)
-    return builder.createRecord(start, current)
+    return builder.createNthRecord(n, start)
   }
 }

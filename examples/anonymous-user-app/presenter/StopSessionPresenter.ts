@@ -2,7 +2,7 @@ import SessionPresenterInterface from '@/interactor/anonymous-users/session/io/S
 import { StopSessionResponse } from '@/interactor/anonymous-users/session/io/response.model'
 import Session from '../model/Session'
 import SessionViewInterface from './SessionViewInterface'
-import { mapResponse } from './mapper'
+import { mapResponseToSession } from './mapper'
 
 export default class StopSessionPresenter implements SessionPresenterInterface {
   private view: SessionViewInterface
@@ -13,7 +13,7 @@ export default class StopSessionPresenter implements SessionPresenterInterface {
 
   present(response: StopSessionResponse): Promise<Session | undefined> {
     if (response.session) {
-      const session = mapResponse(response.session)
+      const session = mapResponseToSession(response.session)
       this.view.render(session)
       return Promise.resolve(session)
     } else {

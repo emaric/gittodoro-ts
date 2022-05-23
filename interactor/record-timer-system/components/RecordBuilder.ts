@@ -28,7 +28,17 @@ export default class RecordBuilder {
     return new Record(String(State[state]), startDate, endDate)
   }
 
-  calculateNRecords(elapsed: number) {
+  createNthRecord(n: number, start: Date) {
+    if (n <= 0) {
+      throw new RecordError('Invalid value for n.')
+    }
+    const state = this.calculateState(n)
+    const startDate = this.calculateStart(n, start)
+    const endDate = this.calculateEnd(state, startDate)
+    return new Record(String(State[state]), startDate, endDate)
+  }
+
+  private calculateNRecords(elapsed: number) {
     const cycles = Math.floor(elapsed / this.duration.totalTime)
     const recordsPerCycle = cycles * this.recordsPerCycle
 
@@ -63,7 +73,7 @@ export default class RecordBuilder {
     return recordsPerCycle + recordsPerShortCycles + 1
   }
 
-  calculateState(nthRecord: number) {
+  private calculateState(nthRecord: number) {
     if (nthRecord <= 0) {
       throw new RecordError('Invalid nth record value.')
     }
@@ -80,7 +90,7 @@ export default class RecordBuilder {
     return State.short
   }
 
-  calculateStart(nthRecord: number, start: Date) {
+  private calculateStart(nthRecord: number, start: Date) {
     if (nthRecord <= 0) {
       throw new RecordError('Invalid nth record.')
     }
@@ -113,7 +123,7 @@ export default class RecordBuilder {
     )
   }
 
-  calculateEnd(state: State, start: Date) {
+  private calculateEnd(state: State, start: Date) {
     if (state == State.pomodoro) {
       return new Date(start.getTime() + this.duration.pomodoro)
     }

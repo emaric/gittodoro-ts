@@ -1,7 +1,9 @@
 import Session from '@/examples/anonymous-user-app/model/Session'
 import Record from '@/examples/anonymous-user-app/model/Record'
 import Logger from '@/examples/anonymous-user-app/model/Logger'
-import { createNextRecord } from '@/examples/anonymous-user-app/components/records'
+
+import * as RecordAPI from '@/examples/anonymous-user-app/api/record'
+
 import RecordTimer from './RecordTimer'
 
 export default class SessionTimer {
@@ -17,6 +19,10 @@ export default class SessionTimer {
     this.finishedRecords = []
     this.recordTimer.setOnStoppedListener((record?: Record) => {
       this.onRecordTimerEnded(record)
+    })
+
+    RecordAPI.onRecordChanged((record: Record) => {
+      this.recordTimer.start(record)
     })
   }
 
@@ -43,20 +49,26 @@ export default class SessionTimer {
       this.finishedRecords.push(record)
     }
     if (this.activeSessionTimeout && this.session && record) {
-      const nextRecord = createNextRecord(
-        this.finishedRecords.length,
+      RecordAPI.createNth(
         this.session.duration,
+        this.finishedRecords.length + 1,
         record.end
       )
-      this.recordTimer.start(nextRecord)
+      // const nextRecord = createNextRecord(
+      //   this.finishedRecords.length,
+      //   this.session.duration,
+      //   record.end
+      // )
+      // this.recordTimer.start(nextRecord)
     }
   }
 
   private startRecordTimer() {
     if (this.activeSessionTimeout && this.session) {
-      this.recordTimer.start(
-        createNextRecord(0, this.session.duration, this.session.start)
-      )
+      RecordAPI.create(this.session.duration, this.session.start, new Date())
+      // this.recordTimer.start(
+      //   createNextRecord(0, this.session.duration, this.session.start)
+      // )
     }
   }
 
