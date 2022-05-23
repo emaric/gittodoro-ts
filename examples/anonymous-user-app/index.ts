@@ -9,7 +9,7 @@ const timer = new SessionTimer(logger)
 console.log('This is a basic app using the Gittodoro module.')
 console.log('The primary actor is an Anonymous User.')
 
-DefaultDurationAPI.updateDefaultDuration(5, 2, 3, 4)
+DefaultDurationAPI.updateDefaultDuration(5 * 1000, 2 * 1000, 3 * 1000, 4)
 
 DefaultDurationAPI.onDefaultDurationChanged(() => {
   const defaultDuration = DefaultDurationAPI.getDefaultDuration()

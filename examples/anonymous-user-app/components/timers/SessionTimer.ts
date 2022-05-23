@@ -22,6 +22,11 @@ export default class SessionTimer {
     })
 
     RecordAPI.onRecordChanged((record: Record) => {
+      console.log(
+        new Date().toJSON() +
+          ' : --------------------------------------------------',
+        record
+      )
       this.recordTimer.start(record)
     })
   }
@@ -52,7 +57,7 @@ export default class SessionTimer {
       RecordAPI.createNth(
         this.session.duration,
         this.finishedRecords.length + 1,
-        record.end
+        this.session.start
       )
       // const nextRecord = createNextRecord(
       //   this.finishedRecords.length,
