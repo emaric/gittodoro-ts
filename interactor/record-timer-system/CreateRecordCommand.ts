@@ -7,7 +7,7 @@ import RecordPresenterInterface from '@/interactor/record-timer-system/io/Record
 import { mapRequestToDuration } from '@/interactor/record-timer-system/io/mapper'
 import { CreateRecordRequest } from '@/interactor/record-timer-system/io/request.model'
 import { CreateRecordResponse } from '@/interactor/record-timer-system/io/response.model'
-import RecordBuilder from './components/RecordBuilder'
+import RecordBuilder from './components/RecordFactory'
 
 export default class CreateRecordCommand implements RecordCommandInterface {
   private presenter: RecordPresenterInterface

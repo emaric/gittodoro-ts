@@ -57,3 +57,14 @@ Trying to follow the Clean Architecture principles.
 `npm test`
 
 `npm run build && node ./lib/examples/anonymous-user-app/index.js`
+
+## MVC
+
+- The **Model** is the application object, the **View** is its screen representation, and the **Controller** defines the way the user interface reacts to user input.
+- Views and Models are decoupled by establishing a subscribe/notify protocol between them.
+- View: ensure that its appearance reflects the state of the model.
+- View uses an instance of a Controller subclass to implement a particular response strategy.
+
+## Strategy
+
+- An object that represents an Algorithm.
