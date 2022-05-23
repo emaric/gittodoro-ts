@@ -26,6 +26,7 @@ export class SessionInMemory
         duration,
         start
       )
+      this.storage.session.push(session)
       return Promise.resolve(session)
     } else {
       return Promise.reject(

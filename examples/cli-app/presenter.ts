@@ -22,13 +22,11 @@ export class SessionCLIPresenter implements SessionPresenterInterface {
   present(
     response: StartSessionResponse | StopSessionResponse
   ): Promise<Session> {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       if (response.session) {
         const session = mapSession(response.session)
         this.cliView.display(session)
         resolve(session)
-      } else {
-        reject('No session to present.')
       }
     })
   }

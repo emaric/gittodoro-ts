@@ -15,21 +15,20 @@ export class RecordTimer {
     this.state = state
     const durationMillis = end.getTime() - start.getTime()
     this.duration = durationMillis / 1000
-    this.interval = durationMillis / (this.duration + 2)
+    this.interval = durationMillis / this.duration
     this.onEnd = onEnd
   }
 
   private run() {
-    console.log(new Date().toJSON() + 'run:', this.state)
     if (this.to != undefined) {
       clearTimeout(this.to)
     }
     this.to = setTimeout(() => {
-      if (this.duration < 0) {
+      console.log(this.state + ' : ' + --this.duration)
+      if (this.duration <= 0) {
         this.to != undefined && clearTimeout(this.to)
         this.onEnd && this.onEnd()
       } else {
-        console.log(this.state + ' ' + this.duration--)
         this.run()
       }
     }, this.interval)
@@ -89,46 +88,29 @@ export class CLI implements CLIView {
   display(session: Session): void {
     this.session = session
     if (session.end) {
-      this.recordView.stop()
+      this.displayStoppedSession(session)
     } else {
-      this.recordController.createRecord(session)
+      this.displayStart()
+      this.session && this.displayRunningSession(session)
       // this.recordView.start()
     }
   }
 
-  displayStart(session: Session) {
-    if (session.end) {
+  displayStart() {
+    if (this.session?.end) {
       throw new Error('This session has ended.')
     }
     console.log('Starting a session...')
   }
 
   displayRunningSession(session: Session) {
-    // const { state, remainingTime } = session.calcStateRemainingTime()
-    // if (remainingTime > 0) {
-    //   console.log(state + ' : ' + remainingTime)
-    //   this.timeoutTimer && clearTimeout(this.timeoutTimer)
-    //   this.timeoutTimer = setTimeout(() => {
-    //     if (this.timeoutTimer) {
-    //       clearTimeout(this.timeoutTimer)
-    //       console.log(state + ' : ' + 0)
-    //     }
-    //     this.displayRunningSession(session)
-    //   }, remainingTime * 1000)
-    //   this.intervalTimer && clearInterval(this.intervalTimer)
-    //   let countDown = remainingTime
-    //   this.intervalTimer = setInterval(() => {
-    //     console.log(state + ' : ' + --countDown)
-    //   }, 1000)
-    // } else {
-    //   this.timeoutTimer && clearTimeout(this.timeoutTimer)
-    //   this.intervalTimer && clearInterval(this.intervalTimer)
-    // }
+    this.recordController.createRecord(session)
   }
 
   displayStoppedSession(session: Session) {
-    if (session.end) {
-      console.log('Stoping a session...')
+    if (session?.end) {
+      console.log('Stopping a session...')
+      this.recordView.stop()
       // this.timeoutTimer && clearTimeout(this.timeoutTimer)
       // this.intervalTimer && clearInterval(this.intervalTimer)
       console.log('Session has ended.')

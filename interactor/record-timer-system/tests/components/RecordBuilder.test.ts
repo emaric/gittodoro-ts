@@ -1,18 +1,32 @@
-import Duration from '@/interactor/entities/Duration'
 import { State } from '@/interactor/entities/State'
+import Duration from '@/interactor/entities/Duration'
 import RecordBuilder from '@/interactor/record-timer-system/components/RecordBuilder'
 
 describe('[RecordBuilder] unit tests', () => {
-  const duration = new Duration(
-    '0',
-    25 * 60 * 1000, // 25 minutes
-    5 * 60 * 1000, // 5 minutes
-    15 * 60 * 1000, // 15 minutes
-    4
-  )
+  const duration = new Duration('0', 25, 5, 15, 4)
   const builder = new RecordBuilder(duration)
 
   describe('when trying to calculate the nth record by the elapsed time', () => {
+    it('should rsdfdfdsfe', () => {
+      const actual = builder.calculateNRecords(
+        duration.pomodoro +
+          duration.short +
+          duration.pomodoro +
+          duration.short +
+          duration.pomodoro +
+          duration.short +
+          duration.pomodoro +
+          duration.long +
+          duration.pomodoro +
+          duration.short +
+          duration.pomodoro +
+          duration.short +
+          duration.pomodoro +
+          duration.short
+      )
+      expect(actual).toBe(15)
+    })
+
     it(`should return 1 if elapsed time is less than duration.pomodoro (25minutes)`, () => {
       const actual = builder.calculateNRecords(0)
       expect(actual).toBe(1)
@@ -23,11 +37,18 @@ describe('[RecordBuilder] unit tests', () => {
       expect(actual).toBe(2)
     })
 
-    it('should return 2 if elapsed time is within Duration.pomodoro + Duration.short', () => {
+    it('should return 3 if elapsed time is within Duration.pomodoro + Duration.short', () => {
       const actual = builder.calculateNRecords(
         duration.pomodoro + duration.short
       )
-      expect(actual).toBe(2)
+      expect(actual).toBe(3)
+    })
+
+    it('should return 4 if elapsed time is within Duration.pomodoro + Duration.short + Duration.pomodoro', () => {
+      const actual = builder.calculateNRecords(
+        duration.pomodoro + duration.short + duration.pomodoro
+      )
+      expect(actual).toBe(4)
     })
 
     it(`should return 9 if elapsed time is equal to 1 cycle + 1`, () => {
@@ -36,32 +57,24 @@ describe('[RecordBuilder] unit tests', () => {
       expect(actual).toBe(9)
     })
 
-    it(`should return ${
-      duration.longInterval * 2
-    } if elapsed time is equal to 1 cycle`, () => {
+    it(`should return 9 if elapsed time is equal to 1 cycle`, () => {
       const oneCycle = duration.totalTime
       const actual = builder.calculateNRecords(oneCycle)
-      expect(actual).toBe(duration.longInterval * 2)
+      expect(actual).toBe(9)
     })
 
-    it(`should return 8 if elapsed time is equal to 1 cycle - (duration.long - 1)`, () => {
+    it(`should return 8 if elapsed time is equal to 1 cycle - duration.long`, () => {
       const oneCycle = duration.totalTime
-      const actual = builder.calculateNRecords(oneCycle - (duration.long - 1))
+      const actual = builder.calculateNRecords(oneCycle - duration.long)
       expect(actual).toBe(8)
     })
 
-    it(`should return 7 if elapsed time is equal to 1 cycle - duration.long`, () => {
-      const oneCycle = duration.totalTime
-      const actual = builder.calculateNRecords(oneCycle - duration.long)
-      expect(actual).toBe(7)
-    })
-
-    it(`should return 6 if elapsed time is equal to 1 cycle - duration.long`, () => {
+    it(`should return 7 if elapsed time is equal to 1 cycle - duration.long - duration.pomodoro`, () => {
       const oneCycle = duration.totalTime
       const actual = builder.calculateNRecords(
         oneCycle - duration.long - duration.pomodoro
       )
-      expect(actual).toBe(6)
+      expect(actual).toBe(7)
     })
   })
 
@@ -118,7 +131,7 @@ describe('[RecordBuilder] unit tests', () => {
       expect(actual.state).toBe(String(State[State.pomodoro]))
     })
 
-    it('should return a pomodoro record', () => {
+    it('should return a short record', () => {
       const start = new Date('2022-01-01T09:00:00')
       const end = new Date(start.getTime() + duration.pomodoro)
       const actual = builder.createRecord(start, end)
@@ -126,6 +139,13 @@ describe('[RecordBuilder] unit tests', () => {
     })
 
     it('should return a pomodoro record', () => {
+      const start = new Date('2022-01-01T09:00:00')
+      const end = new Date(start.getTime() + duration.pomodoro + duration.short)
+      const actual = builder.createRecord(start, end)
+      expect(actual.state).toBe(String(State[State.pomodoro]))
+    })
+
+    it('should return a long record', () => {
       const start = new Date('2022-01-01T09:00:00')
       const end = new Date(start.getTime() + duration.totalTime - 1)
       const actual = builder.createRecord(start, end)

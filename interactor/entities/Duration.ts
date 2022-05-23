@@ -32,6 +32,10 @@ export default class Duration {
   get totalTime() {
     return this.long + this.totalPomodoro + this.totalShort
   }
+
+  get pomodoroAndShort() {
+    return this.pomodoro + this.short
+  }
 }
 
 export const defaultDuration = new Duration(

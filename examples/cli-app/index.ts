@@ -12,9 +12,9 @@ const run = (): number => {
   return 0
 }
 
-const stop = (): number => {
+const stop = async () => {
   console.log('Use case #2: This user can stop a session.')
-  app.stop()
+  await app.stop()
   return 0
 }
 

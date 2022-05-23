@@ -33,15 +33,15 @@ export class SessionCLIApp {
     this.stopInteractor = new StopSessionCommand(db, presenter)
   }
 
-  start(): void {
-    this.startInteractor.execute({
+  async start() {
+    await this.startInteractor.execute({
       start: new Date(),
       durationId: this.defaultDurationId,
     })
   }
 
-  stop(): void {
-    this.stopInteractor.execute({
+  async stop() {
+    await this.stopInteractor.execute({
       date: new Date(),
     })
   }

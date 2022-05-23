@@ -29,30 +29,38 @@ export default class RecordBuilder {
   }
 
   calculateNRecords(elapsed: number) {
-    if (elapsed < this.duration.pomodoro) {
-      return 1
-    }
-
     const cycles = Math.floor(elapsed / this.duration.totalTime)
-    const recordsInCycles = cycles * this.recordsPerCycle
+    const recordsPerCycle = cycles * this.recordsPerCycle
 
     const remainingTime = elapsed % this.duration.totalTime
-    if (remainingTime > this.duration.totalTime - this.duration.long) {
-      return recordsInCycles + this.duration.longInterval * 2
+
+    if (remainingTime == 0) {
+      return recordsPerCycle + 1
+    }
+
+    if (remainingTime >= this.duration.totalTime - this.duration.long) {
+      return recordsPerCycle + this.recordsPerCycle
     }
 
     if (
-      remainingTime >
-      this.duration.totalTime - (this.duration.long + this.duration.pomodoro)
+      remainingTime >=
+      this.duration.totalTime - this.duration.long - this.duration.pomodoro
     ) {
-      return recordsInCycles + this.duration.longInterval * 2 - 1
+      return recordsPerCycle + this.recordsPerCycle - 1
     }
 
-    const remainingRecords = Math.ceil(
-      2 * (remainingTime / (this.duration.pomodoro + this.duration.short))
+    const shortCycles = Math.floor(
+      remainingTime / this.duration.pomodoroAndShort
     )
+    const recordsPerShortCycles = shortCycles * 2
 
-    return recordsInCycles + remainingRecords
+    const remainder = remainingTime % this.duration.pomodoroAndShort
+
+    if (remainder >= this.duration.pomodoro) {
+      return recordsPerCycle + recordsPerShortCycles + 2
+    }
+
+    return recordsPerCycle + recordsPerShortCycles + 1
   }
 
   calculateState(nthRecord: number) {

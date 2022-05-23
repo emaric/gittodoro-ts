@@ -29,7 +29,7 @@ describe('[CreateRecordCommand] unit test', () => {
         start,
         current,
       }
-      expect(await command.execute(request)).toThrow()
+      await expect(command.execute(request)).rejects.toThrow()
     })
 
     it('should return a pomodoro Record to start a new cycle', async () => {
@@ -44,6 +44,76 @@ describe('[CreateRecordCommand] unit test', () => {
       const response = await command.execute(request)
 
       const expectedStart = new Date(start.getTime() + duration.totalTime)
+      const expected = {
+        record: new Record(
+          String(State[State.pomodoro]),
+          expectedStart,
+          new Date(expectedStart.getTime() + duration.pomodoro)
+        ),
+      }
+      expect(response).toEqual(expected)
+    })
+
+    it('should return a pomodoro Record as the first record', async () => {
+      const command = new CreateRecordCommand(presenter)
+      const start = new Date('2022-01-01T09:00:00')
+      const current = new Date(start.getTime() + 1)
+      const request: CreateRecordRequest = {
+        duration,
+        start,
+        current,
+      }
+      const response = await command.execute(request)
+
+      const expectedStart = new Date(start.getTime())
+      const expected = {
+        record: new Record(
+          String(State[State.pomodoro]),
+          expectedStart,
+          new Date(expectedStart.getTime() + duration.pomodoro)
+        ),
+      }
+      expect(response).toEqual(expected)
+    })
+
+    it('should return a short Record as the second record', async () => {
+      const command = new CreateRecordCommand(presenter)
+      const start = new Date('2022-01-01T09:00:00')
+      const current = new Date(start.getTime() + duration.pomodoro)
+      const request: CreateRecordRequest = {
+        duration,
+        start,
+        current,
+      }
+      const response = await command.execute(request)
+
+      const expectedStart = new Date(start.getTime() + duration.pomodoro)
+      const expected = {
+        record: new Record(
+          String(State[State.short]),
+          expectedStart,
+          new Date(expectedStart.getTime() + duration.short)
+        ),
+      }
+      expect(response).toEqual(expected)
+    })
+
+    it('should return a pomodoro Record as the third record', async () => {
+      const command = new CreateRecordCommand(presenter)
+      const start = new Date('2022-01-01T09:00:00')
+      const current = new Date(
+        start.getTime() + duration.pomodoro + duration.short
+      )
+      const request: CreateRecordRequest = {
+        duration,
+        start,
+        current,
+      }
+      const response = await command.execute(request)
+
+      const expectedStart = new Date(
+        start.getTime() + duration.pomodoro + duration.short
+      )
       const expected = {
         record: new Record(
           String(State[State.pomodoro]),

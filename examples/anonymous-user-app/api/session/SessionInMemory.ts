@@ -36,8 +36,10 @@ export default class SessionInMemory
   }
 
   stop(date: Date): Promise<Session | undefined> {
+    console.log('storage:', storage)
     const lastIndex = storage.session.length - 1
     const last = storage.session[lastIndex]
+    console.log('storage:', storage)
     if (last?.end == undefined) {
       last.end = date
       storage.session[lastIndex] = last
