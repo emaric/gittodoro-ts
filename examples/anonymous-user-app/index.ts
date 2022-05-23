@@ -34,7 +34,7 @@ SessionAPI.onSessionChanged((session: Session) => {
       timer.stop()
       const end = new Date()
       SessionAPI.stop(end)
-      clearInterval(to)
+      clearTimeout(to)
     }, ms)
   } else {
     logger.debug('Finished a Session:')
