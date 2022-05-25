@@ -13,3 +13,9 @@ export interface ReadSessionsGatewayInterface {
 
   readByIDs(ids: string[]): Promise<Session[]>
 }
+
+export interface DeleteSessionsGatewayInterface {
+  deleteByRange(startInclusive: Date, end: Date): Promise<Session[]>
+
+  deleteByIDs(ids: string[]): Promise<Session[]>
+}

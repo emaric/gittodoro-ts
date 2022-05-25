@@ -22,6 +22,19 @@ export type ReadByIDs = ReadSessionsRequest & {
   ids: string[]
 }
 
+export type DeleteSessionsRequest = SessionBaseRequest & {
+  by: RequestBy
+}
+
+export type DeleteByRange = DeleteSessionsRequest & {
+  startInclusive: Date
+  end: Date
+}
+
+export type DeleteByIDs = DeleteSessionsRequest & {
+  ids: string[]
+}
+
 export enum RequestBy {
   range,
   ids,

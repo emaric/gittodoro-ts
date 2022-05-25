@@ -1,6 +1,7 @@
 import Duration, { defaultDuration } from '@/interactor/entities/Duration'
 import Session from '@/interactor/entities/Session'
 import {
+  DeleteSessionsGatewayInterface,
   ReadSessionsGatewayInterface,
   StartSessionGatewayInterface,
   StopSessionGatewayInterface,
@@ -11,7 +12,8 @@ export default class SessionInMemory
   implements
     StartSessionGatewayInterface,
     StopSessionGatewayInterface,
-    ReadSessionsGatewayInterface
+    ReadSessionsGatewayInterface,
+    DeleteSessionsGatewayInterface
 {
   storage: {
     session: Session[]
@@ -80,6 +82,22 @@ export default class SessionInMemory
 
   readByIDs(ids: string[]): Promise<Session[]> {
     const sessions = this.storage.session.filter((s) => ids.includes(s.id))
+    return Promise.resolve(sessions)
+  }
+
+  async deleteByRange(startInclusive: Date, end: Date): Promise<Session[]> {
+    const sessions = await this.readByRange(startInclusive, end)
+    this.storage.session = this.storage.session.filter(
+      (s) => !sessions.includes(s)
+    )
+    return Promise.resolve(sessions)
+  }
+
+  async deleteByIDs(ids: string[]): Promise<Session[]> {
+    const sessions = await this.readByIDs(ids)
+    this.storage.session = this.storage.session.filter(
+      (s) => !sessions.includes(s)
+    )
     return Promise.resolve(sessions)
   }
 }
