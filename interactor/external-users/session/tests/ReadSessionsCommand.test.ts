@@ -63,6 +63,31 @@ describe('[ReadSessionsCommand] unit tests', () => {
         'Invalid request type.'
       )
     })
+
+    it('should throw Invalid error', async () => {
+      const db = new SessionInMemory()
+      const request: ReadByIDs = {
+        by: RequestBy.range,
+        ids: ['0'],
+      }
+      const command = new ReadSessionsCommand(db, { present: jest.fn() })
+      await expect(command.execute(request)).rejects.toThrow(
+        'Invalid request values.'
+      )
+    })
+
+    it('should throw Invalid error', async () => {
+      const db = new SessionInMemory()
+      const request: ReadByRange = {
+        by: RequestBy.ids,
+        startInclusive: new Date(),
+        end: new Date(),
+      }
+      const command = new ReadSessionsCommand(db, { present: jest.fn() })
+      await expect(command.execute(request)).rejects.toThrow(
+        'Invalid request values.'
+      )
+    })
   })
 
   describe('when trying to execute with an erroneous presenter', () => {

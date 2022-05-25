@@ -63,9 +63,9 @@ export default class DurationConstraintsValidator
     }
 
     if (errors.length > 0) {
-      throw new ValidatorError('Invalid duration.', ...errors)
+      return Promise.reject(new ValidatorError('Invalid duration.', ...errors))
     }
 
-    return true
+    return Promise.resolve(true)
   }
 }

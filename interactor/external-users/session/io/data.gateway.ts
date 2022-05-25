@@ -8,6 +8,27 @@ export interface StopSessionGatewayInterface {
   stop(date: Date): Promise<Session | undefined>
 }
 
+export interface CreateSessionsGatewayInterface {
+  createWithDurationID(
+    sessions: {
+      durationId: string
+      start: Date
+      end?: Date
+    }[]
+  ): Promise<Session[]>
+
+  createWithDuration(
+    sessions: {
+      pomodoro: number
+      short: number
+      long: number
+      interval: number
+      start: Date
+      end?: Date
+    }[]
+  ): Promise<Session[]>
+}
+
 export interface ReadSessionsGatewayInterface {
   readByRange(startInclusive: Date, end: Date): Promise<Session[]>
 

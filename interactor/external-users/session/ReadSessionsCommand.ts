@@ -1,4 +1,5 @@
 import Session from '@/interactor/entities/Session'
+import ValidatorError from '@/interactor/errors/ValidatorError'
 
 import SessionError from './error/SessionError'
 import { ReadSessionsGatewayInterface } from './io/data.gateway'
@@ -12,6 +13,7 @@ import {
 import { SessionListResponse } from './io/response.model'
 import SessionCommandInterface from './io/SessionCommandInterface'
 import SessionPresenterInterface from './io/SessionPresenterInterface'
+import RequestByRangeValidator from './validators/RequestByRangeValidator'
 
 export default class ReadSessionsCommand implements SessionCommandInterface {
   private dataGateway: ReadSessionsGatewayInterface
@@ -47,6 +49,7 @@ export default class ReadSessionsCommand implements SessionCommandInterface {
     request: ReadByRange
   ): Promise<SessionListResponse> {
     try {
+      await this.validateByRangeRequest(request)
       const sessions = await this.dataGateway.readByRange(
         request.startInclusive,
         request.end
@@ -61,6 +64,7 @@ export default class ReadSessionsCommand implements SessionCommandInterface {
 
   private async executeByIDs(request: ReadByIDs): Promise<SessionListResponse> {
     try {
+      await this.validateByIDsRequest(request)
       const sessions = await this.dataGateway.readByIDs(request.ids)
       return await this.respond(sessions)
     } catch (error) {
@@ -82,5 +86,22 @@ export default class ReadSessionsCommand implements SessionCommandInterface {
         new SessionError('Failed sending out response.', error as Error)
       )
     }
+  }
+
+  private async validateByRangeRequest(request: ReadByRange) {
+    return await RequestByRangeValidator.getInstance().validate(request)
+  }
+
+  private validateByIDsRequest(request: ReadByIDs) {
+    if (request.ids == undefined) {
+      return Promise.reject(
+        new ValidatorError(
+          'Invalid request values.',
+          new Error('ids required.')
+        )
+      )
+    }
+
+    return Promise.resolve(true)
   }
 }

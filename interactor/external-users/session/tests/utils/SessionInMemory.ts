@@ -1,6 +1,7 @@
 import Duration, { defaultDuration } from '@/interactor/entities/Duration'
 import Session from '@/interactor/entities/Session'
 import {
+  CreateSessionsGatewayInterface,
   DeleteSessionsGatewayInterface,
   ReadSessionsGatewayInterface,
   StartSessionGatewayInterface,
@@ -13,7 +14,8 @@ export default class SessionInMemory
     StartSessionGatewayInterface,
     StopSessionGatewayInterface,
     ReadSessionsGatewayInterface,
-    DeleteSessionsGatewayInterface
+    DeleteSessionsGatewayInterface,
+    CreateSessionsGatewayInterface
 {
   storage: {
     session: Session[]
@@ -56,6 +58,82 @@ export default class SessionInMemory
         )
       )
     }
+  }
+
+  createWithDurationID(
+    sessions: { durationId: string; start: Date; end?: Date | undefined }[]
+  ): Promise<Session[]> {
+    const errors: Error[] = []
+    const newSessions: Session[] = []
+    sessions.forEach((session, i) => {
+      const duration = this.storage.duration.find(
+        (d) => d.id == session.durationId
+      )
+      if (duration == undefined) {
+        errors.push(new Error(`Invalid duration id: ${session.durationId}.`))
+        return
+      }
+      const id = String(i + this.storage.session.length)
+      const newSession = new Session(id, duration, session.start, session.end)
+      newSessions.push(newSession)
+    })
+
+    if (errors.length > 0) {
+      return Promise.reject(
+        new SessionError('Encountered errors why creating sessions.', ...errors)
+      )
+    }
+
+    this.storage.session = this.storage.session.concat(newSessions)
+
+    return Promise.resolve(newSessions)
+  }
+
+  createWithDuration(
+    sessions: {
+      pomodoro: number
+      short: number
+      long: number
+      interval: number
+      start: Date
+      end?: Date | undefined
+    }[]
+  ): Promise<Session[]> {
+    const errors: Error[] = []
+    const newSessions: Session[] = []
+    sessions.forEach((session, i) => {
+      let duration = this.storage.duration.find(
+        (d) =>
+          d.pomodoro == session.pomodoro &&
+          d.short == session.short &&
+          d.long == session.long &&
+          d.interval == session.interval
+      )
+      if (duration == undefined) {
+        const durationId = String(this.storage.duration.length)
+        duration = new Duration(
+          durationId,
+          session.pomodoro,
+          session.short,
+          session.long,
+          session.interval
+        )
+        this.storage.duration.push(duration)
+      }
+      const id = String(i + this.storage.session.length)
+      const newSession = new Session(id, duration, session.start, session.end)
+      newSessions.push(newSession)
+    })
+
+    if (errors.length > 0) {
+      return Promise.reject(
+        new SessionError('Encountered errors why creating sessions.', ...errors)
+      )
+    }
+
+    this.storage.session = this.storage.session.concat(newSessions)
+
+    return Promise.resolve(newSessions)
   }
 
   readByRange(startInclusive: Date, end: Date): Promise<Session[]> {

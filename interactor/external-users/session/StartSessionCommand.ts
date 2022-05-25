@@ -32,10 +32,7 @@ export default class StartSessionCommand implements SessionCommandInterface {
       return Promise.resolve(response)
     } catch (error) {
       return Promise.reject(
-        new SessionError(
-          'Error encountered while trying to start a Session.',
-          error as Error
-        )
+        new SessionError('Failed to start a session.', error as Error)
       )
     }
   }
