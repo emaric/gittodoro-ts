@@ -1,8 +1,8 @@
 import { SessionResponse } from '@/interactor/anonymous-users/session/io/response.model'
 import { RecordResponse } from '@/interactor/record-timer-system/io/response.model'
-import Duration from '../model/Duration'
-import Record from '../model/Record'
-import Session from '../model/Session'
+import Duration from '../Duration'
+import Record from '../Record'
+import Session from '../Session'
 
 export const mapResponseToSession = (response: SessionResponse) => {
   const { id, pomodoro, short, long, longInterval } = response.duration

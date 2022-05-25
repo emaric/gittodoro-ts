@@ -4,7 +4,7 @@ import {
   StopSessionGatewayInterface,
 } from '@/interactor/anonymous-users/session/io/data.gateway'
 import Session from '@/interactor/entities/Session'
-import storage from '../storage'
+import storage from './storage'
 
 export default class SessionInMemory
   implements StartSessionGatewayInterface, StopSessionGatewayInterface
@@ -36,10 +36,8 @@ export default class SessionInMemory
   }
 
   stop(date: Date): Promise<Session | undefined> {
-    console.log('storage:', storage)
     const lastIndex = storage.session.length - 1
     const last = storage.session[lastIndex]
-    console.log('storage:', storage)
     if (last?.end == undefined) {
       last.end = date
       storage.session[lastIndex] = last

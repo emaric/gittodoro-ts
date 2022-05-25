@@ -2,7 +2,7 @@ import SessionError from '@/interactor/anonymous-users/session/error/SessionErro
 import { StartSessionResponse } from '@/interactor/anonymous-users/session/io/response.model'
 import SessionPresenterInterface from '@/interactor/anonymous-users/session/io/SessionPresenterInterface'
 
-import Session from '../model/Session'
+import Session from '../Session'
 import { mapResponseToSession } from './mapper'
 import SessionViewInterface from './SessionViewInterface'
 

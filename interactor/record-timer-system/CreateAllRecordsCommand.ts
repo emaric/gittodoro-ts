@@ -38,7 +38,7 @@ export default class CreateAllRecordsCommand implements RecordCommandInterface {
     }
   }
 
-  createAllRecords(duration: Duration, start: Date, end: Date) {
+  private createAllRecords(duration: Duration, start: Date, end: Date) {
     const builder = new RecordBuilder(duration)
     return builder.createAllRecords(start, end)
   }

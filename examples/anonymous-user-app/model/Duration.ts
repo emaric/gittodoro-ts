@@ -19,21 +19,13 @@ export default class Duration {
     this.longInterval = longInterval
   }
 
-  get pomodoroMillis() {
-    return this.pomodoro * 1000
+  get interval() {
+    return this.longInterval
   }
 
-  get shortMillis() {
-    return this.short * 1000
-  }
-
-  get longMillis() {
-    return this.long * 1000
-  }
-
-  get totalMillis() {
-    const totalPomodoro = this.longInterval * this.pomodoroMillis
-    const totalShort = (this.longInterval - 1) * this.shortMillis
-    return this.longMillis + totalShort + totalPomodoro
+  get total() {
+    const totalPomodoro = this.longInterval * this.pomodoro
+    const totalShort = (this.longInterval - 1) * this.short
+    return this.long + totalShort + totalPomodoro
   }
 }

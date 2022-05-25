@@ -32,7 +32,7 @@ export default class CreateRecordCommand implements RecordCommandInterface {
     }
   }
 
-  createRecord(duration: Duration, start: Date, current: Date) {
+  private createRecord(duration: Duration, start: Date, current: Date) {
     const builder = new RecordBuilder(duration)
     return builder.createRecord(start, current)
   }

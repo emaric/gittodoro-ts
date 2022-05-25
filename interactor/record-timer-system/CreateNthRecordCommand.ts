@@ -34,7 +34,7 @@ export default class CreateNthRecordCommand implements RecordCommandInterface {
     }
   }
 
-  createNthRecord(duration: Duration, n: number, start: Date) {
+  private createNthRecord(duration: Duration, n: number, start: Date) {
     const builder = new RecordBuilder(duration)
     return builder.createNthRecord(n, start)
   }
