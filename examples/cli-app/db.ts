@@ -1,7 +1,7 @@
 import {
   StartSessionGatewayInterface,
   StopSessionGatewayInterface,
-} from '@/interactor/anonymous-users/session/io/data.gateway'
+} from '@/interactor/external-users/session/io/data.gateway'
 import { MAX_SESSION_TIME } from '@/interactor/constants'
 import Duration from '@/interactor/entities/Duration'
 import Session from '@/interactor/entities/Session'

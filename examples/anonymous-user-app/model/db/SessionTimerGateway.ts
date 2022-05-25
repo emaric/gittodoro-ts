@@ -1,11 +1,11 @@
 import {
   ReadDefaultDurationDataGatewayInterface,
   UpdateDefaultDurationDataGatewayInterface,
-} from '@/interactor/anonymous-users/default-duration/io/data.gateway'
+} from '@/interactor/external-users/default-duration/io/data.gateway'
 import {
   StartSessionGatewayInterface,
   StopSessionGatewayInterface,
-} from '@/interactor/anonymous-users/session/io/data.gateway'
+} from '@/interactor/external-users/session/io/data.gateway'
 import Duration from '@/interactor/entities/Duration'
 import Session from '@/interactor/entities/Session'
 import DefaultDurationInMemory from './DefaultDurationInMemory'

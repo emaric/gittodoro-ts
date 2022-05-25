@@ -1,8 +1,8 @@
-import SessionError from '@/interactor/anonymous-users/session/error/SessionError'
+import SessionError from '@/interactor/external-users/session/error/SessionError'
 import {
   StartSessionGatewayInterface,
   StopSessionGatewayInterface,
-} from '@/interactor/anonymous-users/session/io/data.gateway'
+} from '@/interactor/external-users/session/io/data.gateway'
 import Session from '@/interactor/entities/Session'
 import storage from './storage'
 

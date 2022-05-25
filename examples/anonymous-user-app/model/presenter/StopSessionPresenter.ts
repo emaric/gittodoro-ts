@@ -1,5 +1,5 @@
-import SessionPresenterInterface from '@/interactor/anonymous-users/session/io/SessionPresenterInterface'
-import { StopSessionResponse } from '@/interactor/anonymous-users/session/io/response.model'
+import SessionPresenterInterface from '@/interactor/external-users/session/io/SessionPresenterInterface'
+import { StopSessionResponse } from '@/interactor/external-users/session/io/response.model'
 import Session from '../Session'
 import SessionViewInterface from './SessionViewInterface'
 import { mapResponseToSession } from './mapper'

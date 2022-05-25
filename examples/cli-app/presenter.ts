@@ -1,10 +1,10 @@
 import { mapSession } from './response-view-mapper'
 import { Session } from './models/Session'
-import SessionPresenterInterface from '@/interactor/anonymous-users/session/io/SessionPresenterInterface'
+import SessionPresenterInterface from '@/interactor/external-users/session/io/SessionPresenterInterface'
 import {
   StartSessionResponse,
   StopSessionResponse,
-} from '@/interactor/anonymous-users/session/io/response.model'
+} from '@/interactor/external-users/session/io/response.model'
 import RecordPresenterInterface from '@/interactor/record-timer-system/io/RecordPresenterInterface'
 import { CreateRecordResponse } from '@/interactor/record-timer-system/io/response.model'
 import Record from './models/Record'

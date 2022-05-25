@@ -2,7 +2,7 @@ import {
   ReadDefaultDurationDataGatewayInterface,
   ResetDefaultDurationDataGatewayInterface,
   UpdateDefaultDurationDataGatewayInterface,
-} from '@/interactor/anonymous-users/default-duration/io/data.gateway'
+} from '@/interactor/external-users/default-duration/io/data.gateway'
 import { defaultDuration } from '@/interactor/entities/Duration'
 import Duration from '@/interactor/entities/Duration'
 import storage from './storage'

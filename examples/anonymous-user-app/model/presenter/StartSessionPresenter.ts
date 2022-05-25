@@ -1,6 +1,6 @@
-import SessionError from '@/interactor/anonymous-users/session/error/SessionError'
-import { StartSessionResponse } from '@/interactor/anonymous-users/session/io/response.model'
-import SessionPresenterInterface from '@/interactor/anonymous-users/session/io/SessionPresenterInterface'
+import SessionError from '@/interactor/external-users/session/error/SessionError'
+import { StartSessionResponse } from '@/interactor/external-users/session/io/response.model'
+import SessionPresenterInterface from '@/interactor/external-users/session/io/SessionPresenterInterface'
 
 import Session from '../Session'
 import { mapResponseToSession } from './mapper'

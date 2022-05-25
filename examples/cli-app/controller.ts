@@ -1,7 +1,7 @@
 import Duration from '@/interactor/entities/Duration'
 
-import StopSessionCommand from '@/interactor/anonymous-users/session/StopSessionCommand'
-import StartSessionCommand from '@/interactor/anonymous-users/session/StartSessionCommand'
+import StopSessionCommand from '@/interactor/external-users/session/StopSessionCommand'
+import StartSessionCommand from '@/interactor/external-users/session/StartSessionCommand'
 import { CLIView, RecordCLIPresenter, SessionCLIPresenter } from './presenter'
 import { SessionInMemory } from './db'
 import CreateRecordCommand from '@/interactor/record-timer-system/CreateRecordCommand'

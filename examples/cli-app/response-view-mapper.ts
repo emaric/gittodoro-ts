@@ -1,4 +1,4 @@
-import { SessionResponse } from '@/interactor/anonymous-users/session/io/response.model'
+import { SessionResponse } from '@/interactor/external-users/session/io/response.model'
 import { Session } from './models/Session'
 
 export const mapSession = (session: SessionResponse): Session => {

@@ -1,10 +1,10 @@
-import DefaultDurationPresenterInterface from '@/interactor/anonymous-users/default-duration/io/DefaultDurationPresenterInterface'
+import DefaultDurationPresenterInterface from '@/interactor/external-users/default-duration/io/DefaultDurationPresenterInterface'
 import {
   DefaultDurationResponse,
   ReadDefaultDurationResponse,
   ResetDefaultDurationResponse,
   UpdateDefaultDurationResponse,
-} from '@/interactor/anonymous-users/default-duration/io/response.model'
+} from '@/interactor/external-users/default-duration/io/response.model'
 
 import Duration from '@/examples/anonymous-user-app/model/Duration'
 

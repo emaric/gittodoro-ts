@@ -15,42 +15,25 @@ Trying to follow the Clean Architecture principles.
 
 ## Interactors
 
-### Actor: Anonymous User
+### Actor: External Users
 
-1. - [x] Anonymous Users can read the default Duration
-1. - [x] Anonymous Users can modify the default Duration.
-1. - [x] Anonymous Users can reset the default Duration.
-1. - [x] Anonymous Users can start Sessions.
-1. - [x] Anonymous Users can stop Sessions.
-1. - [ ] Anonymous Users can stop Sessions based on the last time it was active.
-1. - [ ] Anonymous Users can view a Session by start date.
-1. - [ ] Anonymous Users can view Sessions by a range of dates (start date inclusive; end date exclusive). Which will filter both the start date and end date of the Session.
-1. - [ ] Anonymous Users can delete Sessions from the local/offline storage.
-1. - [ ] Anonymous Users can create a new Notes.
-1. - [ ] Anonymous Users can read Notes by ID or by the date it was created and/or updated.
-1. - [ ] Anonymous Users can update Notes.
-1. - [ ] Anonymous Users can delete Notes.
-
-### Actor: Github User
-
-1. - [ ] Github Users can read the default Duration
-1. - [ ] Github Users can modify the default Duration.
-1. - [ ] Github Users can reset the default Duration.
-1. - [ ] Github Users can define Durations for their Sessions.
-1. - [ ] Github Users can sign in to the app.
-1. - [ ] Github Users can start Sessions.
-1. - [ ] Github Users can stop Sessions.
-1. - [ ] Github Users can stop Sessions across platforms based on the last time it was active.
-1. - [ ] Github Users can view a Session by start date.
-1. - [ ] Github Users can view Sessions by a range of dates (start date inclusive; end date exclusive). Which will filter both the start date and end date of the Session.
-1. - [ ] Github Users can copy Sessions from the local/offline storage to their account.
-1. - [ ] Github Users can delete Sessions from the local/offline storage.
-1. - [ ] Github Users can create a new Notes.
-1. - [ ] Github Users can read Notes by ID or by the date it was created and/or updated.
-1. - [ ] Github Users can update Notes.
-1. - [ ] Github Users can delete Notes.
-1. - [ ] Github Users can select the Repo/Project/Issue to associate with a new Session.
-1. - [ ] Github Users can view the total number of Pomodori they have for each Repo/Project/Issue
+1. - [x] External Users can read the default Duration
+1. - [x] External Users can modify the default Duration.
+1. - [x] External Users can reset the default Duration.
+1. - [ ] External Users can sign in to the app using their Github account.
+1. - [x] External Users can start Sessions.
+1. - [x] External Users can stop Sessions.
+1. - [ ] External Users can stop Sessions across platforms based on the last time it was active.
+1. - [ ] External Users can view a Session by start date.
+1. - [ ] External Users can view Sessions by a range of dates (start date inclusive; end date exclusive). Which will filter both the start date and end date of the Session.
+1. - [ ] External Users can copy Sessions from the local/offline storage to their account.
+1. - [ ] External Users can delete Sessions from the local/offline storage.
+1. - [ ] External Users can create a new Notes.
+1. - [ ] External Users can read Notes by ID or by the date it was created and/or updated.
+1. - [ ] External Users can update Notes.
+1. - [ ] External Users can delete Notes.
+1. - [ ] External Users can select the Repo/Project/Issue to associate with a new Session.
+1. - [ ] External Users can view the total number of Pomodori they have for each Repo/Project/Issue
 
 ## Running Tests
 
