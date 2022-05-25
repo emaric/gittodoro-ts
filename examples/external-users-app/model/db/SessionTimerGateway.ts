@@ -34,13 +34,13 @@ export class SessionTimerGateway
     pomodoro: number,
     short: number,
     long: number,
-    longInterval: number
+    interval: number
   ): Promise<Duration> {
     return this.durationGateway.updateDefaultDuration(
       pomodoro,
       short,
       long,
-      longInterval
+      interval
     )
   }
 

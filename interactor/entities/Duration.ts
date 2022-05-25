@@ -5,28 +5,28 @@ export default class Duration {
   pomodoro: number
   short: number
   long: number
-  longInterval: number
+  interval: number
 
   constructor(
     id: string,
     pomodoro: number,
     short: number,
     long: number,
-    longInterval: number
+    interval: number
   ) {
     this.id = id
     this.pomodoro = pomodoro
     this.short = short
     this.long = long
-    this.longInterval = longInterval
+    this.interval = interval
   }
 
   get totalPomodoro() {
-    return this.pomodoro * this.longInterval
+    return this.pomodoro * this.interval
   }
 
   get totalShort() {
-    return this.short * (this.longInterval - 1)
+    return this.short * (this.interval - 1)
   }
 
   get totalTime() {
@@ -43,5 +43,5 @@ export const defaultDuration = new Duration(
   constants.POMODORO,
   constants.SHORT,
   constants.LONG,
-  constants.LONG_INTERVAL
+  constants.INTERVAL
 )

@@ -4,7 +4,7 @@ export class Session {
   pomodoro: number
   short: number
   long: number
-  longInterval: number
+  interval: number
 
   constructor(obj: {
     start: Date
@@ -12,14 +12,14 @@ export class Session {
     pomodoro: number
     short: number
     long: number
-    longInterval: number
+    interval: number
   }) {
     this.start = obj.start
     this.end = obj.end
     this.pomodoro = obj.pomodoro
     this.short = obj.short
     this.long = obj.long
-    this.longInterval = obj.longInterval
+    this.interval = obj.interval
   }
 
   get elapsed(): number {

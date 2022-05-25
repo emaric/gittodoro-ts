@@ -23,5 +23,5 @@ export type DurationRequest = {
   pomodoro: number
   short: number
   long: number
-  longInterval: number
+  interval: number
 }

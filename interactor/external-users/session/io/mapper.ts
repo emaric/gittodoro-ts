@@ -8,7 +8,7 @@ export const mapDurationToResponse = (duration: Duration) => {
     pomodoro: duration.pomodoro,
     short: duration.short,
     long: duration.long,
-    longInterval: duration.longInterval,
+    interval: duration.interval,
   }
   return response
 }

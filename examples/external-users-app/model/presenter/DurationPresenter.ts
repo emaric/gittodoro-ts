@@ -16,7 +16,7 @@ const mapResponse = (response: DefaultDurationResponse) => {
     response.pomodoro,
     response.short,
     response.long,
-    response.longInterval
+    response.interval
   )
 }
 

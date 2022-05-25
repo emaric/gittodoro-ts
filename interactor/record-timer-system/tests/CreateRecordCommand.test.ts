@@ -14,7 +14,7 @@ describe('[CreateRecordCommand] unit test', () => {
       pomodoro: 25 * 60 * 1000,
       short: 5 * 60 * 1000,
       long: 15 * 60 * 1000,
-      longInterval: 4,
+      interval: 4,
     }
 
     const duration = mapRequestToDuration(durationRequest)

@@ -28,8 +28,8 @@ describe('[index] unit tests', () => {
 
     it('should display the long state and the remaining time', () => {
       const timeTillLongState =
-        duration.pomodoro * (duration.longInterval - 1) +
-        duration.short * (duration.longInterval - 1)
+        duration.pomodoro * (duration.interval - 1) +
+        duration.short * (duration.interval - 1)
 
       jest.advanceTimersByTime(timeTillLongState)
       // expect(setTimeout).toHaveBeenCalledTimes(7)

@@ -30,7 +30,7 @@ export default class StopSessionCommand implements SessionCommandInterface {
     } catch (error) {
       return Promise.reject(
         new SessionError(
-          'Error encountered while trying to start a Session.',
+          'Error encountered while trying to stop a Session.',
           error as Error
         )
       )

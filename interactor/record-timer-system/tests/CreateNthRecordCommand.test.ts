@@ -14,7 +14,7 @@ describe('[CreateNthRecordCommand] unit test', () => {
       pomodoro: 25 * 60 * 1000,
       short: 5 * 60 * 1000,
       long: 15 * 60 * 1000,
-      longInterval: 4,
+      interval: 4,
     }
 
     const duration = mapRequestToDuration(durationRequest)
@@ -36,7 +36,7 @@ describe('[CreateNthRecordCommand] unit test', () => {
       const start = new Date('2022-01-01T09:00:00')
       const request: CreateNthRecordRequest = {
         duration,
-        n: duration.longInterval * 2 + 1,
+        n: duration.interval * 2 + 1,
         start,
       }
       const response = await command.execute(request)

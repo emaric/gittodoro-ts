@@ -7,6 +7,6 @@ export const mapRequestToDuration = (request: DurationRequest) => {
     request.pomodoro,
     request.short,
     request.long,
-    request.longInterval
+    request.interval
   )
 }

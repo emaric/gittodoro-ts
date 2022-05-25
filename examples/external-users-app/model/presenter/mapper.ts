@@ -5,8 +5,8 @@ import Record from '../Record'
 import Session from '../Session'
 
 export const mapResponseToSession = (response: SessionResponse) => {
-  const { id, pomodoro, short, long, longInterval } = response.duration
-  const duration = new Duration(id, pomodoro, short, long, longInterval)
+  const { id, pomodoro, short, long, interval } = response.duration
+  const duration = new Duration(id, pomodoro, short, long, interval)
   return new Session(response.id, duration, response.start, response.end)
 }
 

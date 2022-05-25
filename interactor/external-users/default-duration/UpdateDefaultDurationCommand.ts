@@ -29,7 +29,7 @@ export default class UpdateDefaultDurationCommand
         request.pomodoro,
         request.short,
         request.long,
-        request.longInterval
+        request.interval
       )
       const response = {
         duration: mapDurationToResponse(duration),

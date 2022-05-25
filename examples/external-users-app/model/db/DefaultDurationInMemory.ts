@@ -37,14 +37,14 @@ export default class DefaultDurationInMemory
     pomodoro: number,
     short: number,
     long: number,
-    longInterval: number
+    interval: number
   ): Promise<Duration> {
     const duplicate = storage.duration.find(
       (duration) =>
         duration.pomodoro == pomodoro &&
         duration.short == short &&
         duration.long == long &&
-        duration.longInterval == longInterval
+        duration.interval == interval
     )
     if (duplicate) {
       this.defaultDurationId = duplicate.id
@@ -55,7 +55,7 @@ export default class DefaultDurationInMemory
         pomodoro,
         short,
         long,
-        longInterval
+        interval
       )
       storage.duration.push(duration)
       this.defaultDurationId = duration.id

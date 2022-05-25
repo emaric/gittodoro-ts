@@ -12,7 +12,7 @@ export default class RecordBuilder {
   }
 
   private get recordsPerCycle() {
-    return this.duration.longInterval * 2
+    return this.duration.interval * 2
   }
 
   createRecord(start: Date, estimatedEnd: Date) {

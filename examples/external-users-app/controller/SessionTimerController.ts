@@ -161,7 +161,7 @@ export default class SessionTimerController {
         pomodoro,
         short,
         long,
-        longInterval: interval,
+        interval,
       })
       return this.observer.duration || Promise.reject(methodError)
     } catch (error) {

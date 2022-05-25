@@ -74,11 +74,11 @@ describe('[RecordBuilder] unit tests', () => {
     })
 
     it('should return long for the final record of the first cycle', () => {
-      const actual = builder['calculateState'](duration.longInterval * 2)
+      const actual = builder['calculateState'](duration.interval * 2)
       expect(actual).toBe(State.long)
     })
 
-    it('should return the sequence for 4 longIntervals', () => {
+    it('should return the sequence for 4 intervals', () => {
       const actual = Array.from(Array(8)).map((_, i) =>
         builder['calculateState'](i + 1)
       )

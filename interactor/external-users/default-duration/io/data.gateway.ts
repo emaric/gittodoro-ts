@@ -9,7 +9,7 @@ export interface UpdateDefaultDurationDataGatewayInterface {
     pomodoro: number,
     short: number,
     long: number,
-    longInterval: number
+    interval: number
   ): Promise<Duration>
 }
 
