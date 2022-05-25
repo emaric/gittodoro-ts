@@ -31,7 +31,7 @@ export default class MVCApp {
 
   async start() {
     // wait for 1 cycle before stopping the app
-    this.view.setOnCycleEnded(async (_) => {
+    this.view.setOnCycleEnded(async () => {
       await this.view.stop()
     })
 
