@@ -1,4 +1,4 @@
-import MVCApp from '@/examples/anonymous-user-app/app/MVCApp'
+import MVCApp from '@/examples/external-users-app/app/MVCApp'
 
 jest.useFakeTimers()
 jest.spyOn(global, 'setTimeout')

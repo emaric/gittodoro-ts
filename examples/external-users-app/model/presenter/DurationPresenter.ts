@@ -6,7 +6,7 @@ import {
   UpdateDefaultDurationResponse,
 } from '@/interactor/external-users/default-duration/io/response.model'
 
-import Duration from '@/examples/anonymous-user-app/model/Duration'
+import Duration from '@/examples/external-users-app/model/Duration'
 
 import DefaultDurationViewInterface from './DefaultDurationViewInterface'
 

@@ -1,6 +1,6 @@
-import Duration from '@/examples/anonymous-user-app/model/Duration'
-import Record from '@/examples/anonymous-user-app/model/Record'
-import Session from '@/examples/anonymous-user-app/model/Session'
+import Duration from '@/examples/external-users-app/model/Duration'
+import Record from '@/examples/external-users-app/model/Record'
+import Session from '@/examples/external-users-app/model/Session'
 import AppError from '../components/error/AppError'
 
 export default class SessionTimerView {
