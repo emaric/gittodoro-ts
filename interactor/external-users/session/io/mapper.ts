@@ -22,3 +22,7 @@ export const mapSessionToResponse = (session: Session) => {
   }
   return response
 }
+
+export const mapSessionListToResponse = (sessions: Session[]) => {
+  return sessions.map((s) => mapSessionToResponse(s))
+}

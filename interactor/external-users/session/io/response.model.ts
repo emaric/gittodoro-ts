@@ -1,5 +1,9 @@
 export type SessionBaseResponse = unknown
 
+export type SessionListResponse = SessionBaseResponse & {
+  sessions: SessionResponse[]
+}
+
 export type StartSessionResponse = SessionBaseResponse & {
   session: SessionResponse
 }

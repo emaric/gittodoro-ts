@@ -1,13 +1,17 @@
 import Duration, { defaultDuration } from '@/interactor/entities/Duration'
 import Session from '@/interactor/entities/Session'
 import {
+  ReadSessionsGatewayInterface,
   StartSessionGatewayInterface,
   StopSessionGatewayInterface,
 } from '@/interactor/external-users/session/io/data.gateway'
 import SessionError from '../../error/SessionError'
 
 export default class SessionInMemory
-  implements StartSessionGatewayInterface, StopSessionGatewayInterface
+  implements
+    StartSessionGatewayInterface,
+    StopSessionGatewayInterface,
+    ReadSessionsGatewayInterface
 {
   storage: {
     session: Session[]
@@ -50,5 +54,32 @@ export default class SessionInMemory
         )
       )
     }
+  }
+
+  readByRange(startInclusive: Date, end: Date): Promise<Session[]> {
+    const sessions = this.storage.session.filter((s) => {
+      const startedWithinRange =
+        s.start.getTime() < end.getTime() &&
+        s.start.getTime() >= startInclusive.getTime()
+
+      if (startedWithinRange) {
+        return true
+      }
+
+      if (s.end != undefined) {
+        const endedWithinRange =
+          s.end.getTime() < end.getTime() &&
+          s.end.getTime() >= startInclusive.getTime()
+        return endedWithinRange
+      }
+      return false
+    })
+
+    return Promise.resolve(sessions)
+  }
+
+  readByIDs(ids: string[]): Promise<Session[]> {
+    const sessions = this.storage.session.filter((s) => ids.includes(s.id))
+    return Promise.resolve(sessions)
   }
 }
