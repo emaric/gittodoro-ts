@@ -47,7 +47,3 @@ Trying to follow the Clean Architecture principles.
 - Views and Models are decoupled by establishing a subscribe/notify protocol between them.
 - View: ensure that its appearance reflects the state of the model.
 - View uses an instance of a Controller subclass to implement a particular response strategy.
-
-## Strategy
-
-- An object that represents an Algorithm.
