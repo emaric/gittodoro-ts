@@ -39,7 +39,7 @@ Trying to follow the Clean Architecture principles.
 
 `npm test`
 
-`npm run build && node ./lib/examples/anonymous-user-app/index.js`
+`npm run build && node ./lib/examples/external-users-app/index.js`
 
 ## MVC
 
