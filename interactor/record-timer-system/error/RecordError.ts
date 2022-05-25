@@ -1,3 +1,3 @@
-import MultipleErrors from '@/interactor/errors/MultipleErrors'
+import InteractorError from '@/interactor/errors/InteractorError'
 
-export default class RecordError extends MultipleErrors {}
+export default class RecordError extends InteractorError {}

@@ -1,4 +1,4 @@
-export default class MultipleErrors extends Error {
+export default class InteractorError extends Error {
   errors: Error[]
 
   constructor(message?: string, ...errors: Error[]) {
