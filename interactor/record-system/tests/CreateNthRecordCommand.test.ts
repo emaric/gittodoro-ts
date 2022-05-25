@@ -1,9 +1,9 @@
 import Record from '@/interactor/entities/Record'
 import { State } from '@/interactor/entities/State'
 
-import { mapRequestToDuration } from '@/interactor/record-timer-system/io/mapper'
-import { CreateNthRecordRequest } from '@/interactor/record-timer-system/io/request.model'
-import CreateNthRecordCommand from '@/interactor/record-timer-system/CreateNthRecordCommand'
+import { mapRequestToDuration } from '@/interactor/record-system/io/mapper'
+import { CreateNthRecordRequest } from '@/interactor/record-system/io/request.model'
+import CreateNthRecordCommand from '@/interactor/record-system/CreateNthRecordCommand'
 
 import ConsolePresenter from './utils/ConsolePresenter'
 

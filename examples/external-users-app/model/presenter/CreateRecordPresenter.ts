@@ -1,6 +1,6 @@
-import RecordError from '@/interactor/record-timer-system/error/RecordError'
-import RecordPresenterInterface from '@/interactor/record-timer-system/io/RecordPresenterInterface'
-import { CreateRecordResponse } from '@/interactor/record-timer-system/io/response.model'
+import RecordError from '@/interactor/record-system/error/RecordError'
+import RecordPresenterInterface from '@/interactor/record-system/io/RecordPresenterInterface'
+import { CreateRecordResponse } from '@/interactor/record-system/io/response.model'
 import { mapResponseToRecord } from './mapper'
 import RecordViewInterface from './RecordViewInterface'
 

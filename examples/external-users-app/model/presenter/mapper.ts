@@ -1,5 +1,5 @@
 import { SessionResponse } from '@/interactor/external-users/session/io/response.model'
-import { RecordResponse } from '@/interactor/record-timer-system/io/response.model'
+import { RecordResponse } from '@/interactor/record-system/io/response.model'
 import Duration from '../Duration'
 import Record from '../Record'
 import Session from '../Session'

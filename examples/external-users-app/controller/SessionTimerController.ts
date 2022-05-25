@@ -2,7 +2,7 @@ import ReadDefaultDurationCommand from '@/interactor/external-users/default-dura
 import UpdateDefaultDurationCommand from '@/interactor/external-users/default-duration/UpdateDefaultDurationCommand'
 import StartSessionCommand from '@/interactor/external-users/session/StartSessionCommand'
 import StopSessionCommand from '@/interactor/external-users/session/StopSessionCommand'
-import CreateRecordCommand from '@/interactor/record-timer-system/CreateRecordCommand'
+import CreateRecordCommand from '@/interactor/record-system/CreateRecordCommand'
 import { SessionTimerGateway } from '../model/db/SessionTimerGateway'
 import AppError from '../components/error/AppError'
 import Duration from '../model/Duration'
@@ -17,7 +17,7 @@ import StartSessionPresenter from '../model/presenter/StartSessionPresenter'
 import StopSessionPresenter from '../model/presenter/StopSessionPresenter'
 import SessionTimerView from '../view/SessionTimerView'
 import SessionTimerModel from '../model/SessionTimerModel'
-import CreateNthRecordCommand from '@/interactor/record-timer-system/CreateNthRecordCommand'
+import CreateNthRecordCommand from '@/interactor/record-system/CreateNthRecordCommand'
 
 class SessionTimerObserver
   implements

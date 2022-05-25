@@ -1,6 +1,6 @@
 import { State } from '@/interactor/entities/State'
 import Duration from '@/interactor/entities/Duration'
-import RecordBuilder from '@/interactor/record-timer-system/components/RecordFactory'
+import RecordBuilder from '@/interactor/record-system/components/RecordFactory'
 
 describe('[RecordBuilder] unit tests', () => {
   const duration = new Duration('0', 25, 5, 15, 4)

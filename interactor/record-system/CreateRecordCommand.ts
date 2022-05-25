@@ -1,12 +1,12 @@
 import Duration from '@/interactor/entities/Duration'
 
-import RecordError from '@/interactor/record-timer-system/error/RecordError'
+import RecordError from '@/interactor/record-system/error/RecordError'
 
-import RecordCommandInterface from '@/interactor/record-timer-system/io/RecordCommandInterface'
-import RecordPresenterInterface from '@/interactor/record-timer-system/io/RecordPresenterInterface'
-import { mapRequestToDuration } from '@/interactor/record-timer-system/io/mapper'
-import { CreateRecordRequest } from '@/interactor/record-timer-system/io/request.model'
-import { CreateRecordResponse } from '@/interactor/record-timer-system/io/response.model'
+import RecordCommandInterface from '@/interactor/record-system/io/RecordCommandInterface'
+import RecordPresenterInterface from '@/interactor/record-system/io/RecordPresenterInterface'
+import { mapRequestToDuration } from '@/interactor/record-system/io/mapper'
+import { CreateRecordRequest } from '@/interactor/record-system/io/request.model'
+import { CreateRecordResponse } from '@/interactor/record-system/io/response.model'
 import RecordBuilder from './components/RecordFactory'
 
 export default class CreateRecordCommand implements RecordCommandInterface {

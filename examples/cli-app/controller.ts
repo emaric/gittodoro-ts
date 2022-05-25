@@ -4,8 +4,8 @@ import StopSessionCommand from '@/interactor/external-users/session/StopSessionC
 import StartSessionCommand from '@/interactor/external-users/session/StartSessionCommand'
 import { CLIView, RecordCLIPresenter, SessionCLIPresenter } from './presenter'
 import { SessionInMemory } from './db'
-import CreateRecordCommand from '@/interactor/record-timer-system/CreateRecordCommand'
-import { CreateRecordRequest } from '@/interactor/record-timer-system/io/request.model'
+import CreateRecordCommand from '@/interactor/record-system/CreateRecordCommand'
+import { CreateRecordRequest } from '@/interactor/record-system/io/request.model'
 import { Session } from './models/Session'
 import { RecordCLIView } from './view'
 

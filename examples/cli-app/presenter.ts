@@ -5,8 +5,8 @@ import {
   StartSessionResponse,
   StopSessionResponse,
 } from '@/interactor/external-users/session/io/response.model'
-import RecordPresenterInterface from '@/interactor/record-timer-system/io/RecordPresenterInterface'
-import { CreateRecordResponse } from '@/interactor/record-timer-system/io/response.model'
+import RecordPresenterInterface from '@/interactor/record-system/io/RecordPresenterInterface'
+import { CreateRecordResponse } from '@/interactor/record-system/io/response.model'
 import Record from './models/Record'
 
 export interface CLIView {
