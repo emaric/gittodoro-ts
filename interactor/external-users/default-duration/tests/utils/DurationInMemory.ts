@@ -62,6 +62,7 @@ export default class DurationInMemory
   }
 
   resetDefaultDuration(): Promise<Duration> {
-    throw new Error('Method not implemented.')
+    this.defaultId = defaultDuration.id
+    return Promise.resolve(defaultDuration)
   }
 }
