@@ -4,9 +4,9 @@ import DurationInMemory from './utils/DurationInMemory'
 
 describe('[UpdateDefaultDurationCommand] unit tests', () => {
   const request: UpdateDefaultDurationRequest = {
-    pomodoro: 25,
-    short: 5,
-    long: 10,
+    pomodoro: 25 * 60 * 1000,
+    short: 5 * 60 * 1000,
+    long: 10 * 60 * 1000,
     interval: 4,
   }
 
@@ -27,13 +27,23 @@ describe('[UpdateDefaultDurationCommand] unit tests', () => {
   const db = new DurationInMemory()
   describe('when trying to execute a request with invalid values', () => {
     it('should throw an error', async () => {
-      const presenter = jest.fn()
       const command = new UpdateDefaultDurationCommand(db, {
-        present: presenter,
+        present: jest.fn(),
       })
       await expect(
         command.execute({ pomodoro: 0, short: 0, long: 0, interval: 0 })
       ).rejects.toThrow()
+    })
+  })
+
+  describe('when trying to execute a valid request', () => {
+    it('should present the value', async () => {
+      const presenter = jest.fn()
+      const command = new UpdateDefaultDurationCommand(db, {
+        present: presenter,
+      })
+      await expect(command.execute(request)).resolves.toBeDefined()
+      expect(presenter).toBeCalledTimes(1)
     })
   })
 })

@@ -28,7 +28,7 @@ describe('[StopSessionCommand] unit tests', () => {
       await expect(command.execute({ date: new Date() })).resolves.toEqual({
         session: undefined,
       })
-      expect(presenter).toHaveBeenCalledTimes(0)
+      expect(presenter).toHaveBeenCalledTimes(1)
     })
   })
 

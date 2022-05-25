@@ -4,6 +4,7 @@ import {
   ResetDefaultDurationDataGatewayInterface,
   UpdateDefaultDurationDataGatewayInterface,
 } from '@/interactor/external-users/default-duration/io/data.gateway'
+import DefaultDurationError from '../../error/DefaultDurationError'
 
 export default class DurationInMemory
   implements
@@ -20,7 +21,13 @@ export default class DurationInMemory
   }
 
   getDefaultDuration(): Promise<Duration> {
-    throw new Error('Method not implemented.')
+    const duration = this.storage.find((d) => d.id == this.defaultId)
+    if (duration) {
+      return Promise.resolve(duration)
+    }
+    return Promise.reject(
+      new DefaultDurationError('Default Duration not found.')
+    )
   }
 
   updateDefaultDuration(

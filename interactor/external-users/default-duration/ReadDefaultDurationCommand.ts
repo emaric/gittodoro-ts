@@ -3,12 +3,10 @@ import DefaultDurationError from './error/DefaultDurationError'
 import { mapDurationToResponse } from './io/mapper'
 import { ReadDefaultDurationResponse } from './io/response.model'
 import DefaultDurationPresenterInterface from './io/DefaultDurationPresenterInterface'
-import DefaultDurationCommandInterface from './io/DefaultDurationCommandInterface'
 import { ReadDefaultDurationDataGatewayInterface } from './io/data.gateway'
+import DefaultDurationCommandAbstract from './io/DefaultDurationCommandAbstract'
 
-export default class ReadDefaultDurationCommand
-  implements DefaultDurationCommandInterface
-{
+export default class ReadDefaultDurationCommand extends DefaultDurationCommandAbstract {
   private dataGateway: ReadDefaultDurationDataGatewayInterface
   private presenter: DefaultDurationPresenterInterface
 
@@ -16,6 +14,7 @@ export default class ReadDefaultDurationCommand
     dataGateway: ReadDefaultDurationDataGatewayInterface,
     presenter: DefaultDurationPresenterInterface
   ) {
+    super()
     this.dataGateway = dataGateway
     this.presenter = presenter
   }
@@ -23,8 +22,9 @@ export default class ReadDefaultDurationCommand
   async execute(): Promise<ReadDefaultDurationResponse> {
     try {
       const duration = await this.dataGateway.getDefaultDuration()
+      this.validate(duration)
       const response = {
-        duration: duration ? mapDurationToResponse(duration) : undefined,
+        duration: mapDurationToResponse(duration),
       }
       await this.presenter.present(response)
       return Promise.resolve(response)

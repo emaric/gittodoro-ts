@@ -1,4 +1,4 @@
-import constants from '@/interactor/constants'
+import constants from '@/interactor/validators/constants'
 
 export default class Duration {
   id: string

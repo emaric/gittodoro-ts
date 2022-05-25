@@ -8,8 +8,8 @@ import {
   MIN_LONG,
   MIN_POMODORO,
   MIN_SHORT,
-} from '../constants'
-import InteractorError from '../errors/InteractorError'
+} from './constants'
+import ValidatorError from '../errors/ValidatorError'
 import ValidatorInterface from './ValidatorInterface'
 
 export default class DurationConstraintsValidator
@@ -63,7 +63,7 @@ export default class DurationConstraintsValidator
     }
 
     if (errors.length > 0) {
-      throw new InteractorError('Invalid duration.', ...errors)
+      throw new ValidatorError('Invalid duration.', ...errors)
     }
 
     return true

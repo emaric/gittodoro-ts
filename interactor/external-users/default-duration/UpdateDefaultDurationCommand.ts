@@ -4,12 +4,10 @@ import { mapDurationToResponse } from './io/mapper'
 import { UpdateDefaultDurationRequest } from './io/request.model'
 import { UpdateDefaultDurationResponse } from './io/response.model'
 import DefaultDurationPresenterInterface from './io/DefaultDurationPresenterInterface'
-import DefaultDurationCommandInterface from './io/DefaultDurationCommandInterface'
 import { UpdateDefaultDurationDataGatewayInterface } from './io/data.gateway'
+import DefaultDurationCommandAbstract from './io/DefaultDurationCommandAbstract'
 
-export default class UpdateDefaultDurationCommand
-  implements DefaultDurationCommandInterface
-{
+export default class UpdateDefaultDurationCommand extends DefaultDurationCommandAbstract {
   private dataGateway: UpdateDefaultDurationDataGatewayInterface
   private presenter: DefaultDurationPresenterInterface
 
@@ -17,6 +15,7 @@ export default class UpdateDefaultDurationCommand
     dataGateway: UpdateDefaultDurationDataGatewayInterface,
     presenter: DefaultDurationPresenterInterface
   ) {
+    super()
     this.dataGateway = dataGateway
     this.presenter = presenter
   }
@@ -31,6 +30,7 @@ export default class UpdateDefaultDurationCommand
         request.long,
         request.interval
       )
+      this.validate(duration)
       const response = {
         duration: mapDurationToResponse(duration),
       }
