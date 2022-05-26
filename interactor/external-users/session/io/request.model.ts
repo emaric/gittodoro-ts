@@ -1,3 +1,9 @@
+import {
+  RequestBy,
+  RequestByIDs,
+  RequestByRange,
+} from '@/interactor/external-users/common/io/request.model'
+
 export type SessionBaseRequest = unknown
 
 export type DurationRequest = {
@@ -26,15 +32,6 @@ export type SessionRequestWithDuration = RequestWithDuration & {
   start: Date
   end?: Date
   id?: string
-}
-
-export type RequestByRange = {
-  startInclusive: Date
-  end: Date
-}
-
-export type RequestByIDs = {
-  ids: string[]
 }
 
 export type StartSessionRequest = SessionBaseRequest & {
@@ -74,11 +71,6 @@ export type DeleteSessionsRequest = SessionBaseRequest & {
 export type DeleteByRange = DeleteSessionsRequest & RequestByRange
 
 export type DeleteByIDs = DeleteSessionsRequest & RequestByIDs
-
-export enum RequestBy {
-  range,
-  ids,
-}
 
 export enum RequestWith {
   durationID,

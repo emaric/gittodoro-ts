@@ -5,3 +5,9 @@ export interface CreateNotesGatewayInterface {
     notes: { content: string; date: Date; updatedAt?: Date }[]
   ): Promise<Note[]>
 }
+
+export interface ReadNotesGatewayInterface {
+  readByRange(startInclusive: Date, end: Date): Promise<Note[]>
+
+  readByIDs(ids: string[]): Promise<Note[]>
+}

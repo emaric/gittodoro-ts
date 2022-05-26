@@ -1,6 +1,6 @@
 import ValidatorError from '@/interactor/errors/ValidatorError'
 import ValidatorInterface from '@/interactor/validators/ValidatorInterface'
-import { RequestByRange } from '../io/request.model'
+import { RequestByRange } from '@/interactor/external-users/common/io/request.model'
 
 export default class RequestByRangeValidator
   implements ValidatorInterface<RequestByRange>

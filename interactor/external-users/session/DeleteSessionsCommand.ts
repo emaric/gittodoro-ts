@@ -1,17 +1,21 @@
 import Session from '@/interactor/entities/Session'
 
 import SessionError from './error/SessionError'
+
+import { RequestBy } from '@/interactor/external-users/common/io/request.model'
+import RequestByRangeValidator from '@/interactor/external-users/validators/RequestByRangeValidator'
+
 import { DeleteSessionsGatewayInterface } from './io/data.gateway'
 import { mapSessionListToResponse } from './io/mapper'
 import {
   DeleteByIDs,
   DeleteByRange,
   DeleteSessionsRequest,
-  RequestBy,
 } from './io/request.model'
 import { SessionListResponse } from './io/response.model'
 import SessionCommandInterface from './io/SessionCommandInterface'
 import SessionPresenterInterface from './io/SessionPresenterInterface'
+import RequestByIDsValidator from '../validators/RequestByIDsValidator'
 
 export default class DeleteSessionsCommand implements SessionCommandInterface {
   private dataGateway: DeleteSessionsGatewayInterface
@@ -47,6 +51,7 @@ export default class DeleteSessionsCommand implements SessionCommandInterface {
     request: DeleteByRange
   ): Promise<SessionListResponse> {
     try {
+      await this.validateByRangeRequest(request)
       const sessions = await this.dataGateway.deleteByRange(
         request.startInclusive,
         request.end
@@ -63,6 +68,7 @@ export default class DeleteSessionsCommand implements SessionCommandInterface {
     request: DeleteByIDs
   ): Promise<SessionListResponse> {
     try {
+      await this.validateByIDsRequest(request)
       const sessions = await this.dataGateway.deleteByIDs(request.ids)
       return await this.respond(sessions)
     } catch (error) {
@@ -84,5 +90,13 @@ export default class DeleteSessionsCommand implements SessionCommandInterface {
         new SessionError('Failed sending out response.', error as Error)
       )
     }
+  }
+
+  private async validateByRangeRequest(request: DeleteByRange) {
+    return await RequestByRangeValidator.getInstance().validate(request)
+  }
+
+  private async validateByIDsRequest(request: DeleteByIDs) {
+    return await RequestByIDsValidator.getInstance().validate(request)
   }
 }

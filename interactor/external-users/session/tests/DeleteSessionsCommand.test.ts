@@ -1,11 +1,11 @@
 import Session from '@/interactor/entities/Session'
 import { defaultDuration } from '@/interactor/entities/Duration'
 
+import { RequestBy } from '@/interactor/external-users/common/io/request.model'
 import { DeleteSessionsGatewayInterface } from '@/interactor/external-users/session/io/data.gateway'
 import {
   DeleteByIDs,
   DeleteByRange,
-  RequestBy,
 } from '@/interactor/external-users/session/io/request.model'
 
 import DeleteSessionsCommand from '@/interactor/external-users/session/DeleteSessionsCommand'

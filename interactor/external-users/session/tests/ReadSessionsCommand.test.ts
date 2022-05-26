@@ -1,11 +1,12 @@
 import { defaultDuration } from '@/interactor/entities/Duration'
 import Session from '@/interactor/entities/Session'
 
+import { RequestBy } from '@/interactor/external-users/common/io/request.model'
+
 import { ReadSessionsGatewayInterface } from '@/interactor/external-users/session/io/data.gateway'
 import {
   ReadByIDs,
   ReadByRange,
-  RequestBy,
 } from '@/interactor/external-users/session/io/request.model'
 
 import ReadSessionsCommand from '@/interactor/external-users/session/ReadSessionsCommand'

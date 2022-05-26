@@ -1,3 +1,9 @@
+import {
+  RequestBy,
+  RequestByIDs,
+  RequestByRange,
+} from '@/interactor/external-users/common/io/request.model'
+
 export type NotesBaseRequest = unknown
 
 export type NoteRequest = {
@@ -10,3 +16,11 @@ export type NoteRequest = {
 export type CreateNotesRequest = NotesBaseRequest & {
   notes: NoteRequest[]
 }
+
+export type ReadNotesRequest = NotesBaseRequest & {
+  by: RequestBy
+}
+
+export type ReadByRange = ReadNotesRequest & RequestByRange
+
+export type ReadByIDs = ReadNotesRequest & RequestByIDs
