@@ -13,7 +13,7 @@ describe('[ReadFirstNoteCommand] unit tests', () => {
       const command = new ReadFirstNoteCommand(badDB, { present: jest.fn() })
       await expect(command.execute()).rejects.toThrow('Bad data gateway!')
       await expect(command.execute()).rejects.toThrow(
-        'Failed to get the first note.'
+        'Failed to read the first note.'
       )
     })
   })
@@ -48,6 +48,20 @@ describe('[ReadFirstNoteCommand] unit tests', () => {
       const command = new ReadFirstNoteCommand(db, { present: presenter })
       await expect(command.execute()).resolves.toEqual({ note: firstNote })
       expect(presenter).toHaveBeenCalledTimes(1)
+    })
+  })
+
+  describe('when trying to execute with a bad presenter', () => {
+    it('should throw', async () => {
+      const db = new NotesInMemory()
+      const presenter = () => {
+        throw new Error('Bad presenter!')
+      }
+      const command = new ReadFirstNoteCommand(db, { present: presenter })
+      await expect(command.execute()).rejects.toThrow('Bad presenter!')
+      await expect(command.execute()).rejects.toThrow(
+        'Failed to read the first note.'
+      )
     })
   })
 })

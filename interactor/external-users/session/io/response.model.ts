@@ -12,6 +12,10 @@ export type StopSessionResponse = SessionBaseResponse & {
   session?: SessionResponse
 }
 
+export type ReadFirstSessionResponse = SessionBaseResponse & {
+  session?: SessionResponse
+}
+
 export type DurationResponse = {
   id: string
   pomodoro: number

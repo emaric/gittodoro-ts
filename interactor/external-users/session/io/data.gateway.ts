@@ -40,3 +40,7 @@ export interface DeleteSessionsGatewayInterface {
 
   deleteByIDs(ids: string[]): Promise<Session[]>
 }
+
+export interface ReadFirstSessionGatewayInterface {
+  first(): Promise<Session | undefined>
+}

@@ -3,6 +3,7 @@ import Session from '@/interactor/entities/Session'
 import {
   CreateSessionsGatewayInterface,
   DeleteSessionsGatewayInterface,
+  ReadFirstSessionGatewayInterface,
   ReadSessionsGatewayInterface,
   StartSessionGatewayInterface,
   StopSessionGatewayInterface,
@@ -15,7 +16,8 @@ export default class SessionInMemory
     StopSessionGatewayInterface,
     ReadSessionsGatewayInterface,
     DeleteSessionsGatewayInterface,
-    CreateSessionsGatewayInterface
+    CreateSessionsGatewayInterface,
+    ReadFirstSessionGatewayInterface
 {
   storage: {
     session: Session[]
@@ -177,5 +179,13 @@ export default class SessionInMemory
       (s) => !sessions.includes(s)
     )
     return Promise.resolve(sessions)
+  }
+
+  first(): Promise<Session | undefined> {
+    return Promise.resolve(
+      this.storage.session.sort(
+        (a, b) => a.start.getTime() - b.start.getTime()
+      )[0]
+    )
   }
 }
