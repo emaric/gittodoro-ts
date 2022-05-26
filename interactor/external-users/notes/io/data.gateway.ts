@@ -27,3 +27,7 @@ export interface DeleteNotesGatewayInterface {
 
   deleteByIDs(ids: string[]): Promise<Note[]>
 }
+
+export interface ReadFirstNoteGatewayInterface {
+  first(): Promise<Note | undefined>
+}

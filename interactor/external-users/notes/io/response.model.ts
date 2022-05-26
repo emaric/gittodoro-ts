@@ -10,3 +10,7 @@ export type NoteResponse = {
 export type NoteListResponse = NotesBaseResponse & {
   notes: NoteResponse[]
 }
+
+export type ReadFirstNoteResponse = NotesBaseResponse & {
+  note?: NoteResponse
+}
