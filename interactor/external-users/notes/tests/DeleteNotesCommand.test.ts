@@ -1,27 +1,26 @@
-import Session from '@/interactor/entities/Session'
-import { defaultDuration } from '@/interactor/entities/Duration'
+import Note from '@/interactor/entities/Note'
 
 import { RequestBy } from '@/interactor/external-users/common/io/request.model'
-import { DeleteSessionsGatewayInterface } from '@/interactor/external-users/session/io/data.gateway'
+import { DeleteNotesGatewayInterface } from '@/interactor/external-users/notes/io/data.gateway'
 import {
   DeleteByIDs,
   DeleteByRange,
-} from '@/interactor/external-users/session/io/request.model'
+} from '@/interactor/external-users/notes/io/request.model'
 
-import DeleteSessionsCommand from '@/interactor/external-users/session/DeleteSessionsCommand'
+import DeleteNotesCommand from '@/interactor/external-users/notes/DeleteNotesCommand'
 
-import SessionInMemory from './utils/SessionInMemory'
+import NotesInMemory from './utils/NotesInMemory'
 
-describe('[DeleteSessionsCommand] unit tests', () => {
+describe('[DeleteNotesCommand] unit tests', () => {
   describe('when trying to execute with an erroneous data gateway', () => {
-    const badDB: DeleteSessionsGatewayInterface = {
+    const badDB: DeleteNotesGatewayInterface = {
       deleteByRange: function (
         startInclusive: Date,
         end: Date
-      ): Promise<Session[]> {
+      ): Promise<Note[]> {
         throw new Error('Function not implemented.')
       },
-      deleteByIDs: function (ids: string[]): Promise<Session[]> {
+      deleteByIDs: function (ids: string[]): Promise<Note[]> {
         throw new Error('Function not implemented.')
       },
     }
@@ -32,9 +31,9 @@ describe('[DeleteSessionsCommand] unit tests', () => {
         startInclusive: new Date(),
         end: new Date(),
       }
-      const command = new DeleteSessionsCommand(badDB, { present: jest.fn() })
+      const command = new DeleteNotesCommand(badDB, { present: jest.fn() })
       await expect(command.execute(request)).rejects.toThrow(
-        'Failed to delete sessions by range.'
+        'Failed to delete notes by range.'
       )
     })
 
@@ -43,22 +42,22 @@ describe('[DeleteSessionsCommand] unit tests', () => {
         by: RequestBy.ids,
         ids: ['0'],
       }
-      const command = new DeleteSessionsCommand(badDB, { present: jest.fn() })
+      const command = new DeleteNotesCommand(badDB, { present: jest.fn() })
       await expect(command.execute(request)).rejects.toThrow(
-        'Failed to delete sessions by ids.'
+        'Failed to delete notes by ids.'
       )
     })
   })
 
   describe('when trying to execute with an invalid request value', () => {
     it('should throw Invalid error', async () => {
-      const db = new SessionInMemory()
+      const db = new NotesInMemory()
       const request: DeleteByRange = {
         by: -1,
         startInclusive: new Date(),
         end: new Date(),
       }
-      const command = new DeleteSessionsCommand(db, { present: jest.fn() })
+      const command = new DeleteNotesCommand(db, { present: jest.fn() })
       await expect(command.execute(request)).rejects.toThrow(
         'Invalid request type.'
       )
@@ -72,8 +71,8 @@ describe('[DeleteSessionsCommand] unit tests', () => {
           throw new Error('Bad presenter!')
         },
       }
-      const db = new SessionInMemory()
-      const command = new DeleteSessionsCommand(db, presenter)
+      const db = new NotesInMemory()
+      const command = new DeleteNotesCommand(db, presenter)
 
       const request = {
         by: RequestBy.ids,
@@ -86,42 +85,40 @@ describe('[DeleteSessionsCommand] unit tests', () => {
     })
   })
 
-  describe('when trying to delete sessions with a valid data gateway', () => {
-    const db = new SessionInMemory()
+  describe('when trying to delete notes with a valid data gateway', () => {
+    const db = new NotesInMemory()
 
-    const excludedSessions = [
-      new Session(
+    const excludedNotes = [
+      new Note(
         '1',
-        defaultDuration,
         new Date('2022-01-04T09:00:00'),
+        'Note 1',
         new Date('2022-01-04T13:00:00')
       ),
-      new Session(
+      new Note(
         '4',
-        defaultDuration,
         new Date('2022-01-11T00:00:00'),
+        'Note 4',
         new Date('2022-01-11T05:00:00')
       ),
     ]
 
-    const includedSessions = [
-      new Session(
+    const includedNotes = [
+      new Note(
         '2',
-        defaultDuration,
         new Date('2022-01-04T20:00:00'),
+        'Note 2',
         new Date('2022-01-05T00:00:00')
       ),
-      new Session('3', defaultDuration, new Date('2022-01-05T09:00:00')),
+      new Note('3', new Date('2022-01-05T09:00:00'), 'Note 3'),
     ]
 
     beforeEach(() => {
-      const dbSessions = []
-      dbSessions.push(excludedSessions[0])
-      dbSessions.push(includedSessions[0])
-      dbSessions.push(includedSessions[1])
-      dbSessions.push(excludedSessions[1])
-
-      db.storage.session = dbSessions
+      db.storage = []
+      db.storage.push(excludedNotes[0])
+      db.storage.push(includedNotes[0])
+      db.storage.push(includedNotes[1])
+      db.storage.push(excludedNotes[1])
     })
 
     const requestByRange: DeleteByRange = {
@@ -132,28 +129,27 @@ describe('[DeleteSessionsCommand] unit tests', () => {
 
     const requestByIDs: DeleteByIDs = {
       by: RequestBy.ids,
-      ids: includedSessions.map((s) => s.id),
+      ids: includedNotes.map((s) => s.id),
     }
-
-    it('should present sessions by range', async () => {
+    it('should present notes by range', async () => {
       const presenter = jest.fn()
-      const command = new DeleteSessionsCommand(db, { present: presenter })
+      const command = new DeleteNotesCommand(db, { present: presenter })
 
       await expect(command.execute(requestByRange)).resolves.toEqual({
-        sessions: includedSessions,
+        notes: includedNotes,
       })
-      expect(db.storage.session).toEqual(excludedSessions)
+      expect(db.storage).toEqual(excludedNotes)
       expect(presenter).toHaveBeenCalledTimes(1)
     })
 
-    it('should present sessions by ids', async () => {
+    it('should present notes by ids', async () => {
       const presenter = jest.fn()
-      const command = new DeleteSessionsCommand(db, { present: presenter })
+      const command = new DeleteNotesCommand(db, { present: presenter })
 
       await expect(command.execute(requestByIDs)).resolves.toEqual({
-        sessions: includedSessions,
+        notes: includedNotes,
       })
-      expect(db.storage.session).toEqual(excludedSessions)
+      expect(db.storage).toEqual(excludedNotes)
       expect(presenter).toHaveBeenCalledTimes(1)
     })
   })

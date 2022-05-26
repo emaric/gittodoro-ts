@@ -34,3 +34,11 @@ export type ReadByIDs = ReadNotesRequest & RequestByIDs
 export type UpdateNotesRequest = NotesBaseRequest & {
   notes: UpdateNoteRequest[]
 }
+
+export type DeleteNotesRequest = NotesBaseRequest & {
+  by: RequestBy
+}
+
+export type DeleteByRange = DeleteNotesRequest & RequestByRange
+
+export type DeleteByIDs = DeleteNotesRequest & RequestByIDs

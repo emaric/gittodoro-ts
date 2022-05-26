@@ -1,5 +1,5 @@
 import NotesError from './error/NotesError'
-import { UpdateNotesGatewayInterface } from './io/data.gateways'
+import { UpdateNotesGatewayInterface } from './io/data.gateway'
 import NotesCommandInterface from './io/NotesCommandInterface'
 import NotesPresenterInterface from './io/NotesPresenterInterface'
 import { UpdateNotesRequest } from './io/request.model'

@@ -6,7 +6,7 @@ import RequestByRangeValidator from '@/interactor/external-users/validators/Requ
 
 import NotesError from './error/NotesError'
 
-import { ReadNotesGatewayInterface } from './io/data.gateways'
+import { ReadNotesGatewayInterface } from './io/data.gateway'
 import { mapNoteListToResponse } from './io/mapper'
 import NotesCommandInterface from './io/NotesCommandInterface'
 import NotesPresenterInterface from './io/NotesPresenterInterface'

@@ -1,15 +1,17 @@
 import Note from '@/interactor/entities/Note'
 import {
   CreateNotesGatewayInterface,
+  DeleteNotesGatewayInterface,
   ReadNotesGatewayInterface,
   UpdateNotesGatewayInterface,
-} from '@/interactor/external-users/notes/io/data.gateways'
+} from '@/interactor/external-users/notes/io/data.gateway'
 
 export default class NotesInMemory
   implements
     CreateNotesGatewayInterface,
     ReadNotesGatewayInterface,
-    UpdateNotesGatewayInterface
+    UpdateNotesGatewayInterface,
+    DeleteNotesGatewayInterface
 {
   storage: Note[] = []
 
@@ -77,5 +79,17 @@ export default class NotesInMemory
     })
 
     return Promise.resolve(updatedNotes)
+  }
+
+  async deleteByRange(startInclusive: Date, end: Date): Promise<Note[]> {
+    const notesToDelete = await this.readByRange(startInclusive, end)
+    this.storage = this.storage.filter((n) => !notesToDelete.includes(n))
+    return Promise.resolve(notesToDelete)
+  }
+
+  async deleteByIDs(ids: string[]): Promise<Note[]> {
+    const notesToDelete = await this.readByIDs(ids)
+    this.storage = this.storage.filter((n) => !notesToDelete.includes(n))
+    return Promise.resolve(notesToDelete)
   }
 }

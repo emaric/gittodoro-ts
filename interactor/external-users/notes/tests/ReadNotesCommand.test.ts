@@ -1,3 +1,4 @@
+import Note from '@/interactor/entities/Note'
 import { RequestBy } from '@/interactor/external-users/common/io/request.model'
 import ReadNotesCommand from '@/interactor/external-users/notes/ReadNotesCommand'
 import {
@@ -5,7 +6,6 @@ import {
   ReadByRange,
 } from '@/interactor/external-users/notes/io/request.model'
 import NotesInMemory from './utils/NotesInMemory'
-import Note from '@/interactor/entities/Note'
 
 describe('[ReadNotesCommand] unit tests', () => {
   describe('when trying to execute with a bad data gateway', () => {

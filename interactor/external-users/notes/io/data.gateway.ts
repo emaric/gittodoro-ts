@@ -21,3 +21,9 @@ export interface UpdateNotesGatewayInterface {
     }[]
   ): Promise<Note[]>
 }
+
+export interface DeleteNotesGatewayInterface {
+  deleteByRange(startInclusive: Date, end: Date): Promise<Note[]>
+
+  deleteByIDs(ids: string[]): Promise<Note[]>
+}
