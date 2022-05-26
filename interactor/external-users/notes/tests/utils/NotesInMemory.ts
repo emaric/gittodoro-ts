@@ -2,10 +2,14 @@ import Note from '@/interactor/entities/Note'
 import {
   CreateNotesGatewayInterface,
   ReadNotesGatewayInterface,
+  UpdateNotesGatewayInterface,
 } from '@/interactor/external-users/notes/io/data.gateways'
 
 export default class NotesInMemory
-  implements CreateNotesGatewayInterface, ReadNotesGatewayInterface
+  implements
+    CreateNotesGatewayInterface,
+    ReadNotesGatewayInterface,
+    UpdateNotesGatewayInterface
 {
   storage: Note[] = []
 
@@ -48,5 +52,30 @@ export default class NotesInMemory
   readByIDs(ids: string[]): Promise<Note[]> {
     const notes = this.storage.filter((n) => ids.includes(n.id))
     return Promise.resolve(notes)
+  }
+
+  update(
+    notes: { id: string; content: string; updatedAt: Date }[]
+  ): Promise<Note[]> {
+    const ids = notes.map((n) => n.id)
+    const notesToUpdate = this.storage.filter((n) => ids.includes(n.id))
+    const updatedNotes = notesToUpdate.map((n) => {
+      const values = notes.find((v) => v.id == n.id)
+      if (values) {
+        n.content = values.content
+        n.updatedAt = values.updatedAt
+      }
+      return n
+    })
+
+    this.storage = this.storage.map((note) => {
+      const updated = updatedNotes.find((n) => note.id == n.id)
+      if (updated) {
+        return updated
+      }
+      return note
+    })
+
+    return Promise.resolve(updatedNotes)
   }
 }

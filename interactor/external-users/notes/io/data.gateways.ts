@@ -11,3 +11,13 @@ export interface ReadNotesGatewayInterface {
 
   readByIDs(ids: string[]): Promise<Note[]>
 }
+
+export interface UpdateNotesGatewayInterface {
+  update(
+    notes: {
+      id: string
+      content: string
+      updatedAt: Date
+    }[]
+  ): Promise<Note[]>
+}

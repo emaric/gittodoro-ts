@@ -13,6 +13,12 @@ export type NoteRequest = {
   id?: string
 }
 
+export type UpdateNoteRequest = {
+  id: string
+  content: string
+  updatedAt: Date
+}
+
 export type CreateNotesRequest = NotesBaseRequest & {
   notes: NoteRequest[]
 }
@@ -24,3 +30,7 @@ export type ReadNotesRequest = NotesBaseRequest & {
 export type ReadByRange = ReadNotesRequest & RequestByRange
 
 export type ReadByIDs = ReadNotesRequest & RequestByIDs
+
+export type UpdateNotesRequest = NotesBaseRequest & {
+  notes: UpdateNoteRequest[]
+}
