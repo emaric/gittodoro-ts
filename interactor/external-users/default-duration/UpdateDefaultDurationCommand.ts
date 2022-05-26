@@ -30,7 +30,7 @@ export default class UpdateDefaultDurationCommand extends DefaultDurationCommand
         request.long,
         request.interval
       )
-      this.validate(duration)
+      await this.validate(duration)
       const response = {
         duration: mapDurationToResponse(duration),
       }

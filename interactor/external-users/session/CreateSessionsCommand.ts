@@ -1,4 +1,5 @@
 import Session from '@/interactor/entities/Session'
+import ValidatorError from '@/interactor/errors/ValidatorError'
 import SessionError from './error/SessionError'
 import { CreateSessionsGatewayInterface } from './io/data.gateway'
 import { mapSessionListToResponse } from './io/mapper'
@@ -7,10 +8,12 @@ import {
   CreateWithDuration,
   CreateWithDurationID,
   RequestWith,
+  RequestWithDuration,
 } from './io/request.model'
 import { SessionListResponse } from './io/response.model'
 import SessionCommandInterface from './io/SessionCommandInterface'
 import SessionPresenterInterface from './io/SessionPresenterInterface'
+import RequestWithDurationValidator from './validators/RequestWithDurationValidator'
 
 export default class CreateSessionsCommand implements SessionCommandInterface {
   private dataGateway: CreateSessionsGatewayInterface
@@ -26,6 +29,7 @@ export default class CreateSessionsCommand implements SessionCommandInterface {
 
   async execute(request: CreateSessionsRequest): Promise<SessionListResponse> {
     try {
+      await this.validateRequest(request)
       if (request.with == RequestWith.duration) {
         return await this.executeWithDuration(request as CreateWithDuration)
       }
@@ -34,11 +38,39 @@ export default class CreateSessionsCommand implements SessionCommandInterface {
         return await this.executeWithDurationID(request as CreateWithDurationID)
       }
 
-      return Promise.reject(new SessionError('Invalid request type.'))
+      throw new SessionError('Invalid request type.')
     } catch (error) {
       return Promise.reject(
         new SessionError('Failed to create sessions.', error as Error)
       )
+    }
+  }
+
+  private async validateRequest(request: CreateSessionsRequest) {
+    try {
+      if (request.with == RequestWith.duration) {
+        await Promise.all(
+          request.sessions.map((s) =>
+            RequestWithDurationValidator.getInstance().validate(
+              s as RequestWithDuration
+            )
+          )
+        )
+        return true
+      }
+
+      if (request.with == RequestWith.durationID) {
+        request.sessions.forEach((session) => {
+          if (session.duration.id == undefined) {
+            throw new ValidatorError('Duration ID required.')
+          }
+        })
+        return true
+      }
+
+      throw new ValidatorError('Not implemented.')
+    } catch (error) {
+      throw new ValidatorError('Invalid request values.', error as Error)
     }
   }
 

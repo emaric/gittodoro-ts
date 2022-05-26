@@ -8,15 +8,21 @@ export type DurationRequest = {
   interval: number
 }
 
-export type SessionRequestWithDurationID = {
+export type RequestWithDurationID = {
   duration: { id: string }
+}
+
+export type RequestWithDuration = {
+  duration: DurationRequest
+}
+
+export type SessionRequestWithDurationID = RequestWithDurationID & {
   start: Date
   end?: Date
   id?: string
 }
 
-export type SessionRequestWithDuration = {
-  duration: DurationRequest
+export type SessionRequestWithDuration = RequestWithDuration & {
   start: Date
   end?: Date
   id?: string
@@ -42,6 +48,7 @@ export type StopSessionRequest = SessionBaseRequest & {
 
 export type CreateSessionsRequest = SessionBaseRequest & {
   with: RequestWith
+  sessions: SessionRequestWithDurationID[] | SessionRequestWithDuration[]
 }
 
 export type CreateWithDurationID = CreateSessionsRequest & {

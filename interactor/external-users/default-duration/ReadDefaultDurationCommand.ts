@@ -22,7 +22,7 @@ export default class ReadDefaultDurationCommand extends DefaultDurationCommandAb
   async execute(): Promise<ReadDefaultDurationResponse> {
     try {
       const duration = await this.dataGateway.getDefaultDuration()
-      this.validate(duration)
+      await this.validate(duration)
       const response = {
         duration: mapDurationToResponse(duration),
       }
