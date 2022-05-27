@@ -18,7 +18,7 @@ import StopSessionPresenter from '../model/presenter/StopSessionPresenter'
 import SessionTimerView from '../view/SessionTimerView'
 import SessionTimerModel from '../model/SessionTimerModel'
 import CreateNthRecordCommand from '@/interactor/record-system/CreateNthRecordCommand'
-import { RequestWith } from '@/interactor/external-users/session/io/request.model'
+import { RequestWith } from '@/interactor/common/io/request.model'
 
 class SessionTimerObserver
   implements

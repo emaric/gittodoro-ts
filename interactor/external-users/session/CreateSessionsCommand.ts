@@ -7,15 +7,17 @@ import {
   CreateSessionsRequest,
   CreateWithDuration,
   CreateWithDurationID,
-  RequestWith,
-  RequestWithDuration,
-  RequestWithDurationID,
 } from './io/request.model'
 import { SessionListResponse } from './io/response.model'
 import SessionCommandInterface from './io/SessionCommandInterface'
 import SessionPresenterInterface from './io/SessionPresenterInterface'
-import RequestWithDurationIDValidator from './validators/RequestWithDurationIDValidator'
-import RequestWithDurationValidator from './validators/RequestWithDurationValidator'
+import RequestWithDurationIDValidator from '../../validators/RequestWithDurationIDValidator'
+import {
+  RequestWith,
+  RequestWithDuration,
+  RequestWithDurationID,
+} from '@/interactor/common/io/request.model'
+import RequestWithDurationValidator from '@/interactor/validators/RequestWithDurationValidator'
 
 export default class CreateSessionsCommand implements SessionCommandInterface {
   private dataGateway: CreateSessionsGatewayInterface

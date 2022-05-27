@@ -2,13 +2,13 @@ import Duration from '@/interactor/entities/Duration'
 
 import StopSessionCommand from '@/interactor/external-users/session/StopSessionCommand'
 import StartSessionCommand from '@/interactor/external-users/session/StartSessionCommand'
-import { RequestWith } from '@/interactor/external-users/session/io/request.model'
 import CreateRecordCommand from '@/interactor/record-system/CreateRecordCommand'
 import { CreateRecordRequest } from '@/interactor/record-system/io/request.model'
 import { CLIView, RecordCLIPresenter, SessionCLIPresenter } from './presenter'
 import { SessionInMemory } from './db'
 import { Session } from './models/Session'
 import { RecordCLIView } from './view'
+import { RequestWith } from '@/interactor/common/io/request.model'
 
 export const DEFAULT_DURATION = new Duration(
   '0',

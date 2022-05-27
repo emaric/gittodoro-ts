@@ -5,7 +5,6 @@ import SessionError from './error/SessionError'
 import { StartSessionGatewayInterface } from './io/data.gateway'
 import { mapSessionToResponse } from './io/mapper'
 import {
-  RequestWith,
   StartSessionRequest,
   StartSessionWithDurationIDRequest,
   StartSessionWithDurationRequest,
@@ -13,8 +12,9 @@ import {
 import { StartSessionResponse } from './io/response.model'
 import SessionCommandInterface from './io/SessionCommandInterface'
 import SessionPresenterInterface from './io/SessionPresenterInterface'
-import RequestWithDurationIDValidator from './validators/RequestWithDurationIDValidator'
-import RequestWithDurationValidator from './validators/RequestWithDurationValidator'
+import RequestWithDurationIDValidator from '../../validators/RequestWithDurationIDValidator'
+import { RequestWith } from '@/interactor/common/io/request.model'
+import RequestWithDurationValidator from '@/interactor/validators/RequestWithDurationValidator'
 
 export default class StartSessionCommand implements SessionCommandInterface {
   private dataGateway: StartSessionGatewayInterface

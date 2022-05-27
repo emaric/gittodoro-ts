@@ -1,6 +1,6 @@
 import ValidatorError from '@/interactor/errors/ValidatorError'
 import ValidatorInterface from '@/interactor/validators/ValidatorInterface'
-import { RequestWithDuration } from '../io/request.model'
+import { RequestWithDuration } from '../common/io/request.model'
 
 export default class RequestWithDurationValidator
   implements ValidatorInterface<RequestWithDuration>

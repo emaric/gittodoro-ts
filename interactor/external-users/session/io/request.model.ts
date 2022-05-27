@@ -1,4 +1,9 @@
 import {
+  RequestWith,
+  RequestWithDuration,
+  RequestWithDurationID,
+} from '@/interactor/common/io/request.model'
+import {
   RequestBy,
   RequestByIDs,
   RequestByRange,
@@ -12,14 +17,6 @@ export type DurationRequest = {
   short: number
   long: number
   interval: number
-}
-
-export type RequestWithDurationID = {
-  duration: { id: string }
-}
-
-export type RequestWithDuration = {
-  duration: DurationRequest
 }
 
 export type SessionRequestWithDurationID = RequestWithDurationID & {
@@ -76,8 +73,3 @@ export type DeleteSessionsRequest = SessionBaseRequest & {
 export type DeleteByRange = DeleteSessionsRequest & RequestByRange
 
 export type DeleteByIDs = DeleteSessionsRequest & RequestByIDs
-
-export enum RequestWith {
-  durationID,
-  duration,
-}

@@ -1,6 +1,6 @@
+import { RequestWith } from '@/interactor/common/io/request.model'
 import { defaultDuration } from '@/interactor/entities/Duration'
 import Session from '@/interactor/entities/Session'
-import { RequestWith } from '../io/request.model'
 import StartSessionCommand from '../StartSessionCommand'
 import SessionInMemory from './utils/SessionInMemory'
 

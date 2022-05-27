@@ -5,12 +5,12 @@ import { CreateSessionsGatewayInterface } from '@/interactor/external-users/sess
 import {
   CreateWithDuration,
   CreateWithDurationID,
-  RequestWith,
 } from '@/interactor/external-users/session/io/request.model'
 
 import CreateSessionsCommand from '@/interactor/external-users/session/CreateSessionsCommand'
 
 import SessionInMemory from './utils/SessionInMemory'
+import { RequestWith } from '@/interactor/common/io/request.model'
 
 describe('[CreateSessionsCommand] unit tests', () => {
   const sessionWithDurationId = new Session(

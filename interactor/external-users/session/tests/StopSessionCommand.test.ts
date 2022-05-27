@@ -2,7 +2,7 @@ import StopSessionCommand from '@/interactor/external-users/session/StopSessionC
 import StartSessionCommand from '@/interactor/external-users/session/StartSessionCommand'
 
 import SessionInMemory from './utils/SessionInMemory'
-import { RequestWith } from '../io/request.model'
+import { RequestWith } from '@/interactor/common/io/request.model'
 
 describe('[StopSessionCommand] unit tests', () => {
   const db = new SessionInMemory()
