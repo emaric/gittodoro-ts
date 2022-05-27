@@ -60,7 +60,7 @@ export default class RecordBuilder {
 
       return records
     } catch (error) {
-      return new RecordError(
+      throw new RecordError(
         'Failed while trying to create all records in RecordFacorty.',
         error as Error
       )
