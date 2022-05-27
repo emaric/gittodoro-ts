@@ -30,7 +30,7 @@ export default class StartSessionCommand implements SessionCommandInterface {
 
   async execute(request: StartSessionRequest): Promise<StartSessionResponse> {
     try {
-      this.validateRequest(request)
+      await this.validateRequest(request)
 
       if (request.with == RequestWith.duration) {
         return await this.executeWithDuration(

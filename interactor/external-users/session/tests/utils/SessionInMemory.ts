@@ -31,15 +31,40 @@ export default class SessionInMemory
     }
   }
 
-  start(start: Date, durationId: string): Promise<Session> {
-    const duration = this.storage.duration.find((d) => d.id == durationId)
-    if (duration) {
-      const id = String(this.storage.session.length)
-      const session = new Session(id, duration, start)
-      this.storage.session.push(session)
+  async startWithDuration(
+    start: Date,
+    pomodoro: number,
+    short: number,
+    long: number,
+    interval: number
+  ): Promise<Session> {
+    try {
+      const [session] = await this.createWithDuration([
+        { pomodoro, short, long, interval, start },
+      ])
       return Promise.resolve(session)
+    } catch (error) {
+      return Promise.reject(
+        new SessionError(
+          'Error encountered while trying to start a Session with Duration.',
+          error as Error
+        )
+      )
     }
-    return Promise.reject(new SessionError('Invalid duration id.'))
+  }
+
+  async startWithDurationID(start: Date, durationId: string): Promise<Session> {
+    try {
+      const [session] = await this.createWithDurationID([{ durationId, start }])
+      return Promise.resolve(session)
+    } catch (error) {
+      return Promise.reject(
+        new SessionError(
+          'Error encountered while trying to start a Session with Duration ID.',
+          error as Error
+        )
+      )
+    }
   }
 
   stop(date: Date): Promise<Session | undefined> {
