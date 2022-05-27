@@ -218,4 +218,11 @@ describe('[RecordFactory] unit tests', () => {
       expect(actual).toEqual(expected)
     })
   })
+
+  describe('test', () => {
+    it('sdfsd', async () => {
+      Array(0)
+      expect('Not yet implemented.').toBe(true)
+    })
+  })
 })

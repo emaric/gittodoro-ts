@@ -43,10 +43,9 @@ export default class RecordBuilder {
     if (end.getTime() < start.getTime()) {
       throw new RecordError('Invalid start and end date.')
     }
+
+    const recordCount = this.calculateNRecords(end.getTime() - start.getTime())
     try {
-      const recordCount = this.calculateNRecords(
-        end.getTime() - start.getTime()
-      )
       const records = [this.createNthRecord(1, start)]
 
       Array.from(Array(recordCount - 1)).forEach(() => {
@@ -60,8 +59,12 @@ export default class RecordBuilder {
 
       return records
     } catch (error) {
+      const errorMessage = `${recordCount} : ${
+        end.getTime() - start.getTime()
+      }, : ${end} ${start}`
       throw new RecordError(
-        'Failed while trying to create all records in RecordFacorty.',
+        'Failed while trying to create all records in RecordFacorty.\n' +
+          errorMessage,
         error as Error
       )
     }
