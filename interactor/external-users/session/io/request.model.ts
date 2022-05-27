@@ -35,9 +35,14 @@ export type SessionRequestWithDuration = RequestWithDuration & {
 }
 
 export type StartSessionRequest = SessionBaseRequest & {
+  with: RequestWith
   start: Date
-  durationId: string
 }
+
+export type StartSessionWithDurationRequest = StartSessionRequest &
+  RequestWithDuration
+export type StartSessionWithDurationIDRequest = StartSessionRequest &
+  RequestWithDurationID
 
 export type StopSessionRequest = SessionBaseRequest & {
   date: Date

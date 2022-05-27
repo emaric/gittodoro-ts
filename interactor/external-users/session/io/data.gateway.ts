@@ -1,7 +1,15 @@
 import Session from '@/interactor/entities/Session'
 
 export interface StartSessionGatewayInterface {
-  start(start: Date, durationId: string): Promise<Session>
+  startWithDurationID(start: Date, durationId: string): Promise<Session>
+
+  startWithDuration(
+    start: Date,
+    pomodoro: number,
+    short: number,
+    long: number,
+    interval: number
+  ): Promise<Session>
 }
 
 export interface StopSessionGatewayInterface {

@@ -9,10 +9,12 @@ import {
   CreateWithDurationID,
   RequestWith,
   RequestWithDuration,
+  RequestWithDurationID,
 } from './io/request.model'
 import { SessionListResponse } from './io/response.model'
 import SessionCommandInterface from './io/SessionCommandInterface'
 import SessionPresenterInterface from './io/SessionPresenterInterface'
+import RequestWithDurationIDValidator from './validators/RequestWithDurationIDValidator'
 import RequestWithDurationValidator from './validators/RequestWithDurationValidator'
 
 export default class CreateSessionsCommand implements SessionCommandInterface {
@@ -50,9 +52,9 @@ export default class CreateSessionsCommand implements SessionCommandInterface {
     try {
       if (request.with == RequestWith.duration) {
         await Promise.all(
-          request.sessions.map((s) =>
+          request.sessions.map((session) =>
             RequestWithDurationValidator.getInstance().validate(
-              s as RequestWithDuration
+              session as RequestWithDuration
             )
           )
         )
@@ -60,11 +62,13 @@ export default class CreateSessionsCommand implements SessionCommandInterface {
       }
 
       if (request.with == RequestWith.durationID) {
-        request.sessions.forEach((session) => {
-          if (session.duration.id == undefined) {
-            throw new ValidatorError('Duration ID required.')
-          }
-        })
+        await Promise.all(
+          request.sessions.map((session) =>
+            RequestWithDurationIDValidator.getInstance().validate(
+              session as RequestWithDurationID
+            )
+          )
+        )
         return true
       }
 
