@@ -94,7 +94,7 @@ describe('[StartSessionCommand] unit tests', () => {
         },
       }
       await expect(command.execute(request)).rejects.toThrow(
-        'duration.id required'
+        'Duration ID required'
       )
       await expect(command.execute(request)).rejects.toThrow(
         'Failed to start a session.'

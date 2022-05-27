@@ -94,7 +94,7 @@ describe('[ReadNotesCommand] unit tests', () => {
       }
       const command = new ReadNotesCommand(db, { present: jest.fn() })
       await expect(command.execute(request)).rejects.toThrow(
-        'startInclusive is greater than the end'
+        'Start date is greater than the End date.'
       )
       await expect(command.execute(request)).rejects.toThrow(
         'Invalid request values.'

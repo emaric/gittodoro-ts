@@ -12,7 +12,7 @@ export default class RequestByIDsValidator
       return Promise.reject(
         new ValidatorError(
           'Invalid request values.',
-          new Error('ids required.')
+          new Error('IDs required.')
         )
       )
     }

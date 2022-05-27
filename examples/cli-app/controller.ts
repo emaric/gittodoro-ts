@@ -2,10 +2,11 @@ import Duration from '@/interactor/entities/Duration'
 
 import StopSessionCommand from '@/interactor/external-users/session/StopSessionCommand'
 import StartSessionCommand from '@/interactor/external-users/session/StartSessionCommand'
-import { CLIView, RecordCLIPresenter, SessionCLIPresenter } from './presenter'
-import { SessionInMemory } from './db'
+import { RequestWith } from '@/interactor/external-users/session/io/request.model'
 import CreateRecordCommand from '@/interactor/record-system/CreateRecordCommand'
 import { CreateRecordRequest } from '@/interactor/record-system/io/request.model'
+import { CLIView, RecordCLIPresenter, SessionCLIPresenter } from './presenter'
+import { SessionInMemory } from './db'
 import { Session } from './models/Session'
 import { RecordCLIView } from './view'
 
@@ -34,10 +35,12 @@ export class SessionCLIApp {
   }
 
   async start() {
-    await this.startInteractor.execute({
+    const request = {
+      with: RequestWith.durationID,
       start: new Date(),
-      durationId: this.defaultDurationId,
-    })
+      duration: { id: this.defaultDurationId },
+    }
+    await this.startInteractor.execute(request)
   }
 
   async stop() {

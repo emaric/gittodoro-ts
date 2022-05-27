@@ -18,7 +18,41 @@ export class SessionInMemory
     this.storage = storage
   }
 
-  start(start: Date, durationId: string): Promise<Session> {
+  startWithDuration(
+    start: Date,
+    pomodoro: number,
+    short: number,
+    long: number,
+    interval: number
+  ): Promise<Session> {
+    let duration = this.storage.duration.find(
+      (d) =>
+        d.pomodoro == pomodoro &&
+        d.short == short &&
+        d.long == long &&
+        d.interval == interval
+    )
+    if (duration == undefined) {
+      duration = new Duration(
+        String(this.storage.duration.length),
+        pomodoro,
+        short,
+        long,
+        interval
+      )
+      this.storage.duration.push(duration)
+    }
+
+    const session = new Session(
+      String(this.storage.session.length),
+      duration,
+      start
+    )
+    this.storage.session.push(session)
+    return Promise.resolve(session)
+  }
+
+  startWithDurationID(start: Date, durationId: string): Promise<Session> {
     const duration = this.storage.duration.find((d) => d.id == durationId)
     if (duration) {
       const session = new Session(

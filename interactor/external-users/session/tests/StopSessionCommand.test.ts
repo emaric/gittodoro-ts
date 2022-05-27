@@ -2,6 +2,7 @@ import StopSessionCommand from '@/interactor/external-users/session/StopSessionC
 import StartSessionCommand from '@/interactor/external-users/session/StartSessionCommand'
 
 import SessionInMemory from './utils/SessionInMemory'
+import { RequestWith } from '../io/request.model'
 
 describe('[StopSessionCommand] unit tests', () => {
   const db = new SessionInMemory()
@@ -35,10 +36,12 @@ describe('[StopSessionCommand] unit tests', () => {
   describe('when trying to execute a valid request', () => {
     beforeAll(async () => {
       const command = new StartSessionCommand(db, { present: jest.fn() })
-      await command.execute({
+      const request = {
+        with: RequestWith.durationID,
         start: new Date(),
-        durationId: '0',
-      })
+        duration: { id: '0' },
+      }
+      await command.execute(request)
     })
 
     it('should stop the last active session', async () => {

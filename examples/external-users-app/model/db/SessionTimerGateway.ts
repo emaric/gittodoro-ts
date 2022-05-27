@@ -44,8 +44,24 @@ export class SessionTimerGateway
     )
   }
 
-  start(start: Date, durationId: string): Promise<Session> {
-    return this.sessionGateway.start(start, durationId)
+  startWithDurationID(start: Date, durationId: string): Promise<Session> {
+    return this.sessionGateway.startWithDurationID(start, durationId)
+  }
+
+  startWithDuration(
+    start: Date,
+    pomodoro: number,
+    short: number,
+    long: number,
+    interval: number
+  ): Promise<Session> {
+    return this.sessionGateway.startWithDuration(
+      start,
+      pomodoro,
+      short,
+      long,
+      interval
+    )
   }
 
   stop(date: Date): Promise<Session | undefined> {

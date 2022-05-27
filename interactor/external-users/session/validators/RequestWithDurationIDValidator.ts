@@ -11,10 +11,10 @@ export default class RequestWithDurationIDValidator
     const errors: Error[] = []
 
     if (request.duration == undefined) {
-      errors.push(new Error('duration required'))
+      errors.push(new Error('Duration required.'))
     } else {
       if (request.duration.id == undefined) {
-        errors.push(new Error('duration.id required'))
+        errors.push(new Error('Duration ID required.'))
       }
     }
 

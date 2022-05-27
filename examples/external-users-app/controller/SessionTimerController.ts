@@ -18,6 +18,7 @@ import StopSessionPresenter from '../model/presenter/StopSessionPresenter'
 import SessionTimerView from '../view/SessionTimerView'
 import SessionTimerModel from '../model/SessionTimerModel'
 import CreateNthRecordCommand from '@/interactor/record-system/CreateNthRecordCommand'
+import { RequestWith } from '@/interactor/external-users/session/io/request.model'
 
 class SessionTimerObserver
   implements
@@ -174,10 +175,14 @@ export default class SessionTimerController {
     const errorMessage = 'Failed to start a Session.'
     try {
       this.observer.session = undefined
-      await this.startSessionInteractor.execute({
+      const request = {
+        with: RequestWith.durationID,
         start: new Date(),
-        durationId,
-      })
+        duration: {
+          id: durationId,
+        },
+      }
+      await this.startSessionInteractor.execute(request)
       if (this.observer.session) {
         return Promise.resolve(this.observer.session)
       }

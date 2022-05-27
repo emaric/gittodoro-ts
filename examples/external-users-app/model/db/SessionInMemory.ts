@@ -9,7 +9,43 @@ import storage from './storage'
 export default class SessionInMemory
   implements StartSessionGatewayInterface, StopSessionGatewayInterface
 {
-  async start(start: Date, durationId: string): Promise<Session> {
+  async startWithDuration(
+    start: Date,
+    pomodoro: number,
+    short: number,
+    long: number,
+    interval: number
+  ): Promise<Session> {
+    try {
+      const duration = storage.duration.find(
+        (duration) =>
+          duration.pomodoro == pomodoro &&
+          duration.short == short &&
+          duration.long == long &&
+          duration.interval == interval
+      )
+      if (duration == undefined) {
+        return Promise.reject(new SessionError('Invalid Duration'))
+      }
+
+      const session = new Session(
+        String(storage.session.length),
+        duration,
+        start
+      )
+      storage.session.push(session)
+      return Promise.resolve(session)
+    } catch (error) {
+      return Promise.reject([
+        error,
+        new SessionError(
+          'Error encountered in SessionInMemory while trying to start a Session with Duration.'
+        ),
+      ])
+    }
+  }
+
+  async startWithDurationID(start: Date, durationId: string): Promise<Session> {
     try {
       const duration = storage.duration.find(
         (duration) => duration.id == durationId
@@ -29,7 +65,7 @@ export default class SessionInMemory
       return Promise.reject([
         error,
         new SessionError(
-          'Error encountered in SessionInMemory while trying to start a Session.'
+          'Error encountered in SessionInMemory while trying to start a Session with Duration ID.'
         ),
       ])
     }
