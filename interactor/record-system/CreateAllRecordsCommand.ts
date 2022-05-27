@@ -29,11 +29,17 @@ export default class CreateAllRecordsCommand implements RecordCommandInterface {
       const response = {
         records,
       }
-      await this.presenter.present(response)
+      try {
+        await this.presenter.present(response)
+      } catch (error) {
+        return Promise.reject(
+          new RecordError('Failed presenting record.', error as Error)
+        )
+      }
       return Promise.resolve(response)
     } catch (error) {
       return Promise.reject(
-        new RecordError('Error creating current record.', error as Error)
+        new RecordError('Error creating all record.', error as Error)
       )
     }
   }

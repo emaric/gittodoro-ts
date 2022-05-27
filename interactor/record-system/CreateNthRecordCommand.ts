@@ -29,7 +29,7 @@ export default class CreateNthRecordCommand implements RecordCommandInterface {
       return Promise.resolve(response)
     } catch (error) {
       return Promise.reject(
-        new RecordError('Error creating current record.', error as Error)
+        new RecordError('Error creating nth record.', error as Error)
       )
     }
   }
