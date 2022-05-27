@@ -3,7 +3,7 @@ export type NotesBaseResponse = unknown
 export type NoteResponse = {
   content: string
   date: Date
-  updateAt?: Date
+  updatedAt?: Date
   id?: string
 }
 
