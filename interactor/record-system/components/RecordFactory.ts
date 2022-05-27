@@ -44,7 +44,13 @@ export default class RecordBuilder {
       throw new RecordError('Invalid start and end date.')
     }
 
+    let errorMessage = `${
+      end.getTime() - start.getTime()
+    }, : ${end.toJSON()} ${start.toJSON()}`
+
     const recordCount = this.calculateNRecords(end.getTime() - start.getTime())
+    errorMessage = errorMessage + ' : recordCount: ' + recordCount
+
     try {
       const records = [this.createNthRecord(1, start)]
 
@@ -59,11 +65,8 @@ export default class RecordBuilder {
 
       return records
     } catch (error) {
-      const errorMessage = `${recordCount} : ${
-        end.getTime() - start.getTime()
-      }, : ${end} ${start}`
       throw new RecordError(
-        'Failed while trying to create all records in RecordFacorty.\n' +
+        'Failed while trying to create all records in RecordFacotry.\n' +
           errorMessage,
         error as Error
       )
