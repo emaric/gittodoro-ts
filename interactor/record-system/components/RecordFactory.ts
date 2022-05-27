@@ -68,6 +68,10 @@ export default class RecordBuilder {
   }
 
   private calculateNRecords(elapsed: number) {
+    if (elapsed <= 0) {
+      return 1
+    }
+
     const cycles = Math.floor(elapsed / this.duration.totalTime)
     const recordsPerCycle = cycles * this.recordsPerCycle
 
