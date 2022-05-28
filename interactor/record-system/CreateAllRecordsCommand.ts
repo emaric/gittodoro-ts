@@ -8,6 +8,7 @@ import { mapRequestToDuration } from '@/interactor/record-system/io/mapper'
 import { CreateAllRecordsRequest } from '@/interactor/record-system/io/request.model'
 import { CreateAllRecordsResponse } from '@/interactor/record-system/io/response.model'
 import RecordBuilder from './components/RecordFactory'
+import RequestWithDurationValidator from '../validators/RequestWithDurationValidator'
 
 export default class CreateAllRecordsCommand implements RecordCommandInterface {
   private presenter: RecordPresenterInterface
@@ -20,6 +21,7 @@ export default class CreateAllRecordsCommand implements RecordCommandInterface {
     request: CreateAllRecordsRequest
   ): Promise<CreateAllRecordsResponse> {
     try {
+      await RequestWithDurationValidator.getInstance().validate(request)
       const duration = mapRequestToDuration(request.duration)
       const records = this.createAllRecords(
         duration,

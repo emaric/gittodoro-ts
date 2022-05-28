@@ -8,6 +8,7 @@ import { mapRequestToDuration } from '@/interactor/record-system/io/mapper'
 import { CreateNthRecordRequest } from '@/interactor/record-system/io/request.model'
 import { CreateRecordResponse } from '@/interactor/record-system/io/response.model'
 import RecordBuilder from './components/RecordFactory'
+import RequestWithDurationValidator from '../validators/RequestWithDurationValidator'
 
 export default class CreateNthRecordCommand implements RecordCommandInterface {
   private presenter: RecordPresenterInterface
@@ -20,6 +21,7 @@ export default class CreateNthRecordCommand implements RecordCommandInterface {
     request: CreateNthRecordRequest
   ): Promise<CreateRecordResponse> {
     try {
+      await RequestWithDurationValidator.getInstance().validate(request)
       const duration = mapRequestToDuration(request.duration)
       const record = this.createNthRecord(duration, request.n, request.start)
       const response = {

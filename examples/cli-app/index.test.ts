@@ -4,6 +4,9 @@ import { DEFAULT_DURATION } from './controller'
 jest.useFakeTimers()
 jest.spyOn(global, 'setTimeout')
 describe('[index] unit tests', () => {
+  function flushPromises() {
+    return new Promise(jest.requireActual('timers').setImmediate)
+  }
   describe('when trying to start a new session for up to one long break interval', () => {
     const duration = DEFAULT_DURATION
     const consoleLog = jest.fn()
@@ -18,21 +21,28 @@ describe('[index] unit tests', () => {
       )
     })
 
-    it('should display the short state and the remaining time', () => {
+    it('should display the short state and the remaining time', async () => {
       jest.advanceTimersByTime(duration.pomodoro)
+      await flushPromises()
       expect(setTimeout).toHaveBeenCalledTimes(26)
       expect(consoleLog.mock.calls.at(-1).at(-1)).toBe(
         'short : ' + duration.short / 1000
       )
     })
 
-    it('should display the long state and the remaining time', () => {
-      const timeTillLongState =
-        duration.pomodoro * (duration.interval - 1) +
-        duration.short * (duration.interval - 1)
-
-      jest.advanceTimersByTime(timeTillLongState)
-      // expect(setTimeout).toHaveBeenCalledTimes(7)
+    it('should display the long state and the remaining time', async () => {
+      jest.advanceTimersByTime(duration.short)
+      await flushPromises()
+      jest.advanceTimersByTime(duration.pomodoro)
+      await flushPromises()
+      jest.advanceTimersByTime(duration.short)
+      await flushPromises()
+      jest.advanceTimersByTime(duration.pomodoro)
+      await flushPromises()
+      jest.advanceTimersByTime(duration.short)
+      await flushPromises()
+      jest.advanceTimersByTime(duration.pomodoro)
+      await flushPromises()
       expect(consoleLog.mock.calls.at(-1).at(-1)).toBe(
         'long : ' + duration.long / 1000
       )
@@ -40,6 +50,7 @@ describe('[index] unit tests', () => {
 
     it('should display that the session has ended when stop is called', async () => {
       jest.advanceTimersByTime(duration.long)
+      await flushPromises()
       expect(consoleLog.mock.calls.at(-1).at(-1)).toBe(
         'pomodoro : ' + duration.pomodoro / 1000
       )

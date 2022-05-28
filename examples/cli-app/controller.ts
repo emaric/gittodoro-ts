@@ -36,9 +36,9 @@ export class SessionCLIApp {
 
   async start() {
     const request = {
-      with: RequestWith.durationID,
+      with: RequestWith.duration,
       start: new Date(),
-      duration: { id: this.defaultDurationId },
+      duration: { ...DEFAULT_DURATION },
     }
     await this.startInteractor.execute(request)
   }
