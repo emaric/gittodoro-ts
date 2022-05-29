@@ -34,15 +34,11 @@ export default class CreateAllRecordsCommand implements RecordCommandInterface {
       try {
         await this.presenter.present(response)
       } catch (error) {
-        return Promise.reject(
-          new RecordError('Failed presenting record.', error as Error)
-        )
+        throw new RecordError('Failed presenting record.', error as Error)
       }
-      return Promise.resolve(response)
+      return response
     } catch (error) {
-      return Promise.reject(
-        new RecordError('Error creating all record.', error as Error)
-      )
+      throw new RecordError('Error creating all record.', error as Error)
     }
   }
 

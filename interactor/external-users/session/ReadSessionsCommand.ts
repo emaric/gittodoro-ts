@@ -33,11 +33,9 @@ export default class ReadSessionsCommand implements SessionCommandInterface {
         return await this.executeByIDs(request as ReadByIDs)
       }
 
-      return Promise.reject(new SessionError('Invalid request type.'))
+      throw new SessionError('Invalid request type.')
     } catch (error) {
-      return Promise.reject(
-        new SessionError('Failed to read sessions.', error as Error)
-      )
+      throw new SessionError('Failed to read sessions.', error as Error)
     }
   }
 
@@ -52,8 +50,9 @@ export default class ReadSessionsCommand implements SessionCommandInterface {
       )
       return await this.respond(sessions)
     } catch (error) {
-      return Promise.reject(
-        new SessionError('Failed to read sessions by range.', error as Error)
+      throw new SessionError(
+        'Failed to read sessions by range.',
+        error as Error
       )
     }
   }
@@ -64,9 +63,7 @@ export default class ReadSessionsCommand implements SessionCommandInterface {
       const sessions = await this.dataGateway.readByIDs(request.ids)
       return await this.respond(sessions)
     } catch (error) {
-      return Promise.reject(
-        new SessionError('Failed to read sessions by ids.', error as Error)
-      )
+      throw new SessionError('Failed to read sessions by ids.', error as Error)
     }
   }
 
@@ -76,11 +73,9 @@ export default class ReadSessionsCommand implements SessionCommandInterface {
         sessions: mapSessionListToResponse(sessions),
       }
       await this.presenter.present(response)
-      return Promise.resolve(response)
+      return response
     } catch (error) {
-      return Promise.reject(
-        new SessionError('Failed sending out response.', error as Error)
-      )
+      throw new SessionError('Failed sending out response.', error as Error)
     }
   }
 

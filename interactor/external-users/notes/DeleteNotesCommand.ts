@@ -39,11 +39,9 @@ export default class DeleteNotesCommand implements NotesCommandInterface {
         return await this.executeByIDs(request as DeleteByIDs)
       }
 
-      return Promise.reject(new NotesError('Invalid request type.'))
+      throw new NotesError('Invalid request type.')
     } catch (error) {
-      return Promise.reject(
-        new NotesError('Failed to delete notes.', error as Error)
-      )
+      throw new NotesError('Failed to delete notes.', error as Error)
     }
   }
 
@@ -58,9 +56,7 @@ export default class DeleteNotesCommand implements NotesCommandInterface {
       )
       return await this.respond(notes)
     } catch (error) {
-      return Promise.reject(
-        new NotesError('Failed to delete notes by range.', error as Error)
-      )
+      throw new NotesError('Failed to delete notes by range.', error as Error)
     }
   }
 
@@ -70,9 +66,7 @@ export default class DeleteNotesCommand implements NotesCommandInterface {
       const notes = await this.dataGateway.deleteByIDs(request.ids)
       return await this.respond(notes)
     } catch (error) {
-      return Promise.reject(
-        new NotesError('Failed to delete notes by ids.', error as Error)
-      )
+      throw new NotesError('Failed to delete notes by ids.', error as Error)
     }
   }
 
@@ -82,11 +76,9 @@ export default class DeleteNotesCommand implements NotesCommandInterface {
         notes: mapNoteListToResponse(notes),
       }
       await this.presenter.present(response)
-      return Promise.resolve(response)
+      return response
     } catch (error) {
-      return Promise.reject(
-        new NotesError('Failed sending out response.', error as Error)
-      )
+      throw new NotesError('Failed sending out response.', error as Error)
     }
   }
 

@@ -28,11 +28,9 @@ export default class CreateNthRecordCommand implements RecordCommandInterface {
         record,
       }
       await this.presenter.present(response)
-      return Promise.resolve(response)
+      return response
     } catch (error) {
-      return Promise.reject(
-        new RecordError('Error creating nth record.', error as Error)
-      )
+      throw new RecordError('Error creating nth record.', error as Error)
     }
   }
 

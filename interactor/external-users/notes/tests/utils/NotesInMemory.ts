@@ -86,13 +86,13 @@ export default class NotesInMemory
   async deleteByRange(startInclusive: Date, end: Date): Promise<Note[]> {
     const notesToDelete = await this.readByRange(startInclusive, end)
     this.storage = this.storage.filter((n) => !notesToDelete.includes(n))
-    return Promise.resolve(notesToDelete)
+    return notesToDelete
   }
 
   async deleteByIDs(ids: string[]): Promise<Note[]> {
     const notesToDelete = await this.readByIDs(ids)
     this.storage = this.storage.filter((n) => !notesToDelete.includes(n))
-    return Promise.resolve(notesToDelete)
+    return notesToDelete
   }
 
   first(): Promise<Note | undefined> {

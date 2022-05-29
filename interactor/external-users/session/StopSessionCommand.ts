@@ -26,11 +26,9 @@ export default class StopSessionCommand implements SessionCommandInterface {
         session: session ? mapSessionToResponse(session) : undefined,
       }
       await this.presenter.present(response)
-      return Promise.resolve(response)
+      return response
     } catch (error) {
-      return Promise.reject(
-        new SessionError('Failed to stop a session.', error as Error)
-      )
+      throw new SessionError('Failed to stop a session.', error as Error)
     }
   }
 }

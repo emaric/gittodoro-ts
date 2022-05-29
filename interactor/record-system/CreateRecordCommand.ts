@@ -26,11 +26,9 @@ export default class CreateRecordCommand implements RecordCommandInterface {
         record,
       }
       await this.presenter.present(response)
-      return Promise.resolve(response)
+      return response
     } catch (error) {
-      return Promise.reject(
-        new RecordError('Error creating current record.', error as Error)
-      )
+      throw new RecordError('Error creating current record.', error as Error)
     }
   }
 

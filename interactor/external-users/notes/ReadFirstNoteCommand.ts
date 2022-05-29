@@ -23,11 +23,9 @@ export default class ReadFirstNoteCommand implements NotesCommandInterface {
         note,
       }
       await this.presenter.present(response)
-      return Promise.resolve(response)
+      return response
     } catch (error) {
-      return Promise.reject(
-        new NotesError('Failed to read the first note.', error as Error)
-      )
+      throw new NotesError('Failed to read the first note.', error as Error)
     }
   }
 }

@@ -46,9 +46,7 @@ export default class StartSessionCommand implements SessionCommandInterface {
 
       throw new SessionError('Not implemented.')
     } catch (error) {
-      return Promise.reject(
-        new SessionError('Failed to start a session.', error as Error)
-      )
+      throw new SessionError('Failed to start a session.', error as Error)
     }
   }
 
@@ -67,11 +65,9 @@ export default class StartSessionCommand implements SessionCommandInterface {
 
       return await this.respond(session)
     } catch (error) {
-      return Promise.reject(
-        new SessionError(
-          'Failed to start a Session with Duration.',
-          error as Error
-        )
+      throw new SessionError(
+        'Failed to start a Session with Duration.',
+        error as Error
       )
     }
   }
@@ -86,11 +82,9 @@ export default class StartSessionCommand implements SessionCommandInterface {
       )
       return await this.respond(session)
     } catch (error) {
-      return Promise.reject(
-        new SessionError(
-          'Failed to start a Session with Duration ID.',
-          error as Error
-        )
+      throw new SessionError(
+        'Failed to start a Session with Duration ID.',
+        error as Error
       )
     }
   }
@@ -101,11 +95,9 @@ export default class StartSessionCommand implements SessionCommandInterface {
         session: mapSessionToResponse(session),
       }
       await this.presenter.present(response)
-      return Promise.resolve(response)
+      return response
     } catch (error) {
-      return Promise.reject(
-        new SessionError('Failed sending out response.', error as Error)
-      )
+      throw new SessionError('Failed sending out response.', error as Error)
     }
   }
 

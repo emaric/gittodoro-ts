@@ -27,13 +27,11 @@ export default class ReadDefaultDurationCommand extends DefaultDurationCommandAb
         duration: mapDurationToResponse(duration),
       }
       await this.presenter.present(response)
-      return Promise.resolve(response)
+      return response
     } catch (error) {
-      return Promise.reject(
-        new DefaultDurationError(
-          'Error encountered while trying to get the default duration from the data gateway.',
-          error as Error
-        )
+      throw new DefaultDurationError(
+        'Error encountered while trying to get the default duration from the data gateway.',
+        error as Error
       )
     }
   }

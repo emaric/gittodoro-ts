@@ -42,13 +42,11 @@ export default class SessionInMemory
       const [session] = await this.createWithDuration([
         { pomodoro, short, long, interval, start },
       ])
-      return Promise.resolve(session)
+      return session
     } catch (error) {
-      return Promise.reject(
-        new SessionError(
-          'Error encountered while trying to start a Session with Duration.',
-          error as Error
-        )
+      throw new SessionError(
+        'Error encountered while trying to start a Session with Duration.',
+        error as Error
       )
     }
   }
@@ -56,13 +54,11 @@ export default class SessionInMemory
   async startWithDurationID(start: Date, durationId: string): Promise<Session> {
     try {
       const [session] = await this.createWithDurationID([{ durationId, start }])
-      return Promise.resolve(session)
+      return session
     } catch (error) {
-      return Promise.reject(
-        new SessionError(
-          'Error encountered while trying to start a Session with Duration ID.',
-          error as Error
-        )
+      throw new SessionError(
+        'Error encountered while trying to start a Session with Duration ID.',
+        error as Error
       )
     }
   }
@@ -106,8 +102,9 @@ export default class SessionInMemory
     })
 
     if (errors.length > 0) {
-      return Promise.reject(
-        new SessionError('Encountered errors why creating sessions.', ...errors)
+      throw new SessionError(
+        'Encountered errors why creating sessions.',
+        ...errors
       )
     }
 
@@ -195,7 +192,7 @@ export default class SessionInMemory
     this.storage.session = this.storage.session.filter(
       (s) => !sessions.includes(s)
     )
-    return Promise.resolve(sessions)
+    return sessions
   }
 
   async deleteByIDs(ids: string[]): Promise<Session[]> {
@@ -203,7 +200,7 @@ export default class SessionInMemory
     this.storage.session = this.storage.session.filter(
       (s) => !sessions.includes(s)
     )
-    return Promise.resolve(sessions)
+    return sessions
   }
 
   first(): Promise<Session | undefined> {

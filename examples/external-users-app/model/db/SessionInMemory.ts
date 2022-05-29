@@ -25,7 +25,7 @@ export default class SessionInMemory
           duration.interval == interval
       )
       if (duration == undefined) {
-        return Promise.reject(new SessionError('Invalid Duration'))
+        throw new SessionError('Invalid Duration')
       }
 
       const session = new Session(
@@ -34,14 +34,12 @@ export default class SessionInMemory
         start
       )
       storage.session.push(session)
-      return Promise.resolve(session)
+      return session
     } catch (error) {
-      return Promise.reject([
-        error,
-        new SessionError(
-          'Error encountered in SessionInMemory while trying to start a Session with Duration.'
-        ),
-      ])
+      throw new SessionError(
+        'Error encountered in SessionInMemory while trying to start a Session with Duration.',
+        error as Error
+      )
     }
   }
 
@@ -51,7 +49,7 @@ export default class SessionInMemory
         (duration) => duration.id == durationId
       )
       if (duration == undefined) {
-        return Promise.reject(new SessionError('Invalid Duration'))
+        throw new SessionError('Invalid Duration')
       }
 
       const session = new Session(
@@ -60,14 +58,12 @@ export default class SessionInMemory
         start
       )
       storage.session.push(session)
-      return Promise.resolve(session)
+      return session
     } catch (error) {
-      return Promise.reject([
-        error,
-        new SessionError(
-          'Error encountered in SessionInMemory while trying to start a Session with Duration ID.'
-        ),
-      ])
+      throw new SessionError(
+        'Error encountered in SessionInMemory while trying to start a Session with Duration ID.',
+        error as Error
+      )
     }
   }
 

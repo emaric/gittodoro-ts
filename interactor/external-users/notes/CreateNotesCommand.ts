@@ -24,11 +24,9 @@ export default class CreateNotesCommand implements NotesCommandInterface {
         notes,
       }
       await this.presenter.present(response)
-      return Promise.resolve(response)
+      return response
     } catch (error) {
-      return Promise.reject(
-        new NotesError('Failed to create notes.', error as Error)
-      )
+      throw new NotesError('Failed to create notes.', error as Error)
     }
   }
 }

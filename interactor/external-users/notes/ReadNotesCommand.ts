@@ -35,11 +35,9 @@ export default class ReadNotesCommand implements NotesCommandInterface {
         return await this.executeByIDs(request as ReadByIDs)
       }
 
-      return Promise.reject(new NotesError('Invalid request type.'))
+      throw new NotesError('Invalid request type.')
     } catch (error) {
-      return Promise.reject(
-        new NotesError('Failed to read notes.', error as Error)
-      )
+      throw new NotesError('Failed to read notes.', error as Error)
     }
   }
 
@@ -54,9 +52,7 @@ export default class ReadNotesCommand implements NotesCommandInterface {
       )
       return await this.respond(notes)
     } catch (error) {
-      return Promise.reject(
-        new NotesError('Failed to read notes by range.', error as Error)
-      )
+      throw new NotesError('Failed to read notes by range.', error as Error)
     }
   }
 
@@ -66,9 +62,7 @@ export default class ReadNotesCommand implements NotesCommandInterface {
       const notes = await this.dataGateway.readByIDs(request.ids)
       return await this.respond(notes)
     } catch (error) {
-      return Promise.reject(
-        new NotesError('Failed to read notes by ids.', error as Error)
-      )
+      throw new NotesError('Failed to read notes by ids.', error as Error)
     }
   }
 
@@ -78,11 +72,9 @@ export default class ReadNotesCommand implements NotesCommandInterface {
         notes: mapNoteListToResponse(notes),
       }
       await this.presenter.present(response)
-      return Promise.resolve(response)
+      return response
     } catch (error) {
-      return Promise.reject(
-        new NotesError('Failed sending out response.', error as Error)
-      )
+      throw new NotesError('Failed sending out response.', error as Error)
     }
   }
 

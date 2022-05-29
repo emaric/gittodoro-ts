@@ -39,11 +39,9 @@ export default class DeleteSessionsCommand implements SessionCommandInterface {
         return await this.executeByIDs(request as DeleteByIDs)
       }
 
-      return Promise.reject(new SessionError('Invalid request type.'))
+      throw new SessionError('Invalid request type.')
     } catch (error) {
-      return Promise.reject(
-        new SessionError('Failed to delete sessions.', error as Error)
-      )
+      throw new SessionError('Failed to delete sessions.', error as Error)
     }
   }
 
@@ -58,8 +56,9 @@ export default class DeleteSessionsCommand implements SessionCommandInterface {
       )
       return await this.respond(sessions)
     } catch (error) {
-      return Promise.reject(
-        new SessionError('Failed to delete sessions by range.', error as Error)
+      throw new SessionError(
+        'Failed to delete sessions by range.',
+        error as Error
       )
     }
   }
@@ -72,8 +71,9 @@ export default class DeleteSessionsCommand implements SessionCommandInterface {
       const sessions = await this.dataGateway.deleteByIDs(request.ids)
       return await this.respond(sessions)
     } catch (error) {
-      return Promise.reject(
-        new SessionError('Failed to delete sessions by ids.', error as Error)
+      throw new SessionError(
+        'Failed to delete sessions by ids.',
+        error as Error
       )
     }
   }
@@ -84,11 +84,9 @@ export default class DeleteSessionsCommand implements SessionCommandInterface {
         sessions: mapSessionListToResponse(sessions),
       }
       await this.presenter.present(response)
-      return Promise.resolve(response)
+      return response
     } catch (error) {
-      return Promise.reject(
-        new SessionError('Failed sending out response.', error as Error)
-      )
+      throw new SessionError('Failed sending out response.', error as Error)
     }
   }
 

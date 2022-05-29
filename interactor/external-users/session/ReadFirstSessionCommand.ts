@@ -24,10 +24,11 @@ export default class ReadFirstSessionCommand
         session,
       }
       await this.presenter.present(response)
-      return Promise.resolve(response)
+      return response
     } catch (error) {
-      return Promise.reject(
-        new SessionError('Failed to read the first session.', error as Error)
+      throw new SessionError(
+        'Failed to read the first session.',
+        error as Error
       )
     }
   }

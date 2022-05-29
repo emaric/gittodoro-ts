@@ -142,10 +142,13 @@ export default class SessionTimerController {
     const methodError = new AppError('Failed to get the default duration.')
     try {
       await this.readDurationInteractor.execute()
-      return this.observer.duration || Promise.reject(methodError)
+      if (this.observer.duration) {
+        return this.observer.duration
+      }
+      throw methodError
     } catch (error) {
       methodError.errors.push(error as Error)
-      return Promise.reject(methodError)
+      throw methodError
     }
   }
 
@@ -164,10 +167,13 @@ export default class SessionTimerController {
         long,
         interval,
       })
-      return this.observer.duration || Promise.reject(methodError)
+      if (this.observer.duration != undefined) {
+        return this.observer.duration
+      }
+      throw methodError
     } catch (error) {
       methodError.errors.push(error as Error)
-      return Promise.reject(methodError)
+      throw methodError
     }
   }
 
@@ -184,11 +190,11 @@ export default class SessionTimerController {
       }
       await this.startSessionInteractor.execute(request)
       if (this.observer.session) {
-        return Promise.resolve(this.observer.session)
+        return this.observer.session
       }
-      return Promise.reject(new AppError(errorMessage))
+      throw new AppError(errorMessage)
     } catch (error) {
-      return Promise.reject(new AppError(errorMessage, error as Error))
+      throw new AppError(errorMessage, error as Error)
     }
   }
 
@@ -200,11 +206,11 @@ export default class SessionTimerController {
         date: new Date(),
       })
       if (this.observer.session) {
-        return Promise.resolve(this.observer.session)
+        return this.observer.session
       }
-      return Promise.reject(new AppError(errorMessage))
+      throw new AppError(errorMessage)
     } catch (error) {
-      return Promise.reject(new AppError(errorMessage, error as Error))
+      throw new AppError(errorMessage, error as Error)
     }
   }
 

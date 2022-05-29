@@ -35,13 +35,11 @@ export default class UpdateDefaultDurationCommand extends DefaultDurationCommand
         duration: mapDurationToResponse(duration),
       }
       await this.presenter.present(response)
-      return Promise.resolve(response)
+      return response
     } catch (error) {
-      return Promise.reject(
-        new DefaultDurationError(
-          'Error encountered while trying to update the default duration.',
-          error as Error
-        )
+      throw new DefaultDurationError(
+        'Error encountered while trying to update the default duration.',
+        error as Error
       )
     }
   }

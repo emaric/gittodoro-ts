@@ -44,9 +44,7 @@ export default class CreateSessionsCommand implements SessionCommandInterface {
 
       throw new SessionError('Invalid request type.')
     } catch (error) {
-      return Promise.reject(
-        new SessionError('Failed to create sessions.', error as Error)
-      )
+      throw new SessionError('Failed to create sessions.', error as Error)
     }
   }
 
@@ -92,11 +90,9 @@ export default class CreateSessionsCommand implements SessionCommandInterface {
       )
       return await this.respond(sessions)
     } catch (error) {
-      return Promise.reject(
-        new SessionError(
-          'Failed to create Sessions with Duration.',
-          error as Error
-        )
+      throw new SessionError(
+        'Failed to create Sessions with Duration.',
+        error as Error
       )
     }
   }
@@ -113,11 +109,9 @@ export default class CreateSessionsCommand implements SessionCommandInterface {
       )
       return await this.respond(sessions)
     } catch (error) {
-      return Promise.reject(
-        new SessionError(
-          'Failed to create Sessions with Duration ID.',
-          error as Error
-        )
+      throw new SessionError(
+        'Failed to create Sessions with Duration ID.',
+        error as Error
       )
     }
   }
@@ -128,11 +122,9 @@ export default class CreateSessionsCommand implements SessionCommandInterface {
         sessions: mapSessionListToResponse(sessions),
       }
       await this.presenter.present(response)
-      return Promise.resolve(response)
+      return response
     } catch (error) {
-      return Promise.reject(
-        new SessionError('Failed sending out response.', error as Error)
-      )
+      throw new SessionError('Failed sending out response.', error as Error)
     }
   }
 }
