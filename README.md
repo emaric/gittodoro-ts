@@ -35,6 +35,8 @@ Trying to follow the Clean Architecture principles.
 1. - [ ] External Users can select the Repo/Project/Issue to associate with a new Session.
 1. - [ ] External Users can view the total number of Pomodori they have for each Repo/Project/Issue
 
+1. - [ ] Store Default Duration constraints in database. 
+
 ## Running Tests
 
 `npm test`
