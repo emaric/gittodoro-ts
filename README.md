@@ -1,55 +1,72 @@
-# Gittodoro.
+# Gittodoro
 
-Trying to follow the Clean Architecture principles.
+Following the principles of Clean Architecture.
 
 ## Constraints
 
-1. **Sessions** only last for around 10 hours.
-   - The user can start another session if needed.
-   - The minimum duration is 5 minutes. Less than that, the session will be disregarded.
-1. **Sessions** can only be stopped if the last time it was active (Session.lastTimeActive) is lesser than 5 minutes.
-1. **Pomodoro** must be at least 25 minutes, but must not go over 120 minutes.
-1. **Short** breaks must be at least 1 minute, but must not go over 15 minutes.
-1. **Long** breaks must be at least 3 minutes, but must not go over 60 minutes.
-1. **Long Intervals** must be at least 2, but not more than 6.
+1. **Sessions**
+   - Sessions last for up to 10 hours.
+   - Users can start a new session if needed.
+   - Minimum session duration is 5 minutes; shorter sessions will be disregarded.
+   - Sessions can only be stopped if the last active time (`Session.lastTimeActive`) is less than 5 minutes.
+
+2. **Pomodoro**
+   - Minimum duration: 25 minutes
+   - Maximum duration: 120 minutes
+
+3. **Short Breaks**
+   - Minimum duration: 1 minute
+   - Maximum duration: 15 minutes
+
+4. **Long Breaks**
+   - Minimum duration: 3 minutes
+   - Maximum duration: 60 minutes
+
+5. **Long Intervals**
+   - Minimum count: 2
+   - Maximum count: 6
 
 ## Interactors
 
 ### Actor: External Users
 
-1. - [x] External Users can read the default Duration
-1. - [x] External Users can modify the default Duration.
-1. - [x] External Users can reset the default Duration.
-1. - [ ] External Users can sign in to the app using their Github account.
-1. - [x] External Users can start Sessions.
-1. - [x] External Users can stop Sessions.
-1. - [ ] External Users can stop Sessions across platforms based on the last time it was active.
-1. - [ ] External Users can view a Session by start date.
-1. - [ ] External Users can view Sessions by a range of dates (start date inclusive; end date exclusive). Which will filter both the start date and end date of the Session.
-1. - [ ] External Users can copy Sessions from the local/offline storage to their account.
-1. - [ ] External Users can delete Sessions from the local/offline storage.
-1. - [ ] External Users can create a new Notes.
-1. - [ ] External Users can read Notes by ID or by the date it was created and/or updated.
-1. - [ ] External Users can update Notes.
-1. - [ ] External Users can delete Notes.
-1. - [ ] External Users can select the Repo/Project/Issue to associate with a new Session.
-1. - [ ] External Users can view the total number of Pomodori they have for each Repo/Project/Issue
-
-1. - [ ] Store Default Duration constraints in database. 
+1. - [x] Can read the default duration.
+1. - [x] Can modify the default duration.
+1. - [x] Can reset the default duration.
+1. - [ ] Can sign in to the app using their GitHub account.
+1. - [x] Can start sessions.
+1. - [x] Can stop sessions.
+1. - [ ] Can stop sessions across platforms based on the last active time.
+1. - [ ] Can view a session by start date.
+1. - [ ] Can view sessions by a range of dates (start date inclusive; end date exclusive), filtering both the start date and end date of the session.
+1. - [ ] Can copy sessions from local/offline storage to their account.
+1. - [ ] Can delete sessions from local/offline storage.
+1. - [ ] Can create new notes.
+1. - [ ] Can read notes by ID or by the date they were created/updated.
+1. - [ ] Can update notes.
+1. - [ ] Can delete notes.
+1. - [ ] Can select the repo/project/issue to associate with a new session.
+1. - [ ] Can view the total number of Pomodori for each repo/project/issue.
+1. - [ ] Store default duration constraints in the database.
 
 ## Running Tests
 
-`npm test`
-
-`npm run build && node ./lib/examples/external-users-app/index.js`
+```sh
+npm test
+npm run build && node ./lib/examples/external-users-app/index.js
+```
 
 ## MVC
 
-- The **Model** is the application object, the **View** is its screen representation, and the **Controller** defines the way the user interface reacts to user input.
+- The **Model** is the application object, the **View** is its screen representation, and the **Controller** defines how the user interface reacts to user input.
 - Views and Models are decoupled by establishing a subscribe/notify protocol between them.
-- View: ensure that its appearance reflects the state of the model.
-- View uses an instance of a Controller subclass to implement a particular response strategy.
+- The **View** ensures that its appearance reflects the state of the model.
+- The **View** uses an instance of a Controller subclass to implement specific response strategies.
 
-## Releasing updates
+## Releasing Updates
 
-`npm version major|minor|patch`
+```sh
+npm version major|minor|patch
+```
+
+This version is more consistent and clearer, making it easier for users to understand the project's constraints, functionalities, and how to interact with the application.
