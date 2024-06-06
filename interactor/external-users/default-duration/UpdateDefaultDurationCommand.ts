@@ -54,7 +54,7 @@ export default class UpdateDefaultDurationCommand extends DefaultDurationCommand
 
   private async validateRequest(request: UpdateDefaultDurationRequest) {
     const duration = new Duration(
-      "REQUEST DURATION ID",
+      'REQUEST DURATION ID',
       request.pomodoro,
       request.short,
       request.long,

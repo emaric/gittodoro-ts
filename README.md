@@ -5,20 +5,24 @@ Following the principles of Clean Architecture.
 ## Constraints
 
 1. **Sessions**
+
    - Sessions last for up to 10 hours.
    - Users can start a new session if needed.
    - Minimum session duration is 5 minutes; shorter sessions will be disregarded.
    - Sessions can only be stopped if the last active time (`Session.lastTimeActive`) is less than 5 minutes.
 
 2. **Pomodoro**
+
    - Minimum duration: 25 minutes
    - Maximum duration: 120 minutes
 
 3. **Short Breaks**
+
    - Minimum duration: 1 minute
    - Maximum duration: 15 minutes
 
 4. **Long Breaks**
+
    - Minimum duration: 3 minutes
    - Maximum duration: 60 minutes
 
